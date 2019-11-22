@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <div>工作经历</div>
-    <el-col :span="10" style="margin:14px;padding:0;">
+    <el-col :span="11" style="margin:14px;padding:0;">
       <a href="https://www.baidu.com">
       <el-card :body-style="{padding:'0px'}" shadow="hover">
         <img src="../assets/bg.jpg" style="height:160px;width:100%;" />
@@ -21,7 +21,7 @@
       </a>
     </el-col>
 
-    <el-col :span="32" style="margin:14px;">
+    <el-col :span="11" style="margin:14px;">
       <a href="https://www.baidu.com">
       <el-card :body-style="{padding:'0px'}" shadow="hover">
         <img src="../assets/bg.jpg" style="height:160px;width:100%;" />
