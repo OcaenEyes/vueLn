@@ -16,7 +16,6 @@ module.exports = {
         changeOrigin:true,
         pathRewrite :{
           '^/api':'/api',
-          '^/media':'/media',
         },
         
       }

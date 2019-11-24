@@ -9,18 +9,10 @@ export default new Router({
   mode:'history',
   routes: [
     {
-      path: '/test',
-      component: Test,
-      mata: {
-        title:'测试',
-
-      },
-    },
-    {
-      path: '/index',
+      path: '/',
       component: Index,
       meta:{
-        title:'首页'
+        title:'高智勇的个人简历'
       }
     }
   ]
