@@ -1,7 +1,7 @@
 <template >
   <div>
     <el-button @click="getResume">获取resume信息</el-button>
-    <el-card>
+    <!-- <el-card>
       <div>{{info.name}}</div>
       <div>{{info.phone}}</div>
       <div>{{info.email}}</div>
@@ -11,7 +11,8 @@
     <el-card v-for="i in skills" :key="i">
       <div>{{i.s_name}}</div>
       <div>{{i.s_grade}}</div>
-    </el-card>
+    </el-card> -->
+    <img src="/media/bg.jpg">
   </div>
 </template>
 

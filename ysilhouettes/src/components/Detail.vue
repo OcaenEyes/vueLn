@@ -1,12 +1,17 @@
 <template>
   <el-container>
     <el-main>
-      <el-card><Education></Education></el-card>
+      <el-card shadow="hover">
+        <Education></Education>
+      </el-card>
 
-      <el-card><Experience></Experience></el-card>
+      <el-card shadow="hover">
+        <Experience></Experience>
+      </el-card>
 
-      <el-card><Project></Project></el-card>
-
+      <el-card shadow="hover">
+        <Project></Project>
+      </el-card>
     </el-main>
   </el-container>
 </template>
@@ -15,28 +20,26 @@
 .el-main {
   padding: 10px;
 }
+.el-card {
+  margin-bottom: 6px;
+}
 </style>
 
 <script>
-import Education from './Education'
-import Project from './Project'
-import Experience from './Experience'
+import Education from "./Education";
+import Project from "./Project";
+import Experience from "./Experience";
 export default {
   name: "Detail",
-  components:{
+  components: {
     Education,
     Experience,
-    Project,
-
+    Project
   },
   data() {
-    return {
-
-    };
+    return {};
   },
 
-  methods: {
-
-  }
+  methods: {}
 };
 </script>

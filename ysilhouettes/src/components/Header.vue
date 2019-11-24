@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1>&nbsp;&nbsp;&nbsp;Resume</h1>
+  <h1>&nbsp;&nbsp;&nbsp;个人简历--<small>Resume</small></h1>
   <el-carousel :interval="4000" type="card" height="220px" style="margin-top:20px;width:96%;margin-left:2%;">
     <el-carousel-item v-for="item in 6" :key="item">
       <!-- <h3 class="medium">{{ item }}</h3> -->

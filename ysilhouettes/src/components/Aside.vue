@@ -2,7 +2,7 @@
   <el-container>
     <el-main>
       <el-card shadow="hover">
-        <div class="card-title" @click="showprofile = !showprofile">
+        <div class="card-title" >
           <i class="el-icon-user"></i>&nbsp;&nbsp;
           <span>基本信息</span>
           <!-- <i class="el-icon-view" style="float:right;"></i> -->
@@ -28,19 +28,22 @@
                 >电话：&nbsp;&nbsp;{{info.phone}}</el-tag>
               </div>
               <div>
+                <a :href="'mailto:'+ info.email">
                 <el-tag type style="font-size: 12px">邮箱：&nbsp;&nbsp;{{info.email}}</el-tag>
+                </a>
               </div>
               <div>
-                <el-tag
+                <a :href="info.blog" target="_Blank"><el-tag
                   type="success"
                   style="font-size: 12px;"
-                >博客：&nbsp;&nbsp;{{info.blog}}</el-tag>
+                >博客：&nbsp;&nbsp;{{info.blog}}</el-tag></a>
               </div>
               <div>
+                <a :href="info.website" target="_Blank">
                 <el-tag
                   type="warning"
                   style="font-size: 12px"
-                >网站：&nbsp;&nbsp;{{info.website}}</el-tag>
+                >网站：&nbsp;&nbsp;{{info.website}}</el-tag></a>
               </div>
             </div>
           </div>
@@ -48,7 +51,7 @@
       </el-card>
 
       <el-card shadow="hover">
-        <div class="card-title" @click="showskills = !showskills">
+        <div class="card-title" >
           <i class="el-icon-paperclip"></i>&nbsp;&nbsp;
           <span>技能</span>
           <!-- <i class="el-icon-view" style="float:right;"></i> -->

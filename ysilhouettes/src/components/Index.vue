@@ -8,13 +8,7 @@
         <Header></Header>
       </div>
     </el-col>
-    <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
-      <div class="grid-content bg-profile">
-        <UserInfo></UserInfo>
-      </div>
-    </el-col>
-
-    <el-col :xs="0" :sm="8" :md="8" :lg="6" :xl="6">
+    <el-col :xs="24" :sm="8" :md="8" :lg="6" :xl="6">
       <div class="grid-content bg-profile">
         <Aside></Aside>
       </div>
@@ -75,6 +69,14 @@ export default {
     Detial,
     Header,
     UserInfo
-  }
+  },
+  created(){
+    this.$notify({
+      title:"Good Day~",
+      message:"欢迎访问高智勇的个人简历",
+      type:"success",
+    });
+
+  },
 };
 </script>
