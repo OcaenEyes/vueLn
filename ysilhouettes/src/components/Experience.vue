@@ -4,8 +4,11 @@
       <i class="el-icon-monitor"></i>&nbsp;&nbsp;
       <b>工作经历</b>
     </div>
+
+
+
     <el-col :span="11" style="margin:14px;padding:0;" v-for="(job,index) in jobs" :key="index">
-      <a href target="_Blank">
+      <a href="">
         <el-card :body-style="{padding:'0px'}" shadow="hover">
           <img src="../assets/bg.jpg" style="height:160px;width:100%;" />
           <div style="padding:14px;font-size:14px;line-height:28px;">
@@ -15,15 +18,21 @@
               </span>
             </div>
             <div>
+              <div>
               <span>开始日期：</span>
-              {{job.j_sdate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {{job.j_sdate}}
+              </div>
+              <div>
               <span>结束日期：</span>
               {{job.j_edate}}
+              </div>
             </div>
             <div></div>
           </div>
         </el-card>
       </a>
+
+
     </el-col>
   </el-row>
 </template>
@@ -39,7 +48,7 @@ export default {
   name: "Experience",
   data() {
     return {
-      jobs: null
+      jobs: null,
     };
   },
   created() {

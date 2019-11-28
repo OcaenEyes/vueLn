@@ -12,7 +12,7 @@
       <div>{{i.s_name}}</div>
       <div>{{i.s_grade}}</div>
     </el-card> -->
-    <img src="/media/bg.jpg">
+    <img src="/api/media/bg.jpg">
   </div>
 </template>
 

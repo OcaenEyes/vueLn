@@ -12,7 +12,14 @@ export default new Router({
       path: '/',
       component: Index,
       meta:{
-        title:'高智勇的个人简历'
+        title:'高智勇的个人简历',
+      }
+    },
+    {
+      path:'/test',
+      component: Test,
+      meta:{
+        title:'测试页面',
       }
     }
   ]

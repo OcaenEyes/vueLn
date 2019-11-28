@@ -15,8 +15,8 @@
               </span>
             </div>
             <div>
-              <span>开始日期：</span>{{project.p_sdate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <span>结束日期：</span>{{project.p_edate}}
+              <div><span>开始日期：</span>{{project.p_sdate}}</div>
+              <div><span>结束日期：</span>{{project.p_edate}}</div>
             </div>
             <div></div>
           </div>

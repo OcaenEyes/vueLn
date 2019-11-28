@@ -13,7 +13,7 @@
         <Aside></Aside>
       </div>
     </el-col>
-    <el-col :xs="24" :sm="16" :md="16" :lg="18" :xl="18">
+    <el-col :xs="24" :sm="16" :md="16" :lg="18" :xl="18" >
       <div class="grid-content bg-detial">
         <Detial></Detial>
       </div>
