@@ -7,7 +7,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/daliy',
-    component: Daliy
+    component: Daliy,
+    name: 'Daliy',
+    meta:{
+      title:'Daliy',
+    }
   },
   {
     path: '/about',

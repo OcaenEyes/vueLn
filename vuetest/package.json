@@ -27,8 +27,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.1.2",
+    "lib-flexible": "0.3.2",
+    "postcss-pxtrem": "3.0.3",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-cli-plugin-element": "^1.0.1",
+    "vue-cli-plugin-postcss-pxtrem": "^1.0.6",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -47,5 +50,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "postcss": {
+    "plugins": {
+      "postcss-pxtrem": {
+        "viewportWidth": 750,
+        "unitPrecision": 5,
+        "minPixelValue": 1
+      }
+    }
+  }
 }
