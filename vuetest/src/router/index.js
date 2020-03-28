@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Daliy from '../views/Daliy.vue'
 
 Vue.use(VueRouter)
@@ -9,11 +8,6 @@ const routes = [
   {
     path: '/daliy',
     component: Daliy
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
   },
   {
     path: '/about',

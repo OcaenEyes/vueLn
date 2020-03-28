@@ -1,12 +1,14 @@
 <template>
   <div>
-    每日一文
-    <!-- <div
-      v-for="(item ,index)in daliy"
-      :key="index"
-    >
-      <p>{{ item.id }}</p>
-    </div> -->
+    <h2>每日一文</h2>
+    <div v-for="(item ,index) in daliy" :key="index">
+      <p>{{item.id}}</p>
+      <span>{{item.textContent}}</span>
+      <span>{{item.imgAuther}}</span>
+      <img :src="item.imgUrl" />
+
+    </div>
+    <img>
   </div>
 </template>
 
