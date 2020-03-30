@@ -9,8 +9,8 @@ const routes = [
     path: '/daliy',
     component: Daliy,
     name: 'Daliy',
-    meta:{
-      title:'Daliy',
+    meta: {
+      title: 'Daliy'
     }
   },
   {
