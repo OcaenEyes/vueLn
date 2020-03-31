@@ -4,7 +4,7 @@
       <el-breadcrumb-item>博客管理</el-breadcrumb-item>
       <el-breadcrumb-item>文章管理</el-breadcrumb-item>
     </el-breadcrumb>
-    
+
     <el-button size="small">新建文章</el-button>
 
     <el-table stripe style="width:100%" :data="tableData">
@@ -31,40 +31,57 @@ export default {
   data() {
     return {
       tableData: [
-        {
-          id: 0,
-          title: "第一篇",
-          intro: "简介简介，这是简介",
-          createTime: "2016-05-02",
-          updateTime: "2017-06-03",
-          blogUser: "zy"
-        },
-        {
-          id: 0,
-          title: "第一篇",
-          intro: "简介简介，这是简介",
-          createTime: "2016-05-02",
-          updateTime: "2017-06-03",
-          blogUser: "zy"
-        },
-        {
-          id: 0,
-          title: "第一篇",
-          intro: "简介简介，这是简介",
-          createTime: "2016-05-02",
-          updateTime: "2017-06-03",
-          blogUser: "zy"
-        },
-        {
-          id: 0,
-          title: "第一篇",
-          intro: "简介简介，这是简介",
-          createTime: "2016-05-02",
-          updateTime: "2017-06-03",
-          blogUser: "zy"
-        }
+        // {
+        //   id: 0,
+        //   title: "第一篇",
+        //   intro: "简介简介，这是简介",
+        //   createTime: "2016-05-02",
+        //   updateTime: "2017-06-03",
+        //   blogUser: "zy"
+        // },
+        // {
+        //   id: 0,
+        //   title: "第一篇",
+        //   intro: "简介简介，这是简介",
+        //   createTime: "2016-05-02",
+        //   updateTime: "2017-06-03",
+        //   blogUser: "zy"
+        // },
+        // {
+        //   id: 0,
+        //   title: "第一篇",
+        //   intro: "简介简介，这是简介",
+        //   createTime: "2016-05-02",
+        //   updateTime: "2017-06-03",
+        //   blogUser: "zy"
+        // },
+        // {
+        //   id: 0,
+        //   title: "第一篇",
+        //   intro: "简介简介，这是简介",
+        //   createTime: "2016-05-02",
+        //   updateTime: "2017-06-03",
+        //   blogUser: "zy"
+        // }
       ]
     };
+  },
+
+  created() {
+    this.getArticle();
+  },
+
+  methods: {
+    getArticle() {
+      axios.get("/blogs")
+        .then(function(response) {
+          console.log(response.data.content);
+          this.tableData = response.data.content;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
   }
 };
 </script>
