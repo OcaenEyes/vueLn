@@ -5,7 +5,7 @@
       <el-breadcrumb-item>类型管理</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <el-button size="small">新建类型</el-button>
+    <el-button size="small" @click="newType">新建类型</el-button>
 
     <el-table stripe style="width:100%" :data="tableData">
       <el-table-column fixed prop="id" label="编号" width="80"></el-table-column>
@@ -18,7 +18,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+    <el-pagination background layout="prev, pager, next" :total="totalPages"></el-pagination>
   </div>
 </template>
 
@@ -26,13 +26,25 @@
 export default {
   data() {
     return {
-      tableData: [
-        { id: 0, name: "第一篇" },
-        { id: 0, name: "第一篇" },
-        { id: 0, name: "第一篇" },
-        { id: 0, name: "第一篇" }
-      ]
+      tableData: null,
+      totalPages:null,
     };
+  },
+
+  created() {
+    this.getBlogTypes();
+  },
+
+  methods: {
+    getBlogTypes() {
+      this.axios
+        .get("/blogTypes")
+        .then(res => (this.totalPages = res.data.totalPages,this.tableData = res.data.content))
+        .catch(error => console.log(error));
+    },
+    newType(){
+      this.$router.push("/admin/typeadd");
+    }
   }
 };
 </script>

@@ -5,7 +5,7 @@
       text-color="#fff"
       default-active="1-1"
       active-text-color="#ffd04b"
-      :default-openeds="['1','1']"
+      :default-openeds="['1','1','2']"
       @select="handleSelect"
     >
       <el-submenu index="1">
@@ -60,5 +60,6 @@ export default {
 <style scoped>
 .el-menu .el-submenu .el-menu-item {
   min-width: 199px;
+  max-width: 199px;
 }
 </style>

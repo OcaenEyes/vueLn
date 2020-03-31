@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" >
     <el-row type="flex" justify="space-between" align="middle">
       <el-col :span="3">
         <el-image :src="require('@/assets/logo.png')" fit="fill"></el-image>

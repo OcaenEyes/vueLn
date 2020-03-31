@@ -59,6 +59,8 @@ export default {
 }
 .el-header {
   color: #000;
+  /* background-color: gray; */
+  margin-bottom: 10px;
 }
 /* .el-main {
   background-color: khaki;
