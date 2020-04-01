@@ -29,16 +29,21 @@ export default {
     },
     onSubmit() {
       const _this= this;
-      console.log("submit!");
-      console.log(this.form);
+      // console.log("submit!");
+      // console.log(this.form);
       this.axios
         .post("/saveBlogType", this.form)
         .then(
           // res => console.log(res)
           function(res) {
-            console.log(res);
+            // console.log(res);
             if (res.status ==200){
-              _this.$router.go(-1)
+              _this.$notify({
+                title: "通知",
+                message: "恭喜你，新建成功",
+                type: "success"
+              });
+              _this.$router.go(-1);
             }
           }
         )

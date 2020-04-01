@@ -14,7 +14,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small" @click="deleteType(scope.$index,tableData)">删除</el-button>
+          <el-button type="text" size="small" @click="deleteType(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -53,7 +53,7 @@ export default {
         })
         .then(
           res => (
-            console.log(res),
+            // console.log(res),
             (this.totalElements = res.data.totalElements),
             (this.tableData = res.data.content)
           )
@@ -63,16 +63,19 @@ export default {
     newType() {
       this.$router.push("/admin/typeadd");
     },
-    deleteType(index, rows) {
-      console.log(index);
-      console.log(rows);
+    deleteType(row) {
+      const _this = this;
       this.axios
         .get("/deleteBlogType", {
           params: {
-            id: rows[index].id
+            id: row.id
           }
         })
-        .then(res => console.log(res.s))
+        .then(function(res) {
+          if (res.status == 200) {
+            _this.getBlogTypes();
+          }
+        })
         .catch(error => console.log(error));
     }
   }

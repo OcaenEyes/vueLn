@@ -29,8 +29,8 @@ export default {
     },
     onSubmit() {
       const _this = this;
-      console.log("submit!");
-      console.log(this.form);
+      // console.log("submit!");
+      // console.log(this.form);
       this.axios
         .post("/saveBlogTag", this.form)
         .then(
@@ -38,6 +38,11 @@ export default {
           function(res) {
             console.log(res);
             if (res.status == 200) {
+              _this.$notify({
+                title: "通知",
+                message: "恭喜你，新建成功",
+                type: "success"
+              });
               _this.$router.go(-1);
             }
           }

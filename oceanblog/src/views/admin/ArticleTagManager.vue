@@ -14,7 +14,7 @@
         <template slot-scope="scope">
           <el-button type="text" size="small">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small" @click="deleteTag(scope.$index,tableData)">删除</el-button>
+          <el-button type="text" size="small" @click="deleteTag(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -61,15 +61,19 @@ export default {
     newTag() {
       this.$router.push("/admin/tagadd");
     },
-    deleteTag(index, rows) {
-      console.log(rows);
+    deleteTag(row) {
+      const _this= this;
       this.$axios
         .get("/deleteBlogTag", {
           params: {
-            id: rows[index].id
+            id: row.id
           }
         })
-        .then(res => console.log(res))
+        .then(function(res) {
+          if (res.status == 200) {
+            _this.getBlogTags();
+          }
+        })
         .catch(error => console.log(error));
     }
   }
