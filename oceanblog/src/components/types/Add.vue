@@ -7,7 +7,7 @@
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" size="small" @click="onSubmit">立即创建</el-button>
+          <el-button plain size="small" @click="onSubmit">立即创建</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -29,6 +29,19 @@ export default {
     },
     onSubmit() {
       console.log("submit!");
+      let typedata = Qs.stringfy({
+        blogType :JSON.stringify(this.form)
+      });
+      this.axios
+        .post("/saveBlogType", {
+          params: {
+            blogType: {
+              name: this.form.name
+            }
+          }
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
     }
   }
 };

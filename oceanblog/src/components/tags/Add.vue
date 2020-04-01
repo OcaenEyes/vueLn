@@ -7,7 +7,7 @@
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" size="small" @click="onSubmit">立即创建</el-button>
+          <el-button plain size="small" @click="onSubmit">立即创建</el-button>
         </el-form-item>
       </el-form>
     </el-card>

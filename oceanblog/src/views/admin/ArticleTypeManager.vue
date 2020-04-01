@@ -11,10 +11,10 @@
       <el-table-column fixed prop="id" label="编号" width="80"></el-table-column>
       <el-table-column prop="name" label="类型名称" width="150"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
-        <template slot-scope>
+        <template slot-scope="scope">
           <el-button type="text" size="small">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button type="text" size="small" @click="deleteType(scope.$index,tableData)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       tableData: null,
-      totalPages:null,
+      totalPages: null
     };
   },
 
@@ -39,11 +39,28 @@ export default {
     getBlogTypes() {
       this.axios
         .get("/blogTypes")
-        .then(res => (this.totalPages = res.data.totalPages,this.tableData = res.data.content))
+        .then(
+          res => (
+            (this.totalPages = res.data.totalPages),
+            (this.tableData = res.data.content)
+          )
+        )
         .catch(error => console.log(error));
     },
-    newType(){
+    newType() {
       this.$router.push("/admin/typeadd");
+    },
+    deleteType(index, rows) {
+      console.log(index);
+      console.log(rows);
+      this.axios
+        .get("/deleteBlogType", {
+          params: {
+            id: rows[index].id
+          }
+        })
+        .then(res => console.log(res.s))
+        .catch(error => console.log(error));
     }
   }
 };

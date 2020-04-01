@@ -60,7 +60,7 @@ export default {
 .el-header {
   color: #000;
   /* background-color: gray; */
-  margin-bottom: 10px;
+  /* margin-bottom: 4px; */
 }
 /* .el-main {
   background-color: khaki;
