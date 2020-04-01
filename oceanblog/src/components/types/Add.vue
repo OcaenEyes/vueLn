@@ -4,7 +4,7 @@
     <el-card style="width:80%;margin-left:10%;margin-top:40px;padding-top:40px">
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="类型名称">
-          <el-input v-model="form.name"></el-input>
+          <el-input ref="name" v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button plain size="small" @click="onSubmit">立即创建</el-button>
@@ -28,19 +28,20 @@ export default {
       this.$router.go(-1);
     },
     onSubmit() {
+      const _this= this;
       console.log("submit!");
-      let typedata = Qs.stringfy({
-        blogType :JSON.stringify(this.form)
-      });
+      console.log(this.form);
       this.axios
-        .post("/saveBlogType", {
-          params: {
-            blogType: {
-              name: this.form.name
+        .post("/saveBlogType", this.form)
+        .then(
+          // res => console.log(res)
+          function(res) {
+            console.log(res);
+            if (res.status ==200){
+              _this.$router.go(-1)
             }
           }
-        })
-        .then(res => console.log(res))
+        )
         .catch(error => console.log(error));
     }
   }

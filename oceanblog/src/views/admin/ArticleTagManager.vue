@@ -18,7 +18,12 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination background layout="prev, pager, next" :total="totalPages"></el-pagination>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="totalElements"
+      @current-change="page"
+    ></el-pagination>
   </div>
 </template>
 
@@ -27,7 +32,7 @@ export default {
   data() {
     return {
       tableData: null,
-      totalPages: null
+      totalElements: null
     };
   },
   created() {
@@ -35,12 +40,19 @@ export default {
   },
 
   methods: {
-    getBlogTags() {
+    page(currentPage) {
+      this.getBlogTags(currentPage);
+    },
+    getBlogTags(index) {
       this.axios
-        .get("/blogTags")
+        .get("/blogTags", {
+          params: {
+            page: index
+          }
+        })
         .then(
           res => (
-            (this.totalPages = res.data.totalPages),
+            (this.totalElements = res.data.totalElements),
             (this.tableData = res.data.content)
           )
         )
