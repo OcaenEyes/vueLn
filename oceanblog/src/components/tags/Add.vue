@@ -30,7 +30,7 @@ export default {
     onSubmit() {
       const _this = this;
       // console.log("submit!");
-      // console.log(this.form);
+      console.log(this.form);
       this.axios
         .post("/saveBlogTag", this.form)
         .then(

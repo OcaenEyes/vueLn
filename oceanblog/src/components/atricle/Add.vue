@@ -8,36 +8,33 @@
         </el-form-item>
         <el-form-item label="文章详情">
           <div id="toolbar-container"></div>
-          <el-main id="editor" style="height:400px;border:1px solid #f4f4f4" v-model="form.content">
-            <p>这是一个编辑器</p>
-          </el-main>
+          <el-main id="editor" style="height:400px;border:1px solid #f4f4f4" v-model="form.content"></el-main>
         </el-form-item>
 
         <el-form-item label="文章类型">
           <el-select
-            v-model="form.type"
+            v-model="form.blogTypes.name"
             placeholder="输入文章类型"
             style="width:100%;float:left"
             filterable
             default-first-option
             multiple
             allow-create
-          >
-            <el-option></el-option>
-          </el-select>
+          ></el-select>
         </el-form-item>
         <el-form-item label="文章标签">
           <el-select
-            v-model="form.tag"
+            v-model="form.blogTags.name"
             filterable
             default-first-option
             multiple
             allow-create
             placeholder="输入文章标签"
             style="width:100%;float:left"
-          >
-            <el-option></el-option>
-          </el-select>
+          ></el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="onSubmit">保存</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -52,8 +49,8 @@ export default {
       form: {
         title: "",
         content: "",
-        type: [],
-        tag: []
+        blogTypes: [{ name: "" }],
+        blogTags: [{ name: "" }]
       }
     };
   },
@@ -62,6 +59,9 @@ export default {
   },
   created() {},
   methods: {
+    onSubmit() {
+      console.log(this.form);
+    },
     goBack() {
       this.$router.go(-1);
     },
