@@ -12,7 +12,7 @@
           </el-aside>
         </div>
         <el-container>
-          <el-main>
+          <el-main style="padding-top: 0px">
               <router-view></router-view>
           </el-main>
           <el-footer>
@@ -62,9 +62,6 @@ export default {
   /* background-color: gray; */
   /* margin-bottom: 4px; */
 }
-/* .el-main {
-  background-color: khaki;
-} */
 
 .el-footer {
   background-color: lawngreen;
