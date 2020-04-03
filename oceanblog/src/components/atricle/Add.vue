@@ -9,7 +9,37 @@
         <el-form-item label="文章简介">
           <el-input v-model="form.intro" placeholder="输入文章简介"></el-input>
         </el-form-item>
-        <el-form-item label="缩略图">
+        <el-form-item label="上传封面">
+          <el-upload action="#" list-type="picture-card" :auto-upload="false" style="float:left">
+            <i slot="default" class="el-icon-plus"></i>
+            <div slot="file" slot-scope="{file}">
+              <img class="el-upload-list__item-thumbnail" :src="file.url" alt />
+              <span class="el-upload-list__item-actions">
+                <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+                  <i class="el-icon-zoom-in"></i>
+                </span>
+                <span
+                  v-if="!disabled"
+                  class="el-upload-list__item-delete"
+                  @click="handleDownload(file)"
+                >
+                  <i class="el-icon-download"></i>
+                </span>
+                <span
+                  v-if="!disabled"
+                  class="el-upload-list__item-delete"
+                  @click="handleRemove(file)"
+                >
+                  <i class="el-icon-delete"></i>
+                </span>
+              </span>
+            </div>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt />
+          </el-dialog>
+        </el-form-item>
+        <el-form-item label="封面地址">
           <el-input v-model="form.thumbPic" placeholder="输入文章标题"></el-input>
         </el-form-item>
         <el-form-item label="文章详情">
@@ -50,7 +80,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button @click="onSubmit">保存</el-button>
+          <el-button type="small" @click="onSubmit">保存</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -74,7 +104,10 @@ export default {
       rcoptions: [
         { value: 1, label: "是" },
         { value: 0, label: "否" }
-      ]
+      ],
+      dialogImageUrl: "",
+      dialogVisible: false,
+      disabled: false
     };
   },
   mounted() {
@@ -88,24 +121,20 @@ export default {
       this.form.content = this.editor.getData();
       // console.log(this.form.content);
       console.log(this.form);
-      this.axios.post(
-        "/saveBlog",_this.form
-      ).then(
-        function(res){
+      this.axios
+        .post("/saveBlog", _this.form)
+        .then(function(res) {
           console.log(res);
-          if(res.status == 200){
+          if (res.status == 200) {
             _this.$notify({
-                title: "通知",
-                message: "恭喜你，新建成功",
-                type: "success"
-              });
+              title: "通知",
+              message: "恭喜你，新建成功",
+              type: "success"
+            });
             _this.$router.go(-1);
           }
-        }
-
-      ).catch(
-        error => console.log(error)
-      );
+        })
+        .catch(error => console.log(error));
     },
     goBack() {
       this.$router.go(-1);
@@ -124,6 +153,16 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    handleRemove(file) {
+      console.log(file);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handleDownload(file) {
+      console.log(file);
     }
   }
 };
