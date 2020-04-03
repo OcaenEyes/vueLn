@@ -6,6 +6,12 @@
         <el-form-item label="文章标题">
           <el-input v-model="form.title" placeholder="输入文章标题"></el-input>
         </el-form-item>
+        <el-form-item label="文章简介">
+          <el-input v-model="form.intro" placeholder="输入文章简介"></el-input>
+        </el-form-item>
+        <el-form-item label="缩略图">
+          <el-input v-model="form.thumbPic" placeholder="输入文章标题"></el-input>
+        </el-form-item>
         <el-form-item label="文章详情">
           <div id="toolbar-container"></div>
           <el-main id="editor" style="height:400px;border:1px solid #f4f4f4" v-model="form.content"></el-main>
@@ -33,6 +39,16 @@
             style="width:100%;float:left"
           ></el-select>
         </el-form-item>
+        <el-form-item label="是否推荐">
+          <el-select style="float:left" v-model="form.recommend" placeholder="请选择">
+            <el-option
+              v-for="item in rcoptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item>
           <el-button @click="onSubmit">保存</el-button>
         </el-form-item>
@@ -49,9 +65,16 @@ export default {
       form: {
         title: "",
         content: "",
-        blogTypes: [{ name: "" }],
-        blogTags: [{ name: "" }]
-      }
+        intro: "",
+        thumbPic: "",
+        recommend: "",
+        blogTypes: [],
+        blogTags: []
+      },
+      rcoptions: [
+        { value: 1, label: "是" },
+        { value: 0, label: "否" }
+      ]
     };
   },
   mounted() {
@@ -60,7 +83,29 @@ export default {
   created() {},
   methods: {
     onSubmit() {
+      // console.log(this.editor);
+      const _this = this;
+      this.form.content = this.editor.getData();
+      // console.log(this.form.content);
       console.log(this.form);
+      this.axios.post(
+        "/saveBlog",_this.form
+      ).then(
+        function(res){
+          console.log(res);
+          if(res.status == 200){
+            _this.$notify({
+                title: "通知",
+                message: "恭喜你，新建成功",
+                type: "success"
+              });
+            _this.$router.go(-1);
+          }
+        }
+
+      ).catch(
+        error => console.log(error)
+      );
     },
     goBack() {
       this.$router.go(-1);

@@ -14,14 +14,14 @@
         <el-table-column prop="intro" label="简介" width="200"></el-table-column>
         <el-table-column prop="thumbPic" label="缩略图" width="200"></el-table-column>
         <el-table-column prop="views" label="浏览" width="100"></el-table-column>
-        <el-table-column prop="recommend" label="推荐" width="100"></el-table-column>
+        <el-table-column prop="recommend" label="推荐" width="100"  :formatter="formatBoolean"></el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="150"></el-table-column>
         <el-table-column prop="updateTime" label="更新时间" width="150"></el-table-column>
         <el-table-column fixed="right" label="操作" width="200">
-          <template slot-scope>
+          <template slot-scope="scope">
             <el-button type="text" size="small">查看</el-button>
             <el-button type="text" size="small">编辑</el-button>
-            <el-button type="text" size="small">删除</el-button>
+            <el-button type="text" size="small" @click="deleteArticle(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -50,6 +50,16 @@ export default {
   },
 
   methods: {
+    formatBoolean(row,column,cellValue){
+      var result = '';
+      if (cellValue){
+        result = "是";
+      }else{
+        result ="否";
+      }
+      return result;
+
+    },
     page(currentPage) {
       this.getArticle(currentPage);
     },
@@ -71,6 +81,21 @@ export default {
     },
     newArticle() {
       this.$router.push("/admin/articleadd");
+    },
+    deleteArticle(row) {
+      const _this = this;
+      this.axios
+        .get("/deleteBlog", {
+          params: {
+            id: row.id
+          }
+        })
+        .then(function(res) {
+          if (res.status == 200) {
+            _this.getArticle();
+          }
+        })
+        .catch(error => console.log(error));
     }
   }
 };

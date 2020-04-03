@@ -11,6 +11,8 @@ import '@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn'
 Vue.config.productionTip = false
 Vue.prototype.$qs = qs
 Vue.prototype.$CKEditor = CKEditor
+Vue.config.devtools = true
+
 new Vue({
   router,
   store,
