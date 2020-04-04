@@ -7,6 +7,8 @@ import ArticleTypeManager from '../views/admin/ArticleTypeManager.vue'
 import ArticleAdd from '../components/atricle/Add.vue'
 import TagAdd from '../components/tags/Add.vue'
 import TypeAdd from '../components/types/Add.vue'
+import ArticleDetial from '../components/atricle/Detial.vue'
+import ArticleModify from '../components/atricle/Modify.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +32,14 @@ const routes = [
   {
     path: '/admin/articleadd',
     component: ArticleAdd
+  },
+  {
+    path: '/admin/articledetial',
+    component: ArticleDetial
+  },
+  {
+    path: '/admin/articlemodify',
+    component: ArticleModify
   },
   {
     path: '/admin/tagadd',

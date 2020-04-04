@@ -11,7 +11,7 @@
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-setting"></i>
-          <span>博客管理</span>
+          <span>Daliy管理</span>
         </template>
 
         <el-menu-item-group>

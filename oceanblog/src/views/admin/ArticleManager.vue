@@ -12,15 +12,22 @@
         <el-table-column fixed prop="id" label="编号" width="80"></el-table-column>
         <el-table-column prop="title" label="标题" width="120"></el-table-column>
         <el-table-column prop="intro" label="简介" width="200"></el-table-column>
-        <el-table-column prop="thumbPic" label="缩略图" width="200"></el-table-column>
+        <el-table-column prop="thumbPic" label="文章封面" width="200">
+          <template slot-scope="scope">
+            <el-popover trigger="hover" placement="right" >
+              <el-image slot="reference" :src="scope.row.thumbPic" style="width:60px;height:60px"></el-image>
+              <el-image :src="scope.row.thumbPic" style="width:200px;height:200px"></el-image>
+            </el-popover>
+          </template>
+        </el-table-column>
         <el-table-column prop="views" label="浏览" width="100"></el-table-column>
-        <el-table-column prop="recommend" label="推荐" width="100"  :formatter="formatBoolean"></el-table-column>
+        <el-table-column prop="recommend" label="推荐" width="100" :formatter="formatBoolean"></el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="150"></el-table-column>
         <el-table-column prop="updateTime" label="更新时间" width="150"></el-table-column>
         <el-table-column fixed="right" label="操作" width="200">
           <template slot-scope="scope">
-            <el-button type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
+            <el-button type="text" size="small" @click="detial(scope.row)">查看</el-button>
+            <el-button type="text" size="small" @click="modify(scope.row)">编辑</el-button>
             <el-button type="text" size="small" @click="deleteArticle(scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -50,15 +57,31 @@ export default {
   },
 
   methods: {
-    formatBoolean(row,column,cellValue){
-      var result = '';
-      if (cellValue){
+    modify(row){
+      this.$router.push({
+        path:"/admin/articlemodify",
+        query:{
+          articleId:row.id
+        }
+      });
+    },
+    detial(row) {
+      this.$router.push({
+        path: "/admin/articledetial",
+        query: {
+          articleId: row.id
+        }
+      });
+      // console.log(row.id);
+    },
+    formatBoolean(row, column, cellValue) {
+      var result = "";
+      if (cellValue) {
         result = "是";
-      }else{
-        result ="否";
+      } else {
+        result = "否";
       }
       return result;
-
     },
     page(currentPage) {
       this.getArticle(currentPage);
@@ -67,12 +90,12 @@ export default {
       this.axios
         .get("/blogs", {
           params: {
-            page: index
+            page: index-1
           }
         })
         .then(
           res => (
-            console.log(res),
+            // console.log(res),
             (this.totalElements = res.data.totalElements),
             (this.tableData = res.data.content)
           )

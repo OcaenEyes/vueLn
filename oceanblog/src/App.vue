@@ -60,12 +60,14 @@ export default {
 .el-header {
   color: #000;
   /* background-color: gray; */
-  /* margin-bottom: 4px; */
+  margin-bottom: 4px;
+  box-shadow:2px 2px 1px rgb(236, 236, 236);
 }
 
 .el-footer {
-  background-color: lawngreen;
+  /* background-color: lawngreen; */
   line-height: 60px;
+  display: none;
 }
 
 .el-image{

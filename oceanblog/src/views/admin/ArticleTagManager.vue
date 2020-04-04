@@ -41,23 +41,28 @@ export default {
   created() {
     this.getBlogTags();
   },
+  mounted() {
+  },
 
   methods: {
     page(currentPage) {
+      console.log("currentPage",currentPage);
       this.getBlogTags(currentPage);
     },
     getBlogTags(index) {
       this.axios
         .get("/blogTags", {
           params: {
-            page: index
+            page: index-1
           }
         })
         .then(
-          res => (
-            (this.totalElements = res.data.totalElements),
-            (this.tableData = res.data.content)
-          )
+          res => {
+            this.tableData = res.data.content;
+            this.totalElements = res.data.totalElements
+            console.log("tableData",this.tableData);
+            console.log("totalElements",this.totalElements)
+          }        
         )
         .catch(error => console.log(error));
     },

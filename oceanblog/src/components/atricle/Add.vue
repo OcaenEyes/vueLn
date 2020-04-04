@@ -10,25 +10,34 @@
           <el-input v-model="form.intro" placeholder="输入文章简介"></el-input>
         </el-form-item>
         <el-form-item label="上传封面">
-          <el-upload action="#" list-type="picture-card" :auto-upload="false" style="float:left">
+          <el-upload
+            action="http://localhost:8080/fileUpload"
+            list-type="picture-card"
+            :auto-upload="true"
+            style="float:left;with:60%"
+            :on-success="handleSucess"
+          >
             <i slot="default" class="el-icon-plus"></i>
-            <div slot="file" slot-scope="{file}">
-              <img class="el-upload-list__item-thumbnail" :src="file.url" alt />
+            <div slot="file">
+              <img class="el-upload-list__item-thumbnail" :src="fileUrl" alt />
               <span class="el-upload-list__item-actions">
-                <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+                <span
+                  class="el-upload-list__item-preview"
+                  @click="handlePictureCardPreview(fileUrl)"
+                >
                   <i class="el-icon-zoom-in"></i>
                 </span>
                 <span
                   v-if="!disabled"
                   class="el-upload-list__item-delete"
-                  @click="handleDownload(file)"
+                  @click="handleDownload(fileUrl)"
                 >
                   <i class="el-icon-download"></i>
                 </span>
                 <span
                   v-if="!disabled"
                   class="el-upload-list__item-delete"
-                  @click="handleRemove(file)"
+                  @click="handleRemove(fileUrl)"
                 >
                   <i class="el-icon-delete"></i>
                 </span>
@@ -39,8 +48,8 @@
             <img width="100%" :src="dialogImageUrl" alt />
           </el-dialog>
         </el-form-item>
-        <el-form-item label="封面地址">
-          <el-input v-model="form.thumbPic" placeholder="输入文章标题"></el-input>
+        <el-form-item label="文章封面">
+          <el-input v-model="form.thumbPic" placeholder></el-input>
         </el-form-item>
         <el-form-item label="文章详情">
           <div id="toolbar-container"></div>
@@ -49,25 +58,34 @@
 
         <el-form-item label="文章类型">
           <el-select
-            v-model="form.blogTypes.name"
+            v-model="form.blogTypes"
             placeholder="输入文章类型"
             style="width:100%;float:left"
             filterable
             default-first-option
             multiple
             allow-create
-          ></el-select>
+          >
+            <el-option
+              v-for="item in typeoption"
+              :key="item.id"
+              :label="item.name"
+              :value="item.name"
+            ></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="文章标签">
           <el-select
-            v-model="form.blogTags.name"
+            v-model="form.blogTags"
             filterable
             default-first-option
             multiple
             allow-create
             placeholder="输入文章标签"
             style="width:100%;float:left"
-          ></el-select>
+          >
+            <el-option v-for="item in tagoption" :key="item.id" :label="item.name" :value="item.name"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="是否推荐">
           <el-select style="float:left" v-model="form.recommend" placeholder="请选择">
@@ -92,6 +110,7 @@ export default {
   data() {
     return {
       editor: null,
+      fileUrl: "",
       form: {
         title: "",
         content: "",
@@ -102,9 +121,11 @@ export default {
         blogTags: []
       },
       rcoptions: [
-        { value: 1, label: "是" },
-        { value: 0, label: "否" }
+        { value: true, label: "是" },
+        { value: false, label: "否" }
       ],
+      tagoption: [],
+      typeoption: [],
       dialogImageUrl: "",
       dialogVisible: false,
       disabled: false
@@ -113,14 +134,17 @@ export default {
   mounted() {
     this.initCKEditor();
   },
-  created() {},
+  created() {
+    this.getTypes();
+    this.getTags();
+  },
   methods: {
     onSubmit() {
       // console.log(this.editor);
       const _this = this;
       this.form.content = this.editor.getData();
       // console.log(this.form.content);
-      console.log(this.form);
+      // console.log(this.form);
       this.axios
         .post("/saveBlog", _this.form)
         .then(function(res) {
@@ -140,7 +164,7 @@ export default {
       this.$router.go(-1);
     },
     initCKEditor() {
-      console.log(this.CKEditor);
+      // console.log(this.CKEditor);
       this.$CKEditor
         .create(document.querySelector("#editor"), {
           language: "zh-cn"
@@ -158,11 +182,39 @@ export default {
       console.log(file);
     },
     handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
+      this.dialogImageUrl = file;
       this.dialogVisible = true;
     },
     handleDownload(file) {
       console.log(file);
+    },
+    handleSucess(res) {
+      this.fileUrl = "http://localhost:8080" + res;
+      console.log(this.fileUrl);
+      // console.log(res);
+      this.form.thumbPic = this.fileUrl;
+    },
+    getTypes() {
+      const _this = this;
+      this.axios
+        .get("/type")
+        .then(function(res) {
+          _this.typeoption = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getTags() {
+      const _this = this;
+      this.axios
+        .get("/tag")
+        .then(function(res) {
+          _this.tagoption = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

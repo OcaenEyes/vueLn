@@ -51,7 +51,7 @@ export default {
       this.axios
         .get("/blogTypes", {
           params: {
-            page: index
+            page: index-1
           }
         })
         .then(
