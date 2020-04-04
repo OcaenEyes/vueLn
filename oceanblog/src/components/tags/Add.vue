@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-page-header @back="goBack" title="返回标签列表" content="新建标签"></el-page-header>
+    <el-page-header @back="goBack" title="返回标签列表" content="新建标签" style="margin-top:20px"></el-page-header>
     <el-card style="width:80%;margin-left:10%;margin-top:40px;padding-top:40px">
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="标签名称">
