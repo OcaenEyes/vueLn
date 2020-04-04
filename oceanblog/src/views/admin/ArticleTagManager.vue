@@ -79,6 +79,11 @@ export default {
         })
         .then(function(res) {
           if (res.status == 200) {
+             _this.$notify({
+              title: "通知",
+              message: "已删除",
+              type: "warning"
+            });
             _this.getBlogTags();
           }
         })

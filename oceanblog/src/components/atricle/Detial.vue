@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-page-header @back="goBack" title="返回文章列表" content="文章详情"></el-page-header>
+    <el-page-header @back="goBack" title="返回文章列表" content="文章详情" style="margin-top:20px"></el-page-header>
     <el-card style="width:80%;margin-left:10%;margin-top:40px;padding-top:40px">
       <el-form ref="form" :moedl="form" label-width="80px">
         <el-form-item label="文章标题">

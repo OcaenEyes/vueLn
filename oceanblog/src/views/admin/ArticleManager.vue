@@ -14,7 +14,7 @@
         <el-table-column prop="intro" label="简介" width="200"></el-table-column>
         <el-table-column prop="thumbPic" label="文章封面" width="200">
           <template slot-scope="scope">
-            <el-popover trigger="hover" placement="right" >
+            <el-popover trigger="hover" placement="right">
               <el-image slot="reference" :src="scope.row.thumbPic" style="width:60px;height:60px"></el-image>
               <el-image :src="scope.row.thumbPic" style="width:200px;height:200px"></el-image>
             </el-popover>
@@ -57,11 +57,11 @@ export default {
   },
 
   methods: {
-    modify(row){
+    modify(row) {
       this.$router.push({
-        path:"/admin/articlemodify",
-        query:{
-          articleId:row.id
+        path: "/admin/articlemodify",
+        query: {
+          articleId: row.id
         }
       });
     },
@@ -90,7 +90,7 @@ export default {
       this.axios
         .get("/blogs", {
           params: {
-            page: index-1
+            page: index - 1
           }
         })
         .then(
@@ -115,6 +115,11 @@ export default {
         })
         .then(function(res) {
           if (res.status == 200) {
+            _this.$notify({
+              title: "通知",
+              message: "已删除",
+              type: "warning"
+            });
             _this.getArticle();
           }
         })
