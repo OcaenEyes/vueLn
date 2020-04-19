@@ -52,7 +52,8 @@
                 </div>
                 <div class="date">
                   <i class="el-icon-time"></i>
-                  2020-04-19 13:10</div>
+                  2020-04-19 13:10
+                </div>
                 <div class="views">
                   <i class="el-icon-view"></i>
                   2333
@@ -63,8 +64,9 @@
         </el-card>
       </el-col>
     </el-row>
-
-    <el-pagination :page-size="20" :pager-count="11" layout="prev, pager, next" :total="1000"></el-pagination>
+    <div class="pagination">
+      <el-pagination :page-size="10" :pager-count="11" layout="prev, pager, next" :total="20"></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -116,5 +118,8 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+.pagination{
+  margin: 20px 0;
 }
 </style>

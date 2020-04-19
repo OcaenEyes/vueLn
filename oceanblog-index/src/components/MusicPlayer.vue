@@ -1,8 +1,15 @@
 <template>
-  <div>player</div>
+  <div class="music">
+    <aplayer autoplay></aplayer>
+  </div>
 </template>
 <script>
-export default {};
+import aplayer from "vue-aplayer";
+export default {
+  components: {
+    aplayer
+  }
+};
 </script>
 
 <script>

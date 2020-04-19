@@ -2,93 +2,93 @@
   <div class="header" :class="{'header-active':needFixed}">
     <!-- <div class="header-active" > -->
     <div class="logo">
-      <el-image style="height:56px;width:200px;padding:5px;" aria-placeholder="OCEANEYES INDEX"></el-image>
+      <el-image
+        style="height:56px;width:200px;padding:5px;"
+        aria-placeholder="OCEANEYES INDEX"
+        :src="url"
+      ></el-image>
     </div>
     <div class="nav">
-        <el-dropdown>
-            <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
-              产品
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown" class="dropdown-content">
-              <el-dropdown-item>内容</el-dropdown-item>
-              <el-dropdown-item>推荐</el-dropdown-item>
-              <el-dropdown-item>数据</el-dropdown-item>
-              <el-dropdown-item>中台</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <el-dropdown>
+        <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
+          产品
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown" class="dropdown-content">
+          <el-dropdown-item>内容</el-dropdown-item>
+          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>数据</el-dropdown-item>
+          <el-dropdown-item>中台</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
-            <el-dropdown>
-            <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
-              开发
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown" class="dropdown-content">
-              <el-dropdown-item>内容</el-dropdown-item>
-              <el-dropdown-item>推荐</el-dropdown-item>
-              <el-dropdown-item>数据</el-dropdown-item>
-              <el-dropdown-item>中台</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <el-dropdown>
+        <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
+          开发
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown" class="dropdown-content">
+          <el-dropdown-item>内容</el-dropdown-item>
+          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>数据</el-dropdown-item>
+          <el-dropdown-item>中台</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
-            <el-dropdown>
-            <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
-              设计
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown" class="dropdown-content">
-              <el-dropdown-item>内容</el-dropdown-item>
-              <el-dropdown-item>推荐</el-dropdown-item>
-              <el-dropdown-item>数据</el-dropdown-item>
-              <el-dropdown-item>中台</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <el-dropdown>
+        <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
+          设计
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown" class="dropdown-content">
+          <el-dropdown-item>内容</el-dropdown-item>
+          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>数据</el-dropdown-item>
+          <el-dropdown-item>中台</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
-            <el-dropdown>
-            <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
-              运营
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown" class="dropdown-content">
-              <el-dropdown-item>内容</el-dropdown-item>
-              <el-dropdown-item>推荐</el-dropdown-item>
-              <el-dropdown-item>数据</el-dropdown-item>
-              <el-dropdown-item>中台</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <el-dropdown>
+        <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
+          运营
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown" class="dropdown-content">
+          <el-dropdown-item>内容</el-dropdown-item>
+          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>数据</el-dropdown-item>
+          <el-dropdown-item>中台</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
-            <el-dropdown>
-            <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
-              摄影
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown" class="dropdown-content">
-              <el-dropdown-item>内容</el-dropdown-item>
-              <el-dropdown-item>推荐</el-dropdown-item>
-              <el-dropdown-item>数据</el-dropdown-item>
-              <el-dropdown-item>中台</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+      <el-dropdown>
+        <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
+          摄影
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown" class="dropdown-content">
+          <el-dropdown-item>内容</el-dropdown-item>
+          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>数据</el-dropdown-item>
+          <el-dropdown-item>中台</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
 
-            <el-dropdown>
-            <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
-              小记
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown" class="dropdown-content">
-              <el-dropdown-item>内容</el-dropdown-item>
-              <el-dropdown-item>推荐</el-dropdown-item>
-              <el-dropdown-item>数据</el-dropdown-item>
-              <el-dropdown-item>中台</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-
-   
+      <el-dropdown>
+        <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
+          小记
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown" class="dropdown-content">
+          <el-dropdown-item>内容</el-dropdown-item>
+          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>数据</el-dropdown-item>
+          <el-dropdown-item>中台</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <div class="search">
-      <el-input placeholder="搜索">
-      </el-input>
-
+      <el-input placeholder="搜索"></el-input>
     </div>
   </div>
 </template>
@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       needFixed: false,
-     
+      url: require("@/assets/logo.png")
     };
   },
   mounted() {
@@ -117,8 +117,10 @@ export default {
       // console.log(scrollTop);
       if (scrollTop > 0) {
         _this.needFixed = true;
+        _this.url = require('@/assets/logo-white.png');
       } else {
         _this.needFixed = false;
+        _this.url = require('@/assets/logo.png');
       }
     }
   }
@@ -164,13 +166,12 @@ export default {
   flex-direction: row;
   justify-content: center;
 }
-.search{
+.search {
   float: right;
-  margin-right: 20px;
+  margin-right: 30px;
   height: 66px;
-  
 }
-.el-dropdown{
+.el-dropdown {
   margin-left: 40px;
 }
 
@@ -178,7 +179,7 @@ export default {
   cursor: pointer;
   color: black;
 }
-.scroll-active{
+.scroll-active {
   cursor: pointer;
   color: blanchedalmond;
 }
