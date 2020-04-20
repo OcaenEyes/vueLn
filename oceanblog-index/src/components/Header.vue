@@ -9,7 +9,7 @@
       ></el-image>
     </div>
     <div class="nav">
-      <el-dropdown>
+      <el-dropdown >
         <span class="el-dropdown-link" :class="{'scroll-active':needFixed}">
           产品
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -28,10 +28,12 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown" class="dropdown-content">
-          <el-dropdown-item>内容</el-dropdown-item>
-          <el-dropdown-item>推荐</el-dropdown-item>
-          <el-dropdown-item>数据</el-dropdown-item>
-          <el-dropdown-item>中台</el-dropdown-item>
+          <el-dropdown-item>Python</el-dropdown-item>
+          <el-dropdown-item>Java</el-dropdown-item>
+          <el-dropdown-item>MySQL</el-dropdown-item>
+          <el-dropdown-item>Android</el-dropdown-item>
+          <el-dropdown-item>VUE</el-dropdown-item>
+          <el-dropdown-item>FLutter</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -41,10 +43,10 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown" class="dropdown-content">
-          <el-dropdown-item>内容</el-dropdown-item>
-          <el-dropdown-item>推荐</el-dropdown-item>
-          <el-dropdown-item>数据</el-dropdown-item>
-          <el-dropdown-item>中台</el-dropdown-item>
+          <el-dropdown-item>PS</el-dropdown-item>
+          <el-dropdown-item>AI</el-dropdown-item>
+          <el-dropdown-item>AE</el-dropdown-item>
+          <el-dropdown-item>PR</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -54,10 +56,10 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown" class="dropdown-content">
-          <el-dropdown-item>内容</el-dropdown-item>
-          <el-dropdown-item>推荐</el-dropdown-item>
+          <el-dropdown-item>增长</el-dropdown-item>
+          <el-dropdown-item>营销</el-dropdown-item>
           <el-dropdown-item>数据</el-dropdown-item>
-          <el-dropdown-item>中台</el-dropdown-item>
+          <el-dropdown-item>策划</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -67,10 +69,9 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown" class="dropdown-content">
-          <el-dropdown-item>内容</el-dropdown-item>
-          <el-dropdown-item>推荐</el-dropdown-item>
-          <el-dropdown-item>数据</el-dropdown-item>
-          <el-dropdown-item>中台</el-dropdown-item>
+          <el-dropdown-item>后期</el-dropdown-item>
+          <el-dropdown-item>风光</el-dropdown-item>
+          <el-dropdown-item>人物</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -80,10 +81,7 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown" class="dropdown-content">
-          <el-dropdown-item>内容</el-dropdown-item>
-          <el-dropdown-item>推荐</el-dropdown-item>
-          <el-dropdown-item>数据</el-dropdown-item>
-          <el-dropdown-item>中台</el-dropdown-item>
+          <el-dropdown-item>读书城南</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -164,7 +162,7 @@ export default {
   height: 66px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .search {
   float: right;
@@ -178,12 +176,23 @@ export default {
 .el-dropdown-link {
   cursor: pointer;
   color: black;
+  outline: 0;
 }
+
 .scroll-active {
   cursor: pointer;
   color: blanchedalmond;
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+.el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
+    background-color: #000;
+    color: #fff;
+    /* border-bottom: 1px solid black; */
+}
+.el-pager li.active {
+    cursor: default;
+    color: #67c23a;
 }
 </style>
