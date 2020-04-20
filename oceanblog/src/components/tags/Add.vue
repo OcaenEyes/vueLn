@@ -37,13 +37,19 @@ export default {
           // res => console.log(res)
           function(res) {
             console.log(res);
-            if (res.status == 200) {
+            if (res.data.code == 200) {
               _this.$notify({
                 title: "通知",
                 message: "恭喜你，新建成功",
                 type: "success"
               });
               _this.$router.go(-1);
+            } else if (res.data.code == 100) {
+              _this.$notify({
+                title: "通知",
+                message: "已存在该标签",
+                type: "error"
+              });
             }
           }
         )

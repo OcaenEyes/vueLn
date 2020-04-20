@@ -41,29 +41,26 @@ export default {
   created() {
     this.getBlogTags();
   },
-  mounted() {
-  },
+  mounted() {},
 
   methods: {
     page(currentPage) {
-      console.log("currentPage",currentPage);
+      console.log("currentPage", currentPage);
       this.getBlogTags(currentPage);
     },
     getBlogTags(index) {
       this.axios
         .get("/blogTags", {
           params: {
-            page: index-1
+            page: index - 1
           }
         })
-        .then(
-          res => {
-            this.tableData = res.data.content;
-            this.totalElements = res.data.totalElements
-            console.log("tableData",this.tableData);
-            console.log("totalElements",this.totalElements)
-          }        
-        )
+        .then(res => {
+          this.tableData = res.data.content;
+          this.totalElements = res.data.totalElements;
+          console.log("tableData", this.tableData);
+          console.log("totalElements", this.totalElements);
+        })
         .catch(error => console.log(error));
     },
     newTag() {
@@ -79,7 +76,7 @@ export default {
         })
         .then(function(res) {
           if (res.status == 200) {
-             _this.$notify({
+            _this.$notify({
               title: "通知",
               message: "已删除",
               type: "warning"
