@@ -84,8 +84,7 @@ export default {
             _this.getBlogTags();
           }
         })
-        .catch(
-          error =>
+        .catch(error =>
           _this.$notify({
             title: "通知",
             message: error,

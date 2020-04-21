@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-carousel :interval="5000" type="card" height="380px">
-      <el-carousel-item v-for="item in 6" :key="item">
+      <el-carousel-item v-for="(item,index) in blogsNew" :key="index">
         <div class="intro">
-            <h1>嘿嘿</h1>
-            <span>你看起来很好吃</span>
-          </div>
+          <h1>{{item.title}}</h1>
+          <span>{{item.intro}}</span>
+        </div>
         <el-image
-          src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+          :src="item.thumbPic"
           class="image"
         ></el-image>
       </el-carousel-item>
@@ -16,7 +16,33 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      blogsNew: null
+    };
+  },
+  created() {
+    this.getBlogsNew();
+  },
+  mounted() {},
+
+  methods: {
+    getBlogsNew() {
+      // const _this = this;
+      this.axios
+        .get("/blogNew")
+        .then(
+          res => (
+            (this.blogsNew = res.data),
+            console.log(res.data),
+            console.log(this.blogsNew)
+          )
+        )
+        .catch(error => console.log(error));
+    }
+  }
+};
 </script>
 
 <style scoped>

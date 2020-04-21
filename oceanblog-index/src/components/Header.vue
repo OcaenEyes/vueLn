@@ -166,7 +166,7 @@ export default {
 }
 .search {
   float: right;
-  margin-right: 30px;
+  margin-right: 10px;
   height: 66px;
 }
 .el-dropdown {
