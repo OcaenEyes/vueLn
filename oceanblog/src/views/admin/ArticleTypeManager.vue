@@ -51,7 +51,7 @@ export default {
       this.axios
         .get("/blogTypes", {
           params: {
-            page: index-1
+            page: index - 1
           }
         })
         .then(
@@ -76,7 +76,7 @@ export default {
         })
         .then(function(res) {
           if (res.status == 200) {
-             _this.$notify({
+            _this.$notify({
               title: "通知",
               message: "已删除",
               type: "warning"
@@ -84,7 +84,14 @@ export default {
             _this.getBlogTypes();
           }
         })
-        .catch(error => console.log(error));
+        .catch(
+          error =>
+          _this.$notify({
+            title: "通知",
+            message: error,
+            type: "error"
+          })
+        );
     }
   }
 };

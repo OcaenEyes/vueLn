@@ -84,7 +84,14 @@ export default {
             _this.getBlogTags();
           }
         })
-        .catch(error => console.log(error));
+        .catch(
+          error =>
+          _this.$notify({
+            title: "通知",
+            message: error,
+            type: "error"
+          })
+        );
     }
   }
 };
