@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Im from '../components/Im.vue';
+import ImChat from '../components/ImChat.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/im',
     name: 'Im',
     component: Im
+  },
+  {
+    path: '/imchat',
+    name: 'ImChat',
+    component: ImChat
   }
 ]
 

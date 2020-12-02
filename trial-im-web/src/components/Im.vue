@@ -12,7 +12,7 @@
             class="avatar"
             :style="{ backgroundImage: 'url(' + (data.avatar || '') + ')' }"
           ></div>
-          <div class="bubble">
+          <div class="lbubble">
             <p>{{ data.msg }}</p>
             <div class="meta">
               <time class="posted-date">{{ data.time }}</time>
@@ -40,15 +40,45 @@ export default {
       return new Promise((resolve) => {
         // 模拟请求 50 条数据，因为 size 设置为 50
         setTimeout(() => {
-          for (let i = 0; i < 50; i++) {
-            items.push({
-              id: i,
+          // for (let i = 0; i < 50; i++) {
+          //   items.push({
+          //     id: i,
+          //     avatar:
+          //       "http://m.imeitou.com/uploads/allimg/2020111112/nuezp3yreh1.jpg",
+          //     msg: 'msg',
+          //     time:  new Date(Math.floor(this.initTime + i * this.size * 1000 + Math.random() * this.size * 1000)).toString(),
+          //   });
+          // }
+          items.push(
+            {
+              id: 0,
               avatar:
                 "http://m.imeitou.com/uploads/allimg/2020111112/nuezp3yreh1.jpg",
-              msg: 'msg',
-              time:  new Date(Math.floor(this.initTime + i * this.size * 1000 + Math.random() * this.size * 1000)).toString(),
-            });
-          }
+              msg: "msg",
+              issender:true,
+              time: new Date(
+                Math.floor(
+                  this.initTime +
+                    0 * this.size * 1000 +
+                    Math.random() * this.size * 1000
+                )
+              ).toString(),
+            },
+            {
+              id: 1,
+              avatar:
+                "http://m.imeitou.com/uploads/allimg/2020111112/nuezp3yreh1.jpg",
+              msg: "msg",
+              issender:false,
+              time: new Date(
+                Math.floor(
+                  this.initTime +
+                    1 * this.size * 1000 +
+                    Math.random() * this.size * 1000
+                )
+              ).toString(),
+            }
+          );
           resolve(items);
         }, 1000);
       });
@@ -83,6 +113,12 @@ export default {
   width: 100%;
   text-align: left;
 }
+.ritem{
+    display: flex;
+  padding: 10px 0;
+  width: 100%;
+  text-align: left;
+}
 .avatar {
   border-radius: 50%;
   margin-left: 15px;
@@ -106,7 +142,7 @@ p {
   background-color: #ccc;
   margin: 0.5em 0;
 }
-.bubble {
+.lbubble {
   padding: 7px 10px;
   color: #333;
   background: #fff;
@@ -117,7 +153,18 @@ p {
   margin: 0 20px 0 5px;
 }
 
-.bubble:before {
+.rbubble {
+  padding: 7px 10px;
+  color: #333;
+  background: #fff;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 420px;
+  min-width: 80px;
+  margin: 0 20px 0 5px;
+}
+
+.lbubble::before {
   content: "";
   border-style: solid;
   border-width: 0 10px 10px 0;
@@ -125,6 +172,15 @@ p {
   position: absolute;
   top: 0;
   left: -10px;
+}
+.rbubble::after {
+  content: "";
+  border-style: solid;
+  border-width: 0 10px 10px 0;
+  border-color: #fff transparent #fff transparent;
+  position: absolute;
+  top: 0;
+  right: -10px;
 }
 
 .meta {
