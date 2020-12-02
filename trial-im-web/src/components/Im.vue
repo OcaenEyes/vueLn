@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="chat-window" style="height:800px">
+    <div class="chat-window" style="height: 800px">
       <div class="chat-title">与GZY的对话</div>
-      <div class="msg-list" style="height:600px">
+      <div class="msg-list" style="height: 600px">
         <div class="lchat-msg">
           <img
             class="avatar"
@@ -26,9 +26,8 @@
         </div>
       </div>
 
-      <div class="send-input"> 
-       <el-input v-model="input" placeholder="请输入内容"></el-input>
-      
+      <div class="send-input">
+        
       </div>
     </div>
   </div>
@@ -113,4 +112,5 @@ export default {
   height: 30px;
   border-radius: 15px;
 }
+
 </style>
