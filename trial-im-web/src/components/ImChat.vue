@@ -71,22 +71,6 @@ export default {
   height: calc(100% - 40px);
 }
 
-.im-chat-main .im-chat-main-left {
-  flex: 4;
-  display: flex;
-  flex-direction: column;
-}
-
-.im-chat-main .im-chat-main-left .im-chat-main-box {
-  flex: 1;
-  padding-top: 1rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.im-chat-main .message-img {
-  max-width: 20rem;
-}
-
 .im-chat-main .im-chat-users {
   flex: 1;
   border-left: 1px solid #cccccc;
@@ -113,13 +97,14 @@ export default {
 .im-chat-main .messages ul li .im-chat-text {
   position: relative;
   line-height: 22px;
-  margin-top: 25px;
+  margin-top: 60px;
   padding: 1rem;
   background-color: #e2e2e2;
   border-radius: 3px;
   color: #333;
   word-break: break-all;
-  display: inline-block;
+  display: table-cell;
+  /* width: 20%; */
   vertical-align: top;
   font-size: 14px;
 }
@@ -159,7 +144,7 @@ export default {
   position: absolute;
   left: 60px;
   top: -2px;
-  width: 500px;
+  width: 50px;
   line-height: 24px;
   font-size: 12px;
   white-space: nowrap;
@@ -191,6 +176,8 @@ export default {
   background-color: #000;
   color: #fff;
   display: inline-block;
+  margin-top: 30px;
+  margin-right: 30px;
   vertical-align: top;
   font-size: 14px;
 }

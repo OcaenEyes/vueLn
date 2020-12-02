@@ -1,191 +1,116 @@
 <template>
-  <div class="view-wrapper">
-    <cube-recycle-list
-      class="list"
-      :size="size"
-      :on-fetch="onFetch"
-      :offset="offset"
-    >
-      <template slot="item" slot-scope="{ data }">
-        <div :id="data.id" class="item" @click="handleClick(data)">
-          <div
+  <div>
+    <div class="chat-window" style="height:800px">
+      <div class="chat-title">与GZY的对话</div>
+      <div class="msg-list" style="height:600px">
+        <div class="lchat-msg">
+          <img
             class="avatar"
-            :style="{ backgroundImage: 'url(' + (data.avatar || '') + ')' }"
-          ></div>
-          <div class="lbubble">
-            <p>{{ data.msg }}</p>
-            <div class="meta">
-              <time class="posted-date">{{ data.time }}</time>
-            </div>
+            src="https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+          />
+          <div class="lmsg">
+            <div class="lmsg-time">20201201 23:01</div>
+            <div class="lmsg-content">12121</div>
           </div>
         </div>
-      </template>
-    </cube-recycle-list>
+
+        <div class="rchat-msg">
+          <div class="rmsg">
+            <div class="rmsg-time">20201201 23:01</div>
+            <div class="rmsg-content">12121</div>
+          </div>
+          <img
+            class="avatar"
+            src="https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+          />
+        </div>
+      </div>
+
+      <div class="send-input"> 
+       <el-input v-model="input" placeholder="请输入内容"></el-input>
+      
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Im",
-  data() {
-    return {
-      initTime: new Date().getTime(),
-      size: 50,
-      offset: 100,
-    };
-  },
-  methods: {
-    onFetch() {
-      let items = [];
-      return new Promise((resolve) => {
-        // 模拟请求 50 条数据，因为 size 设置为 50
-        setTimeout(() => {
-          // for (let i = 0; i < 50; i++) {
-          //   items.push({
-          //     id: i,
-          //     avatar:
-          //       "http://m.imeitou.com/uploads/allimg/2020111112/nuezp3yreh1.jpg",
-          //     msg: 'msg',
-          //     time:  new Date(Math.floor(this.initTime + i * this.size * 1000 + Math.random() * this.size * 1000)).toString(),
-          //   });
-          // }
-          items.push(
-            {
-              id: 0,
-              avatar:
-                "http://m.imeitou.com/uploads/allimg/2020111112/nuezp3yreh1.jpg",
-              msg: "msg",
-              issender:true,
-              time: new Date(
-                Math.floor(
-                  this.initTime +
-                    0 * this.size * 1000 +
-                    Math.random() * this.size * 1000
-                )
-              ).toString(),
-            },
-            {
-              id: 1,
-              avatar:
-                "http://m.imeitou.com/uploads/allimg/2020111112/nuezp3yreh1.jpg",
-              msg: "msg",
-              issender:false,
-              time: new Date(
-                Math.floor(
-                  this.initTime +
-                    1 * this.size * 1000 +
-                    Math.random() * this.size * 1000
-                )
-              ).toString(),
-            }
-          );
-          resolve(items);
-        }, 1000);
-      });
-    },
-    handleClick(data) {
-      console.log("Item:" + data);
-    },
-  },
 };
 </script>
 
 <style scoped>
-/* 限制视口 包裹组件*/
-.view-wrapper {
-  position: fixed;
-  top: 54px;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+.el-row {
+  margin-bottom: 20px;
 }
-.list {
-  margin: 0 auto;
-  padding: 0;
-  border: 1px solid #ddd;
-  list-style-type: none;
-  text-align: center;
-  background: #eee;
+.el-col {
+  border-radius: 4px;
 }
-.item {
+.lchat-msg {
   display: flex;
-  padding: 10px 0;
-  width: 100%;
-  text-align: left;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  align-content: center;
+  min-height: 36px;
+  margin-left: 10px;
 }
-.ritem{
-    display: flex;
-  padding: 10px 0;
-  width: 100%;
-  text-align: left;
+.lmsg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 36px;
+  margin-left: 10px;
+}
+.lmsg-time {
+  font-size: 4px;
+  padding: 10px 0 10px 0;
+  color: #a0a0a0;
+}
+.lmsg-content {
+  word-break: break-all;
+  max-width: 66%;
+  background: #d3dce6;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  padding: 0 10px 0 10px;
+}
+
+.rchat-msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  min-height: 36px;
+  margin-right: 10px;
+  align-items: flex-end;
+}
+.rmsg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+.rmsg-time {
+  font-size: 4px;
+  padding: 10px 0 10px 0;
+  color: #a0a0a0;
+}
+.rmsg-content {
+  background: #5fb948;
+  word-break: break-all;
+  max-width: 66%;
+  min-height: 36px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  padding: 0 10px 0 10px;
 }
 .avatar {
-  border-radius: 50%;
-  margin-left: 15px;
-  margin-right: 6px;
-  min-width: 48px;
-  width: 48px;
-  height: 48px;
-  /* background-image: url('./unknown.jpg') */
-  background-size: cover;
-  outline: none;
-}
-p {
-  margin: 0;
-  word-wrap: break-word;
-  font-size: 14px;
-}
-
-.tombstone p {
-  width: 100%;
-  height: 0.5em;
-  background-color: #ccc;
-  margin: 0.5em 0;
-}
-.lbubble {
-  padding: 7px 10px;
-  color: #333;
-  background: #fff;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
-  max-width: 420px;
-  min-width: 80px;
-  margin: 0 20px 0 5px;
-}
-
-.rbubble {
-  padding: 7px 10px;
-  color: #333;
-  background: #fff;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
-  max-width: 420px;
-  min-width: 80px;
-  margin: 0 20px 0 5px;
-}
-
-.lbubble::before {
-  content: "";
-  border-style: solid;
-  border-width: 0 10px 10px 0;
-  border-color: transparent #fff transparent transparent;
-  position: absolute;
-  top: 0;
-  left: -10px;
-}
-.rbubble::after {
-  content: "";
-  border-style: solid;
-  border-width: 0 10px 10px 0;
-  border-color: #fff transparent #fff transparent;
-  position: absolute;
-  top: 0;
-  right: -10px;
-}
-
-.meta {
-  font-size: 0.8rem;
-  color: #999;
-  margin-top: 3px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
 }
 </style>
