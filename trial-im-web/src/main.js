@@ -5,6 +5,7 @@ import store from './store'
 import './plugin/element'
 import './plugin/axios'
 import './plugin/cube-ui'
+import './plugin/socketio'
 
 Vue.config.productionTip = false
 
