@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import VueSocketIO from 'socket.io'
+import VueSocketIO from 'vue-socket.io'
 import SocketIO from 'socket.io-client'
 
-Vue.use(VueSocketIO({
+Vue.use(new VueSocketIO({
     debug:true,
-    connection : SocketIO('127.0.0.1:8082',{
-        path: '',
+    connection: SocketIO('ws://127.0.0.1:8082',{
+        path:'/ws',
         // transports: ['websocket', 'xhr-polling', 'jsonp-polling'],
     })
-}));
+}))

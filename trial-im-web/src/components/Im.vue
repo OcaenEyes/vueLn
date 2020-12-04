@@ -163,9 +163,25 @@ export default {
       msgviewheight: "",
     };
   },
+ sockets: {
+        connect: function () {
+            console.log('socket connected')
+        },
+        customEmit: function () {
+            console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+        }
+  },
   methods: {
-    sendMsg() {},
-    initWebsocket() {},
+    sendMsg() {
+      this.$socket.emit("你好呀～～～");
+    },
+    initWebsocket() {
+      this.$socket.connect();
+    },
+    colseWebsocket(){
+      this.$socket.close();
+			console.log('连接已关闭');
+    },
 
     getMsg() {
       this.messages.push({
@@ -186,13 +202,15 @@ export default {
       console.log(this.msgviewheight);
     },
   },
-  mounted() {},
+  mounted() {
+    this.initWebsocket();
+  },
   created() {
     this.getMsg();
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.sendMsg();
     this.initWebsocket();
+    this.sendMsg();
   },
   watch: {
     messages() {
