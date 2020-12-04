@@ -12,5 +12,8 @@ module.exports = {
       postCompile: false,
       theme: false
     }
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 }
