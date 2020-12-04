@@ -203,7 +203,7 @@ export default {
     },
   },
   mounted() {
-    this.initWebsocket();
+    // this.initWebsocket();
   },
   created() {
     this.getMsg();
