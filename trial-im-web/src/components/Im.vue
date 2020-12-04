@@ -60,7 +60,7 @@ export default {
     return {
       none: "none",
       ws: null,
-      msg:'',
+      msg: "",
       messages: [
         {
           issend: true,
@@ -164,56 +164,9 @@ export default {
     };
   },
   methods: {
-    sendMsg() {
-      if (this.msg != ''){
-        console.log("发送消息");
-        this.ws.send(this.msg);
-        this.messages.push({
-          issend: true,
-          username: "巧克",
-          avatar:
-            "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-          content: this.msg,
-          timestmp: "20201202",
-        
-        });
-        this.msg='';
-      }
-    },
-    initWebsocket() {
-      let that = this;
-      if (window.WebSocket) {
-        var ws = new WebSocket("ws://localhost:8082/ws");
-        that.ws = ws;
-        //监听连接成功
-        ws.onopen = function () {
-          console.log("连接服务器成功");
-          ws.send("你好"); //向服务器发送信息，这个地方我是先把每一个访问的user都先存储起来方便实现1对1对话
-        };
-        //监听连接失败
-        ws.onclose = function () {
-          console.log("服务器关闭");
-        };
-        //监听报错
-        ws.onerror = function () {
-          console.log("连接出错");
-        };
-        // 接收服务器的消息
-        ws.onmessage = function (e) {
-          let message =e.data;
-          console.log(message);
-          that.messages.push({
-            issend: false,
-          username: "厉害",
-          avatar:
-            "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-          content: message,
-          timestmp: "20201202",
-          });
-          console.log("收到服务器消息");
-        };
-      }
-    },
+    sendMsg() {},
+    initWebsocket() {},
+
     getMsg() {
       this.messages.push({
         issend: true,
