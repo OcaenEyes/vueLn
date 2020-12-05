@@ -5,9 +5,10 @@ import store from './store'
 import './plugin/element'
 import './plugin/axios'
 import './plugin/cube-ui'
-import './plugin/socketio'
+import * as ocSockApi from './plugin/ocsocket'
 
 Vue.config.productionTip = false
+Vue.prototype.$ocSockApi = ocSockApi
 
 new Vue({
   router,

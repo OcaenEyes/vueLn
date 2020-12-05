@@ -163,24 +163,24 @@ export default {
       msgviewheight: "",
     };
   },
- sockets: {
-        connect: function () {
-            console.log('socket connected')
-        },
-        customEmit: function () {
-            console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
-        }
-  },
   methods: {
     sendMsg() {
-      this.$socket.emit("你好呀～～～");
-    },
-    initWebsocket() {
-      this.$socket.connect();
-    },
-    colseWebsocket(){
-      this.$socket.close();
-			console.log('连接已关闭');
+      let that = this;
+      var msgData=null;
+      if (this.msg != "") {
+        msgData = {
+          issend: true,
+          username: "巧克",
+          avatar: "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+          content: this.msg,
+          timestmp: "20201202",
+        };
+        this.$ocSockApi.sendSocket(msgData, 
+          function (e) {
+            that.messages.push(e);}
+        );
+        this.msg = "";
+      }
     },
 
     getMsg() {
@@ -202,15 +202,11 @@ export default {
       console.log(this.msgviewheight);
     },
   },
-  mounted() {
-    // this.initWebsocket();
-  },
+  mounted() {},
   created() {
     this.getMsg();
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.initWebsocket();
-    this.sendMsg();
   },
   watch: {
     messages() {
@@ -239,6 +235,7 @@ export default {
 .msg-window {
   overflow-y: auto;
   background-color: turquoise;
+  /* padding: 6px 0 6px 0; */
 }
 .msg-window::-webkit-scrollbar {
   display: none;
