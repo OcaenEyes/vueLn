@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Im from '../components/Im.vue';
 import ImChat from '../components/ImChat.vue'
+import LoginRegister from '../views/RegisterLogin.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/imchat',
     name: 'ImChat',
     component: ImChat
+  },
+  {
+    path: '/loginregister',
+    name: 'LoginRegister',
+    component: LoginRegister
   }
 ]
 

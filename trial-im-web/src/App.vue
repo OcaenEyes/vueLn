@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/im">Im</router-link>｜
-      <router-link to="/imchat">ImChat</router-link>
+      <router-link to="/imchat">ImChat</router-link> |
+      <router-link to="/loginregister">LoginRegister</router-link>
     </div>
     <router-view />
   </div>
