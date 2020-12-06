@@ -1,20 +1,30 @@
 <template>
-<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  
-  <el-form-item label="账号" prop="phone">
-    <el-input v-model.number="ruleForm.phone"></el-input>
-  </el-form-item>
+  <div style="width: 72%">
+    <el-form
+      :model="ruleForm"
+      status-icon
+      :rules="rules"
+      ref="ruleForm"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="账号" prop="phone">
+        <el-input v-model.number="ruleForm.phone"></el-input>
+      </el-form-item>
 
-  <el-form-item label="密码" prop="pass">
-    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-  </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input
+          type="password"
+          v-model="ruleForm.password"
+          autocomplete="off"
+        ></el-input>
+      </el-form-item>
 
-    <el-form-item>
-    <el-button type="primary" @click="register('ruleForm')">登录</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
-  </el-form-item>
-</el-form>
-    
+      <el-form-item>
+        <el-button type="primary" @click="submit('ruleForm')">登录</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
@@ -36,28 +46,26 @@ export default {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
-        }
         callback();
       }
     };
     return {
       ruleForm: {
-        pass: "",
+        password: "",
         phone: "",
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
+        password: [{ validator: validatePass, trigger: "blur" }],
         phone: [{ validator: checkPhone }],
       },
     };
   },
   methods: {
-    register(formName) {
+    submit(formName) {
+      let that = this;
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          that.login();
         } else {
           console.log("error submit!!");
           return false;
@@ -66,6 +74,9 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    login() {
+      this.axios.post("http://127.0.0.1:8081/login", this.ruleForm);
     },
   },
 };

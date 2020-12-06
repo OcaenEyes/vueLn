@@ -1,23 +1,38 @@
 <template>
-<el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  
-  <el-form-item label="账号" prop="phone">
-    <el-input v-model.number="ruleForm.phone"></el-input>
-  </el-form-item>
+<div style="width:72%">
+  <el-form
+    :model="ruleForm"
+    status-icon
+    :rules="rules"
+    ref="ruleForm"
+    class="demo-ruleForm"
+  >
+    <el-form-item label="账号" prop="phone">
+      <el-input v-model.number="ruleForm.phone"></el-input>
+    </el-form-item>
 
-  <el-form-item label="密码" prop="pass">
-    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-  </el-form-item>
-  <el-form-item label="确认密码" prop="checkPass">
-    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-  </el-form-item>
+    <el-form-item label="密码" prop="pass">
+      <el-input
+        type="password"
+        v-model="ruleForm.pass"
+        autocomplete="off"
+      ></el-input>
+    </el-form-item>
+    <el-form-item label="确认密码" prop="checkPass">
+      <el-input
+        type="password"
+        v-model="ruleForm.checkPass"
+        autocomplete="off"
+      ></el-input>
+    </el-form-item>
 
     <el-form-item>
-    <el-button type="primary" @click="register('ruleForm')">注册</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
-  </el-form-item>
-</el-form>
-    
+      <el-button type="primary" @click="register('ruleForm')">注册</el-button>
+      <el-button @click="resetForm('ruleForm')">重置</el-button>
+    </el-form-item>
+  </el-form>
+</div>
+
 </template>
 
 <script>
@@ -71,6 +86,7 @@ export default {
     register(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log(this.ruleForm.phone);
           alert("submit!");
         } else {
           console.log("error submit!!");

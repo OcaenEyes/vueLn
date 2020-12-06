@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <div>
-      <el-button @click.native="clickLogin">登录</el-button>
-      <el-button @click.native="clickRegist">注册</el-button>
-    </div>
-
-    <div :style="{ display: loginshow }">
-      <el-card> <Login></Login></el-card>
-    </div>
-    <div :style="{ display: registshow }">
-      <el-card><Register></Register></el-card>
-    </div>
+  <div  class="login-regist">
+    <el-card class="login-regist-card" shadow='always' align="middle">
+      <div>
+        <el-button type="text" @click="clickLogin">登录</el-button>
+        <el-button type="text" @click="clickRegist">注册</el-button>
+      </div>
+      <div :style="{ display: loginshow }"><Login></Login></div>
+      <div :style="{ display: registshow }"><Register></Register></div>
+    </el-card>
   </div>
 </template>
 
@@ -34,7 +31,7 @@ export default {
       this.loginshow = "";
       this.registshow = "none";
     },
-    clickResgit() {
+    clickRegist() {
       this.loginshow = "none";
       this.registshow = "";
     },
@@ -43,4 +40,13 @@ export default {
 </script>
 
 <style scoped>
+.login-regist{
+  margin-top: calc(10%) ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.login-regist-card{
+  width: 400px;
+}
 </style>
