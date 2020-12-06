@@ -1,14 +1,18 @@
 <template>
   <div class="home">
     <el-container class="main-window">
-      <el-aside width="80px"><OCIMAside></OCIMAside></el-aside>
-      <el-aside width="200px"><MsgListAside></MsgListAside></el-aside>
+      <el-aside class="ocimaside" width="68px"
+        ><OCIMAside></OCIMAside
+      ></el-aside>
+      <el-aside class="msglist" width="160px"
+        ><MsgListAside></MsgListAside
+      ></el-aside>
       <el-container>
-        <el-header>
+        <el-header class="msgwindowtitle">
           <MsgWindowTitle></MsgWindowTitle>
         </el-header>
         <el-main><MsgWindow></MsgWindow></el-main>
-        <el-footer><SendTool></SendTool></el-footer>
+        <el-footer class="sendtool"><SendTool></SendTool></el-footer>
       </el-container>
     </el-container>
   </div>
@@ -44,27 +48,39 @@ export default {
 .main-window {
   max-width: 66%;
   min-height: 600px;
-  max-height: 600px;
+  max-height: 800px;
+  border-right: 1px solid #eee;
 }
-.el-header,
+.msgwindowtitle {
+  background-color: #f4f4f4;
+  color: rgb(0, 0, 0);
+  text-align: left;
+  line-height: 56px;
+  height: 56px;
+  border-bottom: 1px solid #eee;
+}
 .el-footer {
-  background-color: #b3c0d1;
+  background-color: #eee;
   color: #333;
   text-align: center;
-  line-height: 60px;
+  height: 100px !important;
+  padding: 0;
 }
-
-.el-aside {
-  background-color: #d3dce6;
+.ocimaside {
+  background-color: #333;
+  color: #fff;
+}
+.msglist {
+  background-color: #eee;
   color: #333;
-  text-align: center;
-  line-height: 200px;
 }
-
 .el-main {
-  background-color: #e9eef3;
+  background-color: #ffffff;
   color: #333;
   text-align: center;
-  line-height: 160px;
+  overflow-y: auto;
+}
+.el-main::-webkit-scrollbar {
+  display: none;
 }
 </style>

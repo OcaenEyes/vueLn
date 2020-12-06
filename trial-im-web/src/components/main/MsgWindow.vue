@@ -182,7 +182,7 @@ export default {
 <style scoped>
 .msg-window {
   overflow-y: auto;
-  background-color: turquoise;
+  /* background-color: turquoise; */
   /* padding: 6px 0 6px 0; */
 }
 .msg-window::-webkit-scrollbar {
@@ -201,7 +201,7 @@ export default {
   align-items: flex-end;
   align-content: center;
   min-height: 36px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-bottom: 5px;
 }
 .lmsg {
@@ -231,7 +231,7 @@ export default {
   justify-content: flex-end;
   align-content: center;
   min-height: 36px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   align-items: flex-end;
   margin-bottom: 5px;
 }
