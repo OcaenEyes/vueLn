@@ -27,7 +27,7 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button type="primary" @click="register('ruleForm')">注册</el-button>
+      <el-button type="primary" @click="submit('ruleForm')">注册</el-button>
       <el-button @click="resetForm('ruleForm')">重置</el-button>
     </el-form-item>
   </el-form>
@@ -83,11 +83,10 @@ export default {
     };
   },
   methods: {
-    register(formName) {
+    submit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm.phone);
-          alert("submit!");
+          this.regist();
         } else {
           console.log("error submit!!");
           return false;
@@ -96,6 +95,14 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+     regist() {
+      this.axios.post("http://127.0.0.1:8081/register", null, {
+        params: {
+          phone: this.ruleForm.phone,
+          password: this.ruleForm.pass,
+        },
+      });
     },
   },
 };

@@ -5,8 +5,8 @@
         <el-button type="text" @click="clickLogin">登录</el-button>
         <el-button type="text" @click="clickRegist">注册</el-button>
       </div>
-      <div :style="{ display: loginshow }"><Login></Login></div>
-      <div :style="{ display: registshow }"><Register></Register></div>
+      <div class="front" :style="{ display: loginshow }"><Login></Login></div>
+      <div class="back" :style="{ display: registshow }"><Register></Register></div>
     </el-card>
   </div>
 </template>

@@ -76,7 +76,27 @@ export default {
       this.$refs[formName].resetFields();
     },
     login() {
-      this.axios.post("http://127.0.0.1:8081/login", this.ruleForm);
+      let _this = this;
+      this.axios
+        .post("http://127.0.0.1:8081/login", null, {
+          params: {
+            phone: this.ruleForm.phone,
+            password: this.ruleForm.password,
+          },
+        })
+        .then((res) => {
+          if (res.data.code == "200") {
+            var usrdetial = res.data.userDetial;
+            localStorage.setItem("userDetial", JSON.stringify(usrdetial));
+            console.log(JSON.parse(localStorage.getItem("userDetial")));
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: res.data.msg,
+              type: "error",
+            });
+          }
+        });
     },
   },
 };

@@ -61,7 +61,8 @@ function sendSocket(data,callback){
         setTimeout(() => {
             sendSocket(data,callback)
         }, 1000);
-    }else{
+    }else if(ws.readyState === ws.CLOSED){
+        websock_open();
         setTimeout(() => {
             sendSocket(data,callback)
         }, 1000);
