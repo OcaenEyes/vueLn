@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <el-container class="main-window">
+    <el-container class="main-window" :style="{ height: viewheight }" >
       <el-aside class="ocimaside" width="68px"
         ><OCIMAside></OCIMAside
       ></el-aside>
-      <el-aside class="msglist" width="160px"
+      <el-aside class="msglist" width="200px"
         ><MsgListAside></MsgListAside
       ></el-aside>
       <el-container>
@@ -35,6 +35,22 @@ export default {
     MsgListAside,
     OCIMAside,
   },
+  data() {
+    return {
+      viewheight: "",
+    }
+  },
+  methods: {
+    getHeight() {
+      this.viewheight = window.innerHeight - 120 + "px";
+      console.log(this.viewheight);
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.getHeight);
+    this.getHeight();
+  },
+
 };
 </script>
 
@@ -47,17 +63,19 @@ export default {
 }
 .main-window {
   max-width: 66%;
-  min-height: 600px;
-  max-height: 800px;
-  border-right: 1px solid #eee;
+  /* min-height: 600px; */
+  max-height: 600px;
+  border-right: 0.1px solid #eee;
 }
 .msgwindowtitle {
-  background-color: #f4f4f4;
+  background-color: #fff;
   color: rgb(0, 0, 0);
   text-align: left;
   line-height: 56px;
   height: 56px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 0.1px solid #eee;
+  border-left: 0.1px solid #eee;
+  border-top: 0.1px solid #eee;
 }
 .el-footer {
   background-color: #eee;
@@ -71,14 +89,17 @@ export default {
   color: #fff;
 }
 .msglist {
-  background-color: #eee;
+  /* background-color: #eee; */
   color: #333;
+  border-top: 0.1px solid #eee;
+  border-bottom: 0.1px solid #eee;
 }
 .el-main {
-  background-color: #ffffff;
+  background-color: #f4f4f4;
   color: #333;
   text-align: center;
   overflow-y: auto;
+  border-left: 0.1px solid #eee;
 }
 .el-main::-webkit-scrollbar {
   display: none;

@@ -46,7 +46,7 @@ export default {
   height: 100px; 
 }
 .msgin >>>.el-textarea__inner{
-  border: 1px solid #eee;
+  border: 0.1px solid #eee;
   min-height:100px !important;
   height:100px !important ;
   border-radius: 0 !important;
