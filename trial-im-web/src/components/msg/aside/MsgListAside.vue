@@ -1,29 +1,33 @@
 <template>
-  <div>
-    <div class="search">
-      <el-input type="text" placeholder="请输入内容"></el-input>
-      <button class="creategroup">
-        <i class="el-icon-plus"></i>
-      </button>
-    </div>
-    <div class="msglist">
-      <div v-for="(i, index) in count" :key="index">
-        <div class="msglist-item">
-          <div class="sendimg">
-            <el-image
-              style="width: 40px; height: 40px; border-radius: 6px"
-              src="https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
-            ></el-image>
-          </div>
-          <div class="msg-thumb">
-            <div class="msg-thumb-sender"><b>厉害</b></div>
-            <div class="msg-thumb-subdetial"><span>你好你好你好</span></div>
-          </div>
-        </div>
-        <div class="line"></div>
+  <el-container>
+    <el-header>
+      <div class="search">
+        <el-input type="text" placeholder="请输入内容"></el-input>
+        <button class="creategroup">
+          <i class="el-icon-plus"></i>
+        </button>
       </div>
-    </div>
-  </div>
+    </el-header>
+    <el-main class="lmsglist">
+      <div class="msglist">
+        <div v-for="(i, index) in count" :key="index">
+          <div class="msglist-item">
+            <div class="sendimg">
+              <el-image
+                style="width: 40px; height: 40px; border-radius: 6px"
+                src="https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+              ></el-image>
+            </div>
+            <div class="msg-thumb">
+              <div class="msg-thumb-sender"><b>厉害</b></div>
+              <div class="msg-thumb-subdetial"><span>你好你好你好</span></div>
+            </div>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -36,6 +40,12 @@ export default {
 };
 </script>
 <style scoped>
+.lmsglist {
+  padding: 6px 12px;
+}
+.lmsglist::-webkit-scrollbar {
+  display: none;
+}
 .creategroup {
   height: 22px;
   width: 22px;
@@ -46,7 +56,7 @@ export default {
   vertical-align: middle;
   text-align: center;
 }
-.creategroup:focus{
+.creategroup:focus {
   height: 22px;
   width: 22px;
   padding: 0;
@@ -61,7 +71,7 @@ export default {
   display: flex;
   flex-direction: row;
   z-index: 1;
-  border: 0.1px solid #eee;
+  border-bottom: 0.1px solid #eee;
   height: 56px;
   padding: 0 6px;
   align-items: center;
@@ -75,9 +85,6 @@ export default {
 .msglist {
   overflow-y: auto;
 }
-.msglist::-webkit-scrollbar {
-  display: none;
-}
 .msglist-item {
   height: 68px;
   display: flex;
@@ -90,10 +97,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: 10px;
+  padding-left: 14px;
 }
 .msg-thumb-sender {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 5px;
 }
 .msg-thumb-subdetial {
