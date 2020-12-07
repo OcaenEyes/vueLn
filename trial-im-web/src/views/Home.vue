@@ -4,17 +4,6 @@
       <el-aside class="ocimaside" width="68px"
         ><OCIMAside></OCIMAside
       ></el-aside>
-      <!-- <el-container class="msglisttool"
-        ><MsgListAside></MsgListAside
-      ></el-container>
-      <el-container>
-        <el-header class="msgwindowtitle">
-          <MsgWindowTitle></MsgWindowTitle>
-        </el-header>
-        <el-main><MsgWindow></MsgWindow></el-main>
-        <el-footer class="sendtool"><SendTool></SendTool></el-footer>
-      </el-container> -->
-      <!-- <MsgView></MsgView> -->
       <router-view></router-view>
     </el-container>
   </div>
