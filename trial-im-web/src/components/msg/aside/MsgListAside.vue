@@ -11,6 +11,7 @@
     <el-main class="lmsglist">
       <div class="msglist">
         <div v-for="(i, index) in count" :key="index">
+          <router-link to="msgItem">
           <div class="msglist-item">
             <div class="sendimg">
               <el-image
@@ -23,6 +24,7 @@
               <div class="msg-thumb-subdetial"><span>你好你好你好</span></div>
             </div>
           </div>
+          </router-link>
           <div class="line"></div>
         </div>
       </div>

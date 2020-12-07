@@ -1,40 +1,38 @@
 <template>
-  <div class="home">
-    <el-container class="main-window" :style="{ height: viewheight }" >
-      <el-aside class="ocimaside" width="68px"
-        ><OCIMAside></OCIMAside
-      ></el-aside>
-      <!-- <el-container class="msglisttool"
-        ><MsgListAside></MsgListAside
-      ></el-container>
-      <el-container>
-        <el-header class="msgwindowtitle">
-          <MsgWindowTitle></MsgWindowTitle>
-        </el-header>
-        <el-main><MsgWindow></MsgWindow></el-main>
-        <el-footer class="sendtool"><SendTool></SendTool></el-footer>
-      </el-container> -->
-      <!-- <MsgView></MsgView> -->
-      <router-view></router-view>
+  <div style="display: flex; width: 100%">
+    <el-container class="msglisttool"
+      ><MsgListAside></MsgListAside
+    ></el-container>
+    <el-container>
+      <el-header class="msgwindowtitle">
+        <!-- <MsgWindowTitle></MsgWindowTitle> -->
+      </el-header>
+      <el-main>
+        <div>文件</div>
+      </el-main>
+      <el-footer class="sendtool">
+        <div>文件</div>
+      </el-footer>
     </el-container>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import OCIMAside from "../components/OCIMAside";
-// import MsgView from '../views/MsgView.vue'
-
+// import MsgWindowTitle from "../components/msg/head/MsgWindowTitle";
+// import MsgWindow from "../components/msg/main/MsgWindow";
+// import SendTool from "../components/msg/foot/SendTools";
+import MsgListAside from "../components/msg/aside/MsgListAside";
 export default {
-  name: "Home",
+  name: "MsgView",
   components: {
-    OCIMAside,
-    // MsgView,
+    // MsgWindowTitle,
+    // MsgWindow,
+    // SendTool,
+    MsgListAside,
   },
   data() {
     return {
       viewheight: "",
-    }
+    };
   },
   methods: {
     getHeight() {
@@ -46,23 +44,10 @@ export default {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
   },
-
 };
 </script>
 
 <style scoped>
-.home {
-  margin-top: calc(1%);
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.main-window {
-  max-width: 66%;
-  /* min-height: 600px; */
-  /* max-height: 600px; */
-  border-right: 0.1px solid #eee;
-}
 .msgwindowtitle {
   background-color: #fff;
   color: rgb(0, 0, 0);
@@ -89,11 +74,11 @@ export default {
   color: #333;
   border-top: 0.1px solid #eee;
   border-bottom: 0.1px solid #eee;
-  max-width:240px
+  max-width: 240px;
 }
-/* .msglisttool::-webkit-scrollbar{
+.msglisttool::-webkit-scrollbar {
   display: none;
-} */
+}
 .el-main {
   background-color: #f4f4f4;
   color: #333;

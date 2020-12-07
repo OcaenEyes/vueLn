@@ -3,26 +3,30 @@
     <el-container class="msglisttool"
       ><MsgListAside></MsgListAside
     ></el-container>
-    <el-container>
+    <!-- <el-container>
       <el-header class="msgwindowtitle">
         <MsgWindowTitle></MsgWindowTitle>
       </el-header>
       <el-main><MsgWindow></MsgWindow></el-main>
       <el-footer class="sendtool"><SendTool></SendTool></el-footer>
+      <router-view></router-view>
+    </el-container> -->
+    <el-container>
+      <router-view></router-view>
     </el-container>
   </div>
 </template>
 <script>
-import MsgWindowTitle from "../components/msg/head/MsgWindowTitle";
-import MsgWindow from "../components/msg/main/MsgWindow";
-import SendTool from "../components/msg/foot/SendTools";
+// import MsgWindowTitle from "../components/msg/head/MsgWindowTitle";
+// import MsgWindow from "../components/msg/main/MsgWindow";
+// import SendTool from "../components/msg/foot/SendTools";
 import MsgListAside from "../components/msg/aside/MsgListAside";
 export default {
   name: "MsgView",
   components: {
-    MsgWindowTitle,
-    MsgWindow,
-    SendTool,
+    // MsgWindowTitle,
+    // MsgWindow,
+    // SendTool,
     MsgListAside,
   },
   data() {
