@@ -43,6 +43,7 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
+    console.log(this.$route.params.lists);
   },
 };
 </script>

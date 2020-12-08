@@ -8,7 +8,7 @@
         ></el-image>
       </div>
       <div>
-        <router-link to="msg">
+        <router-link :to="{name:'MsgView', params:{lists:msgs}}">
           <i style="font-size: 24px" class="el-icon-chat-dot-round"></i>
         </router-link>
       </div>
@@ -32,7 +32,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      msgs:1
+    }
+  },
+};
 </script>
 <style scoped>
 .asidetools {
