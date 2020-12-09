@@ -23,10 +23,10 @@ const routes = [
         path: '/msgView',
         name: 'MsgView',
         component: MsgView,
-        redirect: '/msgItem',
+        redirect: '/msgView/msgItem/0',
         children: [
           {
-            path: '/msgItem',
+            path: '/msgView/msgItem/:id',
             name: 'MsgItemView',
             component: MsgItemWindow
           }

@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; width: 100%">
     <el-container class="msglisttool"
-      ><MsgListAside></MsgListAside
+      ><MsgListAside :msglists="msglists"></MsgListAside
     ></el-container>
     <!-- <el-container>
       <el-header class="msgwindowtitle">
@@ -12,7 +12,7 @@
       <router-view></router-view>
     </el-container> -->
     <el-container>
-      <router-view></router-view>
+      <router-view :msglists="msglists"></router-view>
     </el-container>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       viewheight: "",
+      msglists: [],
     };
   },
   methods: {
@@ -43,7 +44,8 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    console.log(this.$route.params.lists);
+    this.msglists = JSON.parse(localStorage.getItem("ls"));
+    // console.log(this.msglists);
   },
 };
 </script>

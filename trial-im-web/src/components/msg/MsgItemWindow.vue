@@ -1,38 +1,123 @@
 <template>
   <el-container>
     <el-header class="msgwindowtitle">
-      <MsgWindowTitle></MsgWindowTitle>
+      <div class="chat-title">{{ username }}</div>
     </el-header>
-    <el-main><MsgWindow></MsgWindow></el-main>
-    <el-footer class="sendtool"><SendTool></SendTool></el-footer>
-    <router-view></router-view>
+    <el-main>
+      <div
+        class="msg-window"
+        :style="{ height: msgviewheight }"
+        id="msg-window"
+      >
+        <ul class="infinite-list" >
+          <li
+            class="infinite-list-item"
+            v-for="(msg, index) in msglists"
+            :key="index"
+          >
+            <div class="lchat-msg" :style="{ display: msg.issend ? none : '' }">
+              <img class="lavatar" :src="msg.avatar" />
+              <div class="lmsg">
+                <div class="lmsg-time">
+                  <span
+                    style="color: #666; font-size: small; margin-right: 10px"
+                    >{{ msg.username }}</span
+                  >{{ msg.timestmp }}
+                </div>
+                <div class="lmsg-content">{{ msg.content }}</div>
+              </div>
+            </div>
+
+            <div class="rchat-msg" :style="{ display: msg.issend ? '' : none }">
+              <div class="rmsg">
+                <div class="rmsg-time">
+                  {{ msg.timestmp }}
+                  <span
+                    style="color: #666; font-size: small; margin-left: 10px"
+                    >{{ msg.username }}</span
+                  >
+                </div>
+                <div class="rmsg-content">{{ msg.content }}</div>
+              </div>
+              <img class="ravatar" :src="msg.avatar" />
+            </div>
+          </li>
+        </ul>
+      </div>
+    </el-main>
+    <el-footer>
+      <div class="send-tool">
+        <el-input type="textarea" class="msgin" v-model="sendmsg"></el-input>
+        <el-button class="msgsend" @click="sendMsg">发送</el-button>
+      </div>
+    </el-footer>
   </el-container>
 </template>
 
 <script>
-import MsgWindowTitle from "./head/MsgWindowTitle";
-import MsgWindow from "./main/MsgWindow";
-import SendTool from "./foot/SendTools";
 export default {
-  components: {
-    MsgWindowTitle,
-    MsgWindow,
-    SendTool,
-  },
+  props: ["msglists"],
   data() {
     return {
       viewheight: "",
+      username: null,
+      none: "none",
+      ws: null,
+      sendmsg: "",
+      msgviewheight: "",
     };
   },
   methods: {
     getHeight() {
       this.viewheight = window.innerHeight - 120 + "px";
+      this.msgviewheight = window.innerHeight - 320 + "px";
+      console.log("聊天窗");
       console.log(this.viewheight);
+      console.log("消息框");
+      console.log(this.msgviewheight);
+    },
+    sendMsg() {
+      let that = this;
+      var msgData = null;
+      if (this.sendmsg != "") {
+        msgData = {
+          id:8,
+          issend: true,
+          username: "巧克",
+          avatar:
+            "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+          content: this.sendmsg,
+          timestmp: "20201202",
+        };
+        that.msglists.push(msgData);
+        this.$ocSockApi.sendSocket(msgData, function (e) {
+          that.msglists.push(e);
+        });
+      }
+      this.sendmsg = "";
     },
   },
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
+    // console.log("创建时");
+    // console.log(this.$route.params.id);
+    // console.log(this.msglists);
+    this.username = this.msglists[this.$route.params.id]["username"];
+  },
+  watch: {
+    $route() {
+      console.log("路由变化时");
+      console.log(this.$route.params.id);
+      this.username = this.msglists[this.$route.params.id]["username"];
+    },
+    msglists() {
+      console.log("messageList change");
+      this.$nextTick(() => {
+        var msgh = document.getElementById("msg-window");
+        msgh.scrollTop = msgh.scrollHeight;
+      });
+    },
   },
 };
 </script>
@@ -64,5 +149,119 @@ export default {
 }
 .el-main::-webkit-scrollbar {
   display: none;
+}
+.send-tool {
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+  padding: 0;
+  height: 100px;
+}
+.msgin >>> .el-textarea__inner {
+  border: 0.1px solid #eee;
+  min-height: 100px !important;
+  height: 100px !important ;
+  border-radius: 0 !important;
+  resize: none !important ;
+  overflow: auto !important;
+}
+
+.msgsend {
+  border: none;
+  background-color: #eee;
+  color: #333;
+}
+.msgsend:hover,
+.msgsend:active,
+.msgsend:visited,
+.msgsend:focus {
+  border: none;
+  background-color: #eee;
+  color: #333;
+}
+.msg-window {
+  overflow-y: auto;
+  /* background-color: turquoise; */
+  /* padding: 6px 0 6px 0; */
+}
+.msg-window::-webkit-scrollbar {
+  display: none;
+}
+.el-row {
+  margin-bottom: 20px;
+}
+.el-col {
+  border-radius: 4px;
+}
+.lchat-msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  align-content: center;
+  min-height: 36px;
+  /* margin-left: 10px; */
+  margin-bottom: 5px;
+}
+.lmsg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 36px;
+  margin-left: 10px;
+}
+.lmsg-time {
+  font-size: 4px;
+  padding: 10px 0 10px 0;
+  color: #a0a0a0;
+}
+.lmsg-content {
+  word-break: break-all;
+  background: #d3dce6;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  padding: 0 10px 0 10px;
+}
+
+.rchat-msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  min-height: 36px;
+  /* margin-right: 10px; */
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+.rmsg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+.rmsg-time {
+  font-size: 4px;
+  padding: 10px 0 10px 0;
+  color: #a0a0a0;
+}
+.rmsg-content {
+  background: #5fb948;
+  word-break: break-all;
+  min-height: 36px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  padding: 0 10px 0 10px;
+}
+.lavatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+.ravatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
 }
 </style>

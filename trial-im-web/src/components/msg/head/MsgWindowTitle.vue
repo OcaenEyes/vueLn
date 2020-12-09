@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div class="chat-title">与厉害的对话</div>
+        <div class="chat-title">{{username}}</div>
     </div>
 </template>
 
 <script>
 export default {
-    
+    props: ["username"]
 }
 </script>
 <style scoped>

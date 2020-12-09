@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <el-container class="main-window" :style="{ height: viewheight }" >
+    <el-container class="main-window" :style="{ height: viewheight }">
       <el-aside class="ocimaside" width="68px"
         ><OCIMAside></OCIMAside
       ></el-aside>
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       viewheight: "",
-    }
+    };
   },
   methods: {
     getHeight() {
@@ -32,10 +32,47 @@ export default {
     },
   },
   created() {
+    var ls = [];
+    ls = [
+      {
+        id:0,
+        issend: true,
+        username: "巧克",
+        avatar:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+        content: "你好呀！！！",
+        timestmp: "20201202",
+      },
+      {id:1,
+        issend: false,
+        username: "厉害",
+        avatar:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+        content: "你好呀！！！",
+        timestmp: "20201202",
+      },
+      {id:2,
+        issend: true,
+        username: "巧克",
+        avatar:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+        content: "这是又一条消息",
+        timestmp: "20201202",
+      },
+      {id:3,
+        issend: true,
+        username: "巧克",
+        avatar:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+        content: "你好呀！！！",
+        timestmp: "20201202",
+      },
+    ];
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
+    localStorage.setItem("ls", JSON.stringify(ls));
+    // console.log(JSON.parse(localStorage.getItem("ls")));
   },
-
 };
 </script>
 
@@ -78,7 +115,7 @@ export default {
   color: #333;
   border-top: 0.1px solid #eee;
   border-bottom: 0.1px solid #eee;
-  max-width:240px
+  max-width: 240px;
 }
 /* .msglisttool::-webkit-scrollbar{
   display: none;

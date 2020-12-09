@@ -8,22 +8,22 @@
         ></el-image>
       </div>
       <div>
-        <router-link :to="{name:'MsgView', params:{lists:msgs}}">
+        <router-link to="/msgView">
           <i style="font-size: 24px" class="el-icon-chat-dot-round"></i>
         </router-link>
       </div>
       <div>
-        <router-link to="friend">
+        <router-link to="/friend">
           <i style="font-size: 24px" class="el-icon-user"></i>
         </router-link>
       </div>
       <div>
-        <router-link to="collect">
+        <router-link to="/collect">
           <i style="font-size: 24px" class="el-icon-star-off"></i>
         </router-link>
       </div>
       <div>
-        <router-link to="file">
+        <router-link to="/file">
           <i style="font-size: 24px" class="el-icon-folder"></i>
         </router-link>
       </div>

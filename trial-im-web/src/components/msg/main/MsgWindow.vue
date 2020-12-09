@@ -4,7 +4,7 @@
       <ul class="infinite-list" style="height: 100%">
         <li
           class="infinite-list-item"
-          v-for="(msg, index) in messages"
+          v-for="(msg, index) in msglists"
           :key="index"
         >
           <div class="lchat-msg" :style="{ display: msg.issend ? none : '' }">
@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  props: ["msglists"],
   data() {
     return {
       none: "none",
@@ -176,6 +177,9 @@ export default {
         msgh.scrollTop = msgh.scrollHeight;
       });
     },
+    $route(){
+      console.log(this.msglists);
+    }
   },
 };
 </script>

@@ -10,18 +10,18 @@
     </el-header>
     <el-main class="lmsglist">
       <div class="msglist">
-        <div v-for="(i, index) in count" :key="index">
-          <router-link to="msgItem">
+        <div v-for="(i, index) in msglists" :key="index">
+          <router-link :to="{name:'MsgItemView',params:{id:index}}">
           <div class="msglist-item">
             <div class="sendimg">
               <el-image
                 style="width: 40px; height: 40px; border-radius: 6px"
-                src="https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+                :src="i.avatar"
               ></el-image>
             </div>
             <div class="msg-thumb">
-              <div class="msg-thumb-sender"><b>厉害</b></div>
-              <div class="msg-thumb-subdetial"><span>你好你好你好</span></div>
+              <div class="msg-thumb-sender"><b>{{i.username}}</b></div>
+              <div class="msg-thumb-subdetial"><span>{{i.content}}</span></div>
             </div>
           </div>
           </router-link>
@@ -34,6 +34,7 @@
 
 <script>
 export default {
+  props:["msglists"],
   data() {
     return {
       count: 20,
