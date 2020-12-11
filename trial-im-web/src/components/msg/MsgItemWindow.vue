@@ -12,7 +12,7 @@
         <ul class="infinite-list" >
           <li
             class="infinite-list-item"
-            v-for="(msg, index) in msglists"
+            v-for="(msg, index) in msgsumary"
             :key="index"
           >
             <div class="lchat-msg" :style="{ display: msg.issend ? none : '' }">
@@ -103,14 +103,15 @@ export default {
     // console.log("创建时");
     // console.log(this.$route.params.id);
     // console.log(this.msglists);
-    this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
-    
+    console.log(this.msglists);
+    // this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
+
   },
   watch: {
     $route() {
       console.log("路由变化时");
       console.log(this.$route.params.id);
-      this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
+      // this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
     },
     msglists() {
       console.log("messageList change");

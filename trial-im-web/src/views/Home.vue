@@ -41,6 +41,7 @@ export default {
       groupname:"讨论组一",
       receivename:"",
       receiveid:null,
+      headimg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
       msgsumary:[
       {
         issend: true,
@@ -67,6 +68,7 @@ export default {
       groupname:"",
       receivename:"乔克",
       receiveid:1,
+      headimg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
       msgsumary:[
       {
         
@@ -110,7 +112,7 @@ export default {
     // ];
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    localStorage.setItem("ls", JSON.stringify(lss));
+    localStorage.setItem("lss", JSON.stringify(lss));
     // console.log(JSON.parse(localStorage.getItem("ls")));
   },};
 </script>

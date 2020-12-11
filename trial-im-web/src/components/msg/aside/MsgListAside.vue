@@ -16,12 +16,12 @@
             <div class="sendimg">
               <el-image
                 style="width: 40px; height: 40px; border-radius: 6px"
-                :src="i.avatar"
+                :src="i.headimg"
               ></el-image>
             </div>
             <div class="msg-thumb">
-              <div class="msg-thumb-sender"><b>{{i}}</b></div>
-              <div class="msg-thumb-subdetial"><span>{{i}}</span></div>
+              <div class="msg-thumb-sender"><b>{{i.groupname ?i.groupname:i.receivename}}</b></div>
+              <div class="msg-thumb-subdetial"><b>{{i.groupname?i.msgsumary[i.msgsumary.length -1].username + ": ":""}}</b> <span>{{i.msgsumary[i.msgsumary.length -1].content}}</span></div>
             </div>
           </div>
           </router-link>
@@ -40,6 +40,12 @@ export default {
       count: 20,
       isgroup:null,
     };
+  },
+  methods: {
+    
+  },
+  created() {
+    console.log(this.msglists[this.msglists.length-1]);
   },
 };
 </script>
