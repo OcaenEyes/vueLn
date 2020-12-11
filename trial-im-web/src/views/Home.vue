@@ -76,7 +76,7 @@ export default {
         username: "GZY",
         avatar:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "你好呀！！！",
+        content: "乔克叔叔杂货店来了",
         timestmp: "20201202",
       },
       {
@@ -84,7 +84,7 @@ export default {
         username: "乔克",
         avatar:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "你好呀！！！",
+        content: "GZY，来看看 乔克叔叔杂货店来了",
         timestmp: "20201202",
       }
       ]

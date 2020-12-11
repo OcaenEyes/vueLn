@@ -9,7 +9,7 @@
         :style="{ height: msgviewheight }"
         id="msg-window"
       >
-        <ul class="infinite-list" >
+        <ul class="infinite-list">
           <li
             class="infinite-list-item"
             v-for="(msg, index) in msgsumary"
@@ -65,7 +65,7 @@ export default {
       ws: null,
       sendmsg: "",
       msgviewheight: "",
-      msgsumary:null,
+      msgsumary: null,
     };
   },
   methods: {
@@ -81,18 +81,17 @@ export default {
       let that = this;
       var msgData = null;
       if (this.sendmsg != "") {
-        msgData = {
+        (msgData = {
           issend: true,
-          username: "巧克",
+          username: "GZY",
           avatar:
             "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
           content: this.sendmsg,
           timestmp: "20201202",
-        };
-        // that.msglists.push(msgData);
-        this.$ocSockApi.sendSocket(msgData, function (e) {
-          that.msglists.push(e);
-        });
+        }),
+          this.$ocSockApi.sendSocket(msgData, function (e) {
+            that.msglists[that.$route.params.id]["msgsumary"].push(e);
+          });
       }
       this.sendmsg = "";
     },
@@ -101,17 +100,23 @@ export default {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
     // console.log("创建时");
-    // console.log(this.$route.params.id);
+    console.log(this.$route.params.id);
     // console.log(this.msglists);
-    console.log(this.msglists);
-    // this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
-
+    // console.log(this.msglists);
+    this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
+    this.username = this.msglists[this.$route.params.id]["isgroup"]
+      ? this.msglists[this.$route.params.id]["groupname"]
+      : this.msglists[this.$route.params.id]["receivename"];
+    console.log(this.msgsumary);
   },
   watch: {
     $route() {
       console.log("路由变化时");
       console.log(this.$route.params.id);
-      // this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
+      this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
+      this.username = this.msglists[this.$route.params.id]["isgroup"]
+        ? this.msglists[this.$route.params.id]["groupname"]
+        : this.msglists[this.$route.params.id]["receivename"];
     },
     msglists() {
       console.log("messageList change");

@@ -12,7 +12,7 @@
       <router-view></router-view>
     </el-container> -->
     <el-container>
-      <router-view ></router-view>
+      <router-view :msglists="msglists"></router-view>
     </el-container>
   </div>
 </template>
