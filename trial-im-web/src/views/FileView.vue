@@ -8,10 +8,10 @@
         <!-- <MsgWindowTitle></MsgWindowTitle> -->
       </el-header>
       <el-main>
-        <div>文件</div>
+        <div>实验室</div>
       </el-main>
       <el-footer class="sendtool">
-        <div>文件</div>
+        <div>实验室</div>
       </el-footer>
     </el-container>
   </div>

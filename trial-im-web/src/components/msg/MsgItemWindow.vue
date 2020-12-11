@@ -65,6 +65,7 @@ export default {
       ws: null,
       sendmsg: "",
       msgviewheight: "",
+      msgsumary:null,
     };
   },
   methods: {
@@ -81,7 +82,6 @@ export default {
       var msgData = null;
       if (this.sendmsg != "") {
         msgData = {
-          id:8,
           issend: true,
           username: "巧克",
           avatar:
@@ -89,7 +89,7 @@ export default {
           content: this.sendmsg,
           timestmp: "20201202",
         };
-        that.msglists.push(msgData);
+        // that.msglists.push(msgData);
         this.$ocSockApi.sendSocket(msgData, function (e) {
           that.msglists.push(e);
         });
@@ -103,13 +103,14 @@ export default {
     // console.log("创建时");
     // console.log(this.$route.params.id);
     // console.log(this.msglists);
-    this.username = this.msglists[this.$route.params.id]["username"];
+    this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
+    
   },
   watch: {
     $route() {
       console.log("路由变化时");
       console.log(this.$route.params.id);
-      this.username = this.msglists[this.$route.params.id]["username"];
+      this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
     },
     msglists() {
       console.log("messageList change");

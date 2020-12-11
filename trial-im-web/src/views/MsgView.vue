@@ -44,7 +44,7 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.msglists = JSON.parse(localStorage.getItem("ls"));
+    this.msglists = JSON.parse(localStorage.getItem("lss"));
     // console.log(this.msglists);
   },
 };

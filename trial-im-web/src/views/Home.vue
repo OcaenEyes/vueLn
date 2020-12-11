@@ -32,48 +32,87 @@ export default {
     },
   },
   created() {
-    var ls = [];
-    ls = [
+    // var ls =[] ;
+    var lss =[] ;
+    lss =[{
+      id:0,
+      isgroup:true,
+      groupid:1,
+      groupname:"讨论组一",
+      receivename:"",
+      receiveid:null,
+      msgsumary:[
       {
-        id:0,
         issend: true,
-        username: "巧克",
+        username: "GZY",
         avatar:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
         content: "你好呀！！！",
         timestmp: "20201202",
       },
-      {id:1,
+      {
         issend: false,
         username: "厉害",
         avatar:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
         content: "你好呀！！！",
         timestmp: "20201202",
-      },
-      {id:2,
+      }
+      ]
+ },
+ {
+      id:1,
+      isgroup:false,
+      groupid:null,
+      groupname:"",
+      receivename:"乔克",
+      receiveid:1,
+      msgsumary:[
+      {
+        
         issend: true,
-        username: "巧克",
-        avatar:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "这是又一条消息",
-        timestmp: "20201202",
-      },
-      {id:3,
-        issend: true,
-        username: "巧克",
+        username: "GZY",
         avatar:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
         content: "你好呀！！！",
         timestmp: "20201202",
       },
+      {
+        issend: false,
+        username: "乔克",
+        avatar:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+        content: "你好呀！！！",
+        timestmp: "20201202",
+      }
+      ]
+      },
     ];
+  
+    // ls= [
+    //   {
+    //     id:0,
+    //     issend: true,
+    //     username: "巧克",
+    //     avatar:
+    //       "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+    //     content: "你好呀！！！",
+    //     timestmp: "20201202",
+    //   },
+    //   {id:1,
+    //     issend: false,
+    //     username: "厉害",
+    //     avatar:
+    //       "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+    //     content: "你好呀！！！",
+    //     timestmp: "20201202",
+    //   }
+    // ];
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    localStorage.setItem("ls", JSON.stringify(ls));
+    localStorage.setItem("ls", JSON.stringify(lss));
     // console.log(JSON.parse(localStorage.getItem("ls")));
-  },
-};
+  },};
 </script>
 
 <style scoped>

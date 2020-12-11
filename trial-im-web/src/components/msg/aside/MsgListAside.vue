@@ -20,8 +20,8 @@
               ></el-image>
             </div>
             <div class="msg-thumb">
-              <div class="msg-thumb-sender"><b>{{i.username}}</b></div>
-              <div class="msg-thumb-subdetial"><span>{{i.content}}</span></div>
+              <div class="msg-thumb-sender"><b>{{i}}</b></div>
+              <div class="msg-thumb-subdetial"><span>{{i}}</span></div>
             </div>
           </div>
           </router-link>
@@ -38,6 +38,7 @@ export default {
   data() {
     return {
       count: 20,
+      isgroup:null,
     };
   },
 };
