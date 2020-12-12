@@ -118,8 +118,8 @@ export default {
         ? this.msglists[this.$route.params.id]["groupname"]
         : this.msglists[this.$route.params.id]["receivename"];
     },
-    msglists() {
-      console.log("messageList change");
+    msgsumary() {
+      console.log("msgsumary change");
       this.$nextTick(() => {
         var msgh = document.getElementById("msg-window");
         msgh.scrollTop = msgh.scrollHeight;

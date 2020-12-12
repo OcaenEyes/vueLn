@@ -68,10 +68,6 @@ export default {
   height: 100px !important;
   padding: 0;
 }
-.ocimaside {
-  background-color: #333;
-  color: #fff;
-}
 .msglisttool {
   /* background-color: #eee; */
   color: #333;

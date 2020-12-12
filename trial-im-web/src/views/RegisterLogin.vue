@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Login from "../components/Login";
-import Register from "../components/Register";
+import Login from "../components/login-register/Login";
+import Register from "../components/login-register/Register";
 export default {
   name: "LoginRegister",
   components: {

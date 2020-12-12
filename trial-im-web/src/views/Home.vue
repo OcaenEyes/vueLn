@@ -33,88 +33,96 @@ export default {
   },
   created() {
     // var ls =[] ;
-    var lss =[] ;
-    lss =[{
-      id:0,
-      isgroup:true,
-      groupid:1,
-      groupname:"讨论组一",
-      receivename:"",
-      receiveid:null,
-      headimg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      msgsumary:[
+    var lss = [];
+    lss = [
       {
-        issend: true,
-        username: "GZY",
-        avatar:
+        id: 0,
+        isgroup: true,
+        groupid: 1,
+        groupname: "讨论组一",
+        receivename: "",
+        receiveid: null,
+        headimg:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "你好呀！！！",
-        timestmp: "20201202",
+        msgsumary: [
+          {
+            issend: true,
+            username: "GZY",
+            avatar:
+              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+            content: "你好呀！！！",
+            timestmp: "20201202",
+          },
+          {
+            issend: false,
+            username: "厉害",
+            avatar:
+              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+            content: "你好呀！！！",
+            timestmp: "20201202",
+          },
+        ],
       },
       {
-        issend: false,
-        username: "厉害",
-        avatar:
+        id: 1,
+        isgroup: false,
+        groupid: null,
+        groupname: "",
+        receivename: "乔克",
+        receiveid: 1,
+        headimg:
           "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "你好呀！！！",
-        timestmp: "20201202",
-      }
-      ]
- },
- {
-      id:1,
-      isgroup:false,
-      groupid:null,
-      groupname:"",
-      receivename:"乔克",
-      receiveid:1,
-      headimg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      msgsumary:[
-      {
-        
-        issend: true,
-        username: "GZY",
-        avatar:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "乔克叔叔杂货店来了",
-        timestmp: "20201202",
-      },
-      {
-        issend: false,
-        username: "乔克",
-        avatar:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        content: "GZY，来看看 乔克叔叔杂货店来了",
-        timestmp: "20201202",
-      }
-      ]
+        msgsumary: [
+          {
+            issend: true,
+            username: "GZY",
+            avatar:
+              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+            content: "乔克叔叔杂货店来了",
+            timestmp: "20201202",
+          },
+          {
+            issend: false,
+            username: "乔克",
+            avatar:
+              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+            content: "GZY，来看看 乔克叔叔杂货店来了",
+            timestmp: "20201202",
+          },
+        ],
       },
     ];
-  
-    // ls= [
-    //   {
-    //     id:0,
-    //     issend: true,
-    //     username: "巧克",
-    //     avatar:
-    //       "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-    //     content: "你好呀！！！",
-    //     timestmp: "20201202",
-    //   },
-    //   {id:1,
-    //     issend: false,
-    //     username: "厉害",
-    //     avatar:
-    //       "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-    //     content: "你好呀！！！",
-    //     timestmp: "20201202",
-    //   }
-    // ];
+
+    var friends = [];
+    friends = [
+      {
+        id: 0,
+        isgroup: true,
+        groupid: 1,
+        groupname: "讨论组一",
+        friendname: "",
+        friendid: null,
+        headimg:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+      },
+      {
+        id: 1,
+        isgroup: false,
+        groupid: null,
+        groupname: "",
+        friendname: "乔克",
+        friendid: 1,
+        headimg:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+      },
+    ];
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
     localStorage.setItem("lss", JSON.stringify(lss));
+    localStorage.setItem("friends",JSON.stringify(friends));
     // console.log(JSON.parse(localStorage.getItem("ls")));
-  },};
+  },
+};
 </script>
 
 <style scoped>

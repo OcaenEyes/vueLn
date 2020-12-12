@@ -8,28 +8,20 @@
         </button>
       </div>
     </el-header>
-    <el-main class="lmsglist">
-      <div class="msglist">
-        <div v-for="(i, index) in msglists" :key="index">
-          <router-link :to="{ name: 'MsgItemView', params: { id: index } }">
-            <div class="msglist-item">
+    <el-main class="lfriendlist">
+      <div class="friendlist">
+        <div v-for="(i, index) in friendlists" :key="index">
+          <router-link :to="{ name: 'FriendItemView', params: { id: index } }">
+            <div class="friendlist-item">
               <div class="sendimg">
                 <el-image
                   style="width: 32px; height: 32px; border-radius: 6px"
                   :src="i.headimg"
                 ></el-image>
               </div>
-              <div class="msg-thumb">
-                <div class="msg-thumb-sender">
+              <div class="friend-thumb">
+                <div class="friend-thumb-sender">
                   <b>{{ i.groupname ? i.groupname : i.receivename }}</b>
-                </div>
-                <div class="msg-thumb-subdetial">
-                  <b>{{
-                    i.groupname
-                      ? i.msgsumary[i.msgsumary.length - 1].username + ": "
-                      : ""
-                  }}</b>
-                  <span>{{ i.msgsumary[i.msgsumary.length - 1].content }}</span>
                 </div>
               </div>
             </div>
@@ -43,7 +35,7 @@
 
 <script>
 export default {
-  props: ["msglists"],
+  props: ["friendlists"],
   data() {
     return {
       count: 20,
@@ -52,18 +44,18 @@ export default {
   },
   methods: {},
   created() {
-    console.log(this.msglists[this.msglists.length - 1]);
+    console.log(this.friendlists[this.friendlists.length - 1]);
   },
 };
 </script>
 <style scoped>
-.lmsglist {
+.lfriendlist {
   padding-top: 0;
-  padding-bottom:6px ;
+  padding-bottom: 6px;
   padding-left: 14px;
   padding-right: 14px;
 }
-.lmsglist::-webkit-scrollbar {
+.lfriendlist::-webkit-scrollbar {
   display: none;
 }
 .creategroup {
@@ -102,11 +94,11 @@ export default {
   border-radius: 30px !important;
 }
 
-.msglist {
+.friendlist {
   overflow-y: auto;
 }
-.msglist-item {
-  height: 56px;
+.friendlist-item {
+  height: 48px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -115,34 +107,20 @@ export default {
   text-align: left;
   max-width: 216px;
 }
-.msglist-item:hover{
+.friendlist-item:hover{
   background-color: #f0f0f0 !important;
 }
-.msg-thumb {
+.friend-thumb {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding-left: 14px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   min-width: 80px;
   max-width: 152px;
 }
-.msg-thumb-sender {
+.friend-thumb-sender {
   font-size: 16px;
-  margin-bottom: 5px;
   color:#333;
-  font-weight:bold;
-  overflow: hidden;
-  min-width: 80px;
-  max-width: 152px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.msg-thumb-subdetial {
-  font-size: 12px;
-  margin-top: 5px;
-  color: rgb(138, 136, 136);
   overflow: hidden;
   min-width: 80px;
   max-width: 152px;
@@ -153,6 +131,6 @@ export default {
   width: 88%;
   height: 1px;
   margin-left: 6%;
-  border-top: solid rgb(226, 226, 226) 0.1px;
+  border-top: solid #eee 1px;
 }
 </style>

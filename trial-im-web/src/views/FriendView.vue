@@ -1,37 +1,27 @@
 <template>
   <div style="display: flex; width: 100%">
-    <el-container class="msglisttool"
-      ><MsgListAside></MsgListAside
+    <el-container class="friendlisttool"
+      ><FriendListAside :friendlists="friendlists"></FriendListAside
     ></el-container>
     <el-container>
-      <el-header class="msgwindowtitle">
-        <!-- <MsgWindowTitle></MsgWindowTitle> -->
-      </el-header>
-      <el-main>
-        <div>朋友</div>
-      </el-main>
-      <el-footer class="sendtool">
-        <div>朋友</div>
-      </el-footer>
+      <router-view></router-view>
     </el-container>
   </div>
 </template>
 <script>
-// import MsgWindowTitle from "../components/msg/head/MsgWindowTitle";
-// import MsgWindow from "../components/msg/main/MsgWindow";
-// import SendTool from "../components/msg/foot/SendTools";
-import MsgListAside from "../components/msg/aside/MsgListAside";
+import FriendListAside from "../components/friend/aside/FriendListAside";
 export default {
-  name: "MsgView",
+  name: "friend",
   components: {
-    // MsgWindowTitle,
-    // MsgWindow,
+    // friendWindowTitle,
+    // friendWindow,
     // SendTool,
-    MsgListAside,
+    FriendListAside,
   },
   data() {
     return {
       viewheight: "",
+      friendlists: [],
     };
   },
   methods: {
@@ -43,50 +33,20 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
+    this.friendlists = JSON.parse(localStorage.getItem("friends"));
   },
 };
 </script>
 
 <style scoped>
-.msgwindowtitle {
-  background-color: #fff;
-  color: rgb(0, 0, 0);
-  text-align: left;
-  line-height: 56px;
-  height: 56px;
-  border-bottom: 0.1px solid #eee;
-  border-left: 0.1px solid #eee;
-  border-top: 0.1px solid #eee;
-}
-.el-footer {
-  background-color: #eee;
-  color: #333;
-  text-align: center;
-  height: 100px !important;
-  padding: 0;
-}
-.ocimaside {
-  background-color: #333;
-  color: #fff;
-}
-.msglisttool {
+.friendlisttool {
   /* background-color: #eee; */
   color: #333;
   border-top: 0.1px solid #eee;
   border-bottom: 0.1px solid #eee;
   max-width: 240px;
 }
-.msglisttool::-webkit-scrollbar {
-  display: none;
-}
-.el-main {
-  background-color: #f4f4f4;
-  color: #333;
-  text-align: center;
-  overflow-y: auto;
-  border-left: 0.1px solid #eee;
-}
-.el-main::-webkit-scrollbar {
+.friendlisttool::-webkit-scrollbar {
   display: none;
 }
 </style>

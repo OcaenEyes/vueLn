@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Im from '../components/Im.vue';
 import LoginRegister from '../views/RegisterLogin.vue'
 import MsgView from '../views/MsgView.vue'
 import FriendWindow from '../views/FriendView.vue'
 import CollectWindow from '../views/CollectionView.vue'
 import FileWindow from '../views/FileView.vue'
 import MsgItemWindow from '../components/msg/MsgItemWindow.vue'
+import FriendItemWindow from '../components/friend/FriendItemWindow.vue'
 
 Vue.use(VueRouter)
 
@@ -35,7 +35,15 @@ const routes = [
       },
       {
         path: '/friend',
-        component: FriendWindow
+        name: 'friend',
+        component: FriendWindow,
+        children:[
+          {
+            path: '/friend/firendItem/:id',
+            name : 'FriendItemView',
+            component: FriendItemWindow
+          }
+        ]
       },
       {
         path: '/collect',
@@ -47,19 +55,14 @@ const routes = [
       }
     ],
   },
-  {
-    path: '/demo',
-    name: 'Demo',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "demo" */ '../views/Demo.vue')
-  },
-  {
-    path: '/im',
-    name: 'Im',
-    component: Im
-  },
+  // {
+  //   path: '/demo',
+  //   name: 'Demo',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "demo" */ '../views/Demo.vue')
+  // },
   {
     path: '/loginregister',
     name: 'LoginRegister',
