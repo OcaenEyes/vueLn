@@ -18,3 +18,25 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+router.beforeEach((to, from, next) => {
+  // 页面title
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  // 判断该路由是否需要登录
+  if (to.matched.some(record => record.meta.requireAuth)) {
+
+    if (localStorage.token) {
+      next();
+    } else {
+      console.log("需要登录");
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      });
+    }
+  } else {
+    next();
+  }
+})

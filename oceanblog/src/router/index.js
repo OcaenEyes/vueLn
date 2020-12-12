@@ -9,45 +9,93 @@ import TagAdd from '../components/tags/Add.vue'
 import TypeAdd from '../components/types/Add.vue'
 import ArticleDetial from '../components/atricle/Detial.vue'
 import ArticleModify from '../components/atricle/Modify.vue'
+import Login from '../views/login/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  // {
+  //   path: '/',
+  //   component: ArticleManager,
+  //   meta:{
+  //     title:'文章管理',
+  //     requireAuth:true
+  //   }
+  // },
   {
     path: '/',
-    component: ArticleManager
+    component: Login,
+    meta: {
+      title: '登录'
+    }
   },
   {
     path: '/admin/articlemanager',
-    component: ArticleManager
+    component: ArticleManager,
+    meta: {
+      title:'文章管理',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/articletagmanager',
-    component: ArticleTagManager
+    component: ArticleTagManager,
+    meta: {
+      title:'标签管理',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/articletypemanager',
-    component: ArticleTypeManager
+    component: ArticleTypeManager,
+    meta: {
+      title:'标签管理',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/articleadd',
-    component: ArticleAdd
+    component: ArticleAdd,
+    meta: {
+      title:'新增文章',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/articledetial',
-    component: ArticleDetial
+    component: ArticleDetial,
+    meta: {
+      title:'文章详情',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/articlemodify',
-    component: ArticleModify
+    component: ArticleModify,
+    meta: {
+      title:'修改文章',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/tagadd',
-    component: TagAdd
+    component: TagAdd,
+    meta: {
+      title:'新增标签',
+      requireAuth:true
+    }
   },
   {
     path: '/admin/typeadd',
-    component: TypeAdd
+    component: TypeAdd,
+    meta: {
+      title:'新增类型',
+      requireAuth:true
+    }
+  },
+  {
+    path: '/login',
+    component: Login
   },
   // {
   //   path: '/about',
