@@ -30,6 +30,30 @@ export default {
       this.viewheight = window.innerHeight - 120 + "px";
       console.log(this.viewheight);
     },
+
+    getMsgs() {},
+
+    getFriends() {
+      const _this = this;
+      this.axios
+        .get("http://127.0.01:8081/getFriends", {
+          params: {
+            id: "49ca45e7-e4fd-41f5-ae65-cf3a776cf7d2",
+          },
+        })
+        .then(function (res) {
+          if (res.data.friends.length >= 0) {
+            localStorage.setItem("friends", JSON.stringify(res.data.friends));
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: "请求异常",
+              type: "error",
+            });
+          }
+        })
+        .catch((error) => console.log(error));
+    },
   },
   created() {
     // var ls =[] ;
@@ -92,34 +116,11 @@ export default {
         ],
       },
     ];
-
-    var friends = [];
-    friends = [
-      {
-        id: 0,
-        isgroup: true,
-        groupid: 1,
-        groupname: "讨论组一",
-        friendname: "",
-        friendid: null,
-        headimg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      },
-      {
-        id: 1,
-        isgroup: false,
-        groupid: null,
-        groupname: "",
-        friendname: "乔克",
-        friendid: 1,
-        headimg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      },
-    ];
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
+    this.getFriends();
     localStorage.setItem("lss", JSON.stringify(lss));
-    localStorage.setItem("friends",JSON.stringify(friends));
+    // localStorage.setItem("friends", JSON.stringify(friends));
     // console.log(JSON.parse(localStorage.getItem("ls")));
   },
 };

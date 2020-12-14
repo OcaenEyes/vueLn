@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; width: 100%">
     <el-container class="friendlisttool"
-      ><FriendListAside :friendlists="friendlists"></FriendListAside
+      ><FriendListAside :friends="friends"></FriendListAside
     ></el-container>
     <el-container>
       <router-view></router-view>
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       viewheight: "",
-      friendlists: [],
+      friends: [],
     };
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.friendlists = JSON.parse(localStorage.getItem("friends"));
+    this.friends = JSON.parse(localStorage.getItem("friends"));
   },
 };
 </script>

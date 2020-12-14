@@ -34,9 +34,7 @@
 <script>
 export default {
   data() {
-    return {
-      msgs:1
-    }
+    return {};
   },
 };
 </script>

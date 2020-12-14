@@ -10,18 +10,18 @@
     </el-header>
     <el-main class="lfriendlist">
       <div class="friendlist">
-        <div v-for="(i, index) in friendlists" :key="index">
+        <div v-for="(i, index) in friends" :key="index">
           <router-link :to="{ name: 'FriendItemView', params: { id: index } }">
             <div class="friendlist-item">
               <div class="sendimg">
                 <el-image
                   style="width: 32px; height: 32px; border-radius: 6px"
-                  :src="i.headimg"
+                  :src="i.headImg"
                 ></el-image>
               </div>
               <div class="friend-thumb">
                 <div class="friend-thumb-sender">
-                  <b>{{ i.groupname ? i.groupname : i.receivename }}</b>
+                  <b>{{i.nickname }}</b>
                 </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  props: ["friendlists"],
+  props: ["friends"],
   data() {
     return {
       count: 20,
@@ -44,7 +44,7 @@ export default {
   },
   methods: {},
   created() {
-    console.log(this.friendlists[this.friendlists.length - 1]);
+    console.log(this.friends[this.friends.length - 1]);
   },
 };
 </script>
