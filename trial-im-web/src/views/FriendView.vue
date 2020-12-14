@@ -34,7 +34,14 @@ export default {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
     this.friends = JSON.parse(localStorage.getItem("friends"));
+    console.log(this.friends);
   },
+  // watch:{
+  //   $route(){
+  //     this.friends = JSON.parse(localStorage.getItem("friends"));
+  //     console.log(this.friends);
+  //   }
+  // }
 };
 </script>
 

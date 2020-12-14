@@ -38,12 +38,14 @@ export default {
       this.axios
         .get("http://127.0.01:8081/getFriends", {
           params: {
-            id: "49ca45e7-e4fd-41f5-ae65-cf3a776cf7d2",
+            // id: "49ca45e7-e4fd-41f5-ae65-cf3a776cf7d2",
+            id:"5fb2daad-28c1-4546-b645-9e77d759494d",
           },
         })
         .then(function (res) {
           if (res.data.friends.length >= 0) {
             localStorage.setItem("friends", JSON.stringify(res.data.friends));
+            console.log(res.data.friends);
           } else {
             _this.$notify({
               title: "通知",

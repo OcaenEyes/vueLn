@@ -10,7 +10,7 @@
     </el-header>
     <el-main class="lfriendlist">
       <div class="friendlist">
-        <div v-for="(i, index) in friends" :key="index">
+        <div v-for="(i,index) in friends" :key="index">
           <router-link :to="{ name: 'FriendItemView', params: { id: index } }">
             <div class="friendlist-item">
               <div class="sendimg">
@@ -21,7 +21,7 @@
               </div>
               <div class="friend-thumb">
                 <div class="friend-thumb-sender">
-                  <b>{{i.nickname }}</b>
+                  <b>{{i.nickname}}</b>
                 </div>
               </div>
             </div>
@@ -45,6 +45,7 @@ export default {
   methods: {},
   created() {
     console.log(this.friends[this.friends.length - 1]);
+    console.log(this.friends);
   },
 };
 </script>
