@@ -43,8 +43,8 @@ function websock_onmessage(e) {
 
 // 数据发送
 function websock_send(e) {
-    // ws.send(JSON.stringify(e));
-    ws.send(e);
+    ws.send(JSON.stringify(e));
+    // ws.send(e);
     console.log(e);
     global_callback(e);
 

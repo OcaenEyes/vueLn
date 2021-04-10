@@ -34,7 +34,7 @@ export default {};
   line-height: 56px;
   height: 56px;
   border-bottom: 0.1px solid #eee;
-  border-left: 0.1px solid #eee;
-  border-top: 0.1px solid #eee;
+  /* border-left: 0.1px solid #eee; */
+  /* border-top: 0.1px solid #eee; */
 }
 </style>

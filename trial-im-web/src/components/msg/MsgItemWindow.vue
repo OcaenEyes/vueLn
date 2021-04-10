@@ -24,20 +24,20 @@
                     >{{ msg.username }}</span
                   >{{ msg.timestmp }}
                 </div>
-                <div class="lmsg-content">{{ msg.content }}</div>
+                <div class="lmsg-content">{{ msg.msgDetail }}</div>
               </div>
             </div>
 
             <div class="rchat-msg" :style="{ display: msg.issend ? '' : none }">
               <div class="rmsg">
                 <div class="rmsg-time">
-                  {{ msg.timestmp }}
+                  {{ msg.msgTime }}
                   <span
                     style="color: #666; font-size: small; margin-left: 10px"
                     >{{ msg.username }}</span
                   >
                 </div>
-                <div class="rmsg-content">{{ msg.content }}</div>
+                <div class="rmsg-content">{{ msg.msgDetail }}</div>
               </div>
               <img class="ravatar" :src="msg.avatar" />
             </div>
@@ -47,7 +47,12 @@
     </el-main>
     <el-footer>
       <div class="send-tool">
-        <el-input type="textarea" class="msgin" v-model="sendmsg"></el-input>
+        <el-input
+          type="textarea"
+          class="msgin"
+          v-model="sendmsg"
+          @keypress.enter.native="sendMsg"
+        ></el-input>
         <el-button class="msgsend" @click="sendMsg">发送</el-button>
       </div>
     </el-footer>
@@ -81,17 +86,19 @@ export default {
       let that = this;
       var msgData = null;
       if (this.sendmsg != "") {
-        (msgData = {
+        msgData = {
+          isgroup: false,
           issend: true,
-          username: "GZY",
-          avatar:
-            "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-          content: this.sendmsg,
-          timestmp: "20201202",
-        }),
-          this.$ocSockApi.sendSocket(msgData, function (e) {
-            that.msglists[that.$route.params.id]["msgsumary"].push(e);
-          });
+          msgType: "single",
+          receiverId: "1450136519",
+          senderId: "1450136519",
+          msgDetail: this.sendmsg,
+          msgTime: "20201202",
+        };
+        console.log(msgData);
+        this.$ocSockApi.sendSocket(msgData, function (e) {
+          that.msglists[that.$route.params.id]["msgsumary"].push(e);
+        });
       }
       this.sendmsg = "";
     },

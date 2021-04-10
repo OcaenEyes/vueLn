@@ -3,7 +3,7 @@
     <el-container class="friendlisttool"
       ><FriendListAside :friends="friends"></FriendListAside
     ></el-container>
-    <el-container>
+    <el-container style="border-top: solid #eee 1px;border-bottom: solid #eee 1px;border-left: solid #eee 1px;">
       <router-view></router-view>
     </el-container>
   </div>

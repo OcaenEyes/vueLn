@@ -60,6 +60,7 @@ export default {
   created() {
     // var ls =[] ;
     var lss = [];
+    var friends =[];
     lss = [
       {
         id: 0,
@@ -118,10 +119,30 @@ export default {
         ],
       },
     ];
+
+    friends = [
+      {id:0,
+      nickname:"好朋友1",
+      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      },
+      {id:1,
+      nickname:"好朋友2",
+      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      },
+      {id:2,
+      nickname:"好朋友3",
+      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      },
+      {id:3,
+      nickname:"好朋友4",
+      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      },
+    ]
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.getFriends();
+    // this.getFriends();
     localStorage.setItem("lss", JSON.stringify(lss));
+    localStorage.setItem("friends",JSON.stringify(friends));
     // localStorage.setItem("friends", JSON.stringify(friends));
     // console.log(JSON.parse(localStorage.getItem("ls")));
   },

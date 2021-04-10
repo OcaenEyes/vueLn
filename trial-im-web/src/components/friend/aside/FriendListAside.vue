@@ -132,6 +132,6 @@ export default {
   width: 88%;
   height: 1px;
   margin-left: 6%;
-  border-top: solid #eee 1px;
+  /* border-top: solid #eee 1px; */
 }
 </style>
