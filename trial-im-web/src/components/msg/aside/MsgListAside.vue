@@ -29,7 +29,7 @@
                       ? i.msgsumary[i.msgsumary.length - 1].username + ": "
                       : ""
                   }}</b>
-                  <span>{{ i.msgsumary[i.msgsumary.length - 1].content }}</span>
+                  <span>{{ i.msgsumary[i.msgsumary.length - 1].msgDetail }}</span>
                 </div>
               </div>
             </div>
