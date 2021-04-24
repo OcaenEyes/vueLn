@@ -4,7 +4,7 @@ var websock_port = '8082';
 var host_name = 'ws://127.0.0.1'
 
 function initWebsocket() {
-    var wsuri = host_name + ":" + websock_port+"/ws";
+    var wsuri = host_name + ":" + websock_port + "/ws";
 
     if (window.WebSocket) {
         ws = new WebSocket(wsuri);
@@ -37,7 +37,7 @@ function websock_close(e) {
 }
 // 数据接收
 function websock_onmessage(e) {
-    console.log("收到服务器消息"+ e);
+    console.log("收到服务器消息" + e);
     global_callback(JSON.parse(e.data));
 }
 
@@ -52,24 +52,23 @@ function websock_send(e) {
 
 
 // 实际业务调用
-function sendSocket(data,callback){
+function sendSocket(data, callback) {
     global_callback = callback;
-    if(ws.readyState === ws.OPEN){
+    if (ws.readyState === ws.OPEN) {
         // 如果是开启状态
         websock_send(data);
-    }else if (ws.readyState === ws.CONNECTING){
+    } else if (ws.readyState === ws.CONNECTING) {
         setTimeout(() => {
-            sendSocket(data,callback)
+            sendSocket(data, callback)
         }, 1000);
-    }else if(ws.readyState === ws.CLOSED){
+    } else if (ws.readyState === ws.CLOSED) {
         initWebsocket();
-        sendSocket(data,callback);
         setTimeout(() => {
-            sendSocket(data,callback)
+            sendSocket(data, callback)
         }, 1000);
     }
 }
 
 initWebsocket();
 
-export {sendSocket}
+export { sendSocket }

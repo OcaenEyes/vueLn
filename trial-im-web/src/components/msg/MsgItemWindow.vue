@@ -96,8 +96,8 @@ export default {
           msgTime: "20201202",
         };
         console.log(msgData);
-        this.$ocSockApi.sendSocket(msgData, function (e) {
-          that.msglists[that.$route.params.id]["msgsumary"].push(e);
+        this.$ocSockApi.sendSocket(msgData, function (msgData) {
+          that.msglists[that.$route.params.id]["msgsumary"].push(msgData);
         });
       }
       this.sendmsg = "";
