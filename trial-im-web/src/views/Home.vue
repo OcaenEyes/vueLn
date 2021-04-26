@@ -31,15 +31,31 @@ export default {
       console.log(this.viewheight);
     },
 
-    getMsgs() {},
+    getMsgs() {
+      const _this = this;
+      this.axios
+        .get("http://127.0.01:8081/getMsgList", {
+          params: { userId: "152955" },
+        })
+        .then(function (res) {
+          if (res.resCode == "0000") {
+            localStorage.setItem("allMsgLists", res.msgLists);
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: res.recMsg,
+              type: "error",
+            });
+          }
+        });
+    },
 
     getFriends() {
       const _this = this;
       this.axios
         .get("http://127.0.01:8081/getFriends", {
           params: {
-            // id: "49ca45e7-e4fd-41f5-ae65-cf3a776cf7d2",
-            id:"5fb2daad-28c1-4546-b645-9e77d759494d",
+            id: "5fb2daad-28c1-4546-b645-9e77d759494d",
           },
         })
         .then(function (res) {
@@ -58,9 +74,9 @@ export default {
     },
   },
   created() {
-    // var ls =[] ;
+ 
     var lss = [];
-    var friends =[];
+    var friends = [];
     lss = [
       {
         id: 0,
@@ -121,30 +137,37 @@ export default {
     ];
 
     friends = [
-      {id:0,
-      nickname:"好朋友1",
-      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      {
+        id: 0,
+        nickname: "好朋友1",
+        headImg:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
       },
-      {id:1,
-      nickname:"好朋友2",
-      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      {
+        id: 1,
+        nickname: "好朋友2",
+        headImg:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
       },
-      {id:2,
-      nickname:"好朋友3",
-      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      {
+        id: 2,
+        nickname: "好朋友3",
+        headImg:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
       },
-      {id:3,
-      nickname:"好朋友4",
-      headImg:"https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
+      {
+        id: 3,
+        nickname: "好朋友4",
+        headImg:
+          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
       },
-    ]
+    ];
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
     // this.getFriends();
+    this.getMsgs();
     localStorage.setItem("lss", JSON.stringify(lss));
-    localStorage.setItem("friends",JSON.stringify(friends));
-    // localStorage.setItem("friends", JSON.stringify(friends));
-    // console.log(JSON.parse(localStorage.getItem("ls")));
+    localStorage.setItem("friends", JSON.stringify(friends));
   },
 };
 </script>
