@@ -29,77 +29,14 @@ export default {
     getHeight() {
       this.viewheight = window.innerHeight - 120 + "px";
       console.log(this.viewheight);
+      
     },
-
-    getMsgs() {
-      const _this = this;
-      this.axios
-        .get("http://127.0.01:8081/getChat", {
-          params: { userId: "152955" },
-        })
-        .then(function (res) {
-          console.log(res.data);
-          if (res.data.resCode == "0000") {
-            localStorage.setItem(
-              "chatInfos",
-              JSON.stringify(res.data.chatInfos)
-            );
-          } else {
-            _this.$notify({
-              title: "通知",
-              message: res.recMsg,
-              type: "error",
-            });
-          }
-        });
-    },
-
-    getFriends() {
-      const _this = this;
-      this.axios
-        .get("http://127.0.01:8081/getFriends", {
-          params: {
-            userId: "152955",
-          },
-        })
-        .then(function (res) {
-          console.log(res.data);
-          if (res.data.resCode == "0000") {
-            localStorage.setItem("friends", JSON.stringify(res.data.friends));
-          } else {
-            _this.$notify({
-              title: "通知",
-              message: "请求异常",
-              type: "error",
-            });
-          }
-        })
-        .catch((error) => console.log(error));
-    },
+    
   },
   created() {
-    var myUserInfo;
-    myUserInfo = {
-      userSex: "0",
-      address: null,
-      headImg:
-        "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      qrCode: null,
-      phone: "152955",
-      headImgBig:
-        "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      createTime: null,
-      nickName: "ZY",
-      sign: "这个人很懒暂无签名",
-      updateTime: null,
-      userName: "152955",
-      userId: "152955",
-    };
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.getFriends();
-    this.getMsgs();
-    localStorage.setItem("myUserInfo", JSON.stringify(myUserInfo));
+
   },
 };
 </script>

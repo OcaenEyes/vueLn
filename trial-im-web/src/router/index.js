@@ -11,17 +11,17 @@ import FriendItemWindow from '../components/friend/FriendItemWindow.vue'
 
 Vue.use(VueRouter)
 
-// const s= 1;
-var chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
 var id;
-if (chatInfos.length > 0) {
-  if (chatInfos[chatInfos.length - 1].group) {
-    id = chatInfos[chatInfos.length - 1].chatGroupId;
-  } else {
-    id = chatInfos[chatInfos.length - 1].chatUserId;
+var chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
+if (chatInfos != null) {
+  if (chatInfos.length > 0) {
+    if (chatInfos[chatInfos.length - 1].group) {
+      id = chatInfos[chatInfos.length - 1].chatGroupId;
+    } else {
+      id = chatInfos[chatInfos.length - 1].chatUserId;
+    }
   }
 }
-
 const routes = [
   {
     path: '/',
@@ -34,14 +34,15 @@ const routes = [
         name: 'MsgView',
         component: MsgView,
         redirect: '/msgView/msgItem/' + id,
+        meta: { requiresAuth: true },
         children: [
           {
             path: '/msgView/msgItem/:id',
             name: 'MsgItemView',
-            component: MsgItemWindow
+            component: MsgItemWindow,
+            meta: { requiresAuth: true }
           }
         ]
-
       },
       {
         path: '/friend',
@@ -51,17 +52,21 @@ const routes = [
           {
             path: '/friend/firendItem/:id',
             name: 'FriendItemView',
-            component: FriendItemWindow
+            component: FriendItemWindow,
+            meta: { requiresAuth: true }
           }
         ]
       },
       {
         path: '/collect',
-        component: CollectWindow
+        component: CollectWindow,
+        meta: { requiresAuth: true }
+
       },
       {
         path: '/file',
-        component: FileWindow
+        component: FileWindow,
+        meta: { requiresAuth: true }
       }
     ],
   },
@@ -84,4 +89,26 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  var myCookie;
+  myCookie = localStorage.getItem("myCookie");
+  console.log(myCookie);
+  console.log(to.meta.requiresAuth);
+  if (to.name == 'LoginRegister') {
+    if (myCookie != null) {
+      next({ name: 'Home' })
+    } else {
+      next();
+    }
+  } else if (to.meta.requiresAuth == true) {
+    if (myCookie != null) {
+      next()
+    } else {
+      next({ name: 'LoginRegister' })
+    }
+  } else {
+    next()
+  }
+
+})
 export default router

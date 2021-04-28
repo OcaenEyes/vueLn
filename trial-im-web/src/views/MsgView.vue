@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       viewheight: "",
-      msglists: [],
       chatInfos: [],
       myUserInfo: {},
     };
@@ -46,10 +45,8 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.msglists = JSON.parse(localStorage.getItem("lss"));
     this.chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
     this.myUserInfo = JSON.parse(localStorage.getItem("myUserInfo"));
-    // console.log(this.msglists);
   },
 };
 </script>

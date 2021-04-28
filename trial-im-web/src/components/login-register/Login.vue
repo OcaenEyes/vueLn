@@ -58,6 +58,9 @@ export default {
         password: [{ validator: validatePass, trigger: "blur" }],
         phone: [{ validator: checkPhone }],
       },
+      chatInfos: [],
+      friends: [],
+      myUserInfo: {},
     };
   },
   methods: {
@@ -77,6 +80,7 @@ export default {
     },
     login() {
       let _this = this;
+
       this.axios
         .post("http://127.0.0.1:8081/login", null, {
           params: {
@@ -85,19 +89,82 @@ export default {
           },
         })
         .then((res) => {
-          if (res.data.code == "200") {
-            var usrdetial = res.data.userDetial;
-            localStorage.setItem("userDetial", JSON.stringify(usrdetial));
-            console.log(JSON.parse(localStorage.getItem("userDetial")));
+          if (res.data.resCode == "0000") {
+            localStorage.setItem(
+              "myUserInfo",
+              JSON.stringify(res.data.userDetail)
+            );
+            this.myUserInfo = res.data.userDetail;
+            localStorage.setItem("myCookie", "152955");
           } else {
             _this.$notify({
               title: "通知",
-              message: res.data.msg,
+              message: res.data.resMsg,
+              type: "error",
+            });
+          }
+        });
+
+      if (this.myUserInfo != null) {
+        this.getFriends();
+        this.getMsgs();
+      }
+      if (this.chatInfos != null) {
+        this.$router.push({ name: "Home" });
+      }
+    },
+    getMsgs() {
+      const _this = this;
+      this.axios
+        .get("http://127.0.01:8081/getChat", {
+          params: {
+            userId: JSON.parse(localStorage.getItem("myUserInfo"))["userId"],
+          },
+        })
+        .then(function (res) {
+          console.log(res.data);
+          if (res.data.resCode == "0000") {
+            localStorage.setItem(
+              "chatInfos",
+              JSON.stringify(res.data.chatInfos)
+            );
+            this.chatInfos = res.data.chatInfos;
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: res.recMsg,
               type: "error",
             });
           }
         });
     },
+
+    getFriends() {
+      const _this = this;
+      this.axios
+        .get("http://127.0.01:8081/getFriends", {
+          params: {
+            userId: JSON.parse(localStorage.getItem("myUserInfo"))["userId"],
+          },
+        })
+        .then(function (res) {
+          console.log(res.data);
+          if (res.data.resCode == "0000") {
+            localStorage.setItem("friends", JSON.stringify(res.data.friends));
+            this.friends = res.data.friends;
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: "请求异常",
+              type: "error",
+            });
+          }
+        })
+        .catch((error) => console.log(error));
+    },
+  },
+  created() {
+    console.log(localStorage.getItem("myCookie"));
   },
 };
 </script>

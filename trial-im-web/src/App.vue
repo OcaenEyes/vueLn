@@ -14,7 +14,10 @@ export default {
     return {};
   },
   methods: {},
-  created() {},
+  created() {
+    // localStorage.removeItem("chatInfos");
+    // localStorage.removeItem("myCookie");
+  },
 };
 </script>
 
