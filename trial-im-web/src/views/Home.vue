@@ -34,12 +34,16 @@ export default {
     getMsgs() {
       const _this = this;
       this.axios
-        .get("http://127.0.01:8081/getMsgList", {
+        .get("http://127.0.01:8081/getChat", {
           params: { userId: "152955" },
         })
         .then(function (res) {
-          if (res.resCode == "0000") {
-            localStorage.setItem("allMsgLists", res.msgLists);
+          console.log(res.data);
+          if (res.data.resCode == "0000") {
+            localStorage.setItem(
+              "chatInfos",
+              JSON.stringify(res.data.chatInfos)
+            );
           } else {
             _this.$notify({
               title: "通知",
@@ -55,13 +59,13 @@ export default {
       this.axios
         .get("http://127.0.01:8081/getFriends", {
           params: {
-            id: "5fb2daad-28c1-4546-b645-9e77d759494d",
+            userId: "152955",
           },
         })
         .then(function (res) {
-          if (res.data.friends.length >= 0) {
+          console.log(res.data);
+          if (res.data.resCode == "0000") {
             localStorage.setItem("friends", JSON.stringify(res.data.friends));
-            console.log(res.data.friends);
           } else {
             _this.$notify({
               title: "通知",
@@ -74,100 +78,28 @@ export default {
     },
   },
   created() {
- 
-    var lss = [];
-    var friends = [];
-    lss = [
-      {
-        id: 0,
-        isgroup: true,
-        groupid: 1,
-        groupname: "讨论组一",
-        receivename: "",
-        receiveid: null,
-        headimg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        msgsumary: [
-          {
-            issend: true,
-            username: "GZY",
-            avatar:
-              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-            msgDetail: "你好呀！！！",
-            msgTime: "20201202",
-          },
-          {
-            issend: false,
-            username: "厉害",
-            avatar:
-              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-            msgDetail: "你好呀！！！",
-            msgTime: "20201202",
-          },
-        ],
-      },
-      {
-        id: 1,
-        isgroup: false,
-        groupid: null,
-        groupname: "",
-        receivename: "乔克",
-        receiveid: 1,
-        headimg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-        msgsumary: [
-          {
-            issend: true,
-            username: "GZY",
-            avatar:
-              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-            msgDetail: "乔克叔叔杂货店来了",
-            msgTime: "20201202",
-          },
-          {
-            issend: false,
-            username: "乔克",
-            avatar:
-              "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-            msgDetail: "GZY，来看看 乔克叔叔杂货店来了",
-            msgTime: "20201202",
-          },
-        ],
-      },
-    ];
-
-    friends = [
-      {
-        id: 0,
-        nickname: "好朋友1",
-        headImg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      },
-      {
-        id: 1,
-        nickname: "好朋友2",
-        headImg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      },
-      {
-        id: 2,
-        nickname: "好朋友3",
-        headImg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      },
-      {
-        id: 3,
-        nickname: "好朋友4",
-        headImg:
-          "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
-      },
-    ];
+    var myUserInfo;
+    myUserInfo = {
+      userSex: "0",
+      address: null,
+      headImg:
+        "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+      qrCode: null,
+      phone: "152955",
+      headImgBig:
+        "https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg",
+      createTime: null,
+      nickName: "ZY",
+      sign: "这个人很懒暂无签名",
+      updateTime: null,
+      userName: "152955",
+      userId: "152955",
+    };
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    // this.getFriends();
+    this.getFriends();
     this.getMsgs();
-    localStorage.setItem("lss", JSON.stringify(lss));
-    localStorage.setItem("friends", JSON.stringify(friends));
+    localStorage.setItem("myUserInfo", JSON.stringify(myUserInfo));
   },
 };
 </script>

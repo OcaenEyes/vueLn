@@ -10,29 +10,41 @@
     </el-header>
     <el-main class="lmsglist">
       <div class="msglist">
-        <div v-for="(i, index) in msglists" :key="index">
-          <router-link :to="{ name: 'MsgItemView', params: { id: index } }">
-            <div class="msglist-item">
-              <div class="sendimg">
-                <el-image
-                  style="width: 32px; height: 32px; border-radius: 6px"
-                  :src="i.headimg"
-                ></el-image>
-              </div>
-              <div class="msg-thumb">
-                <div class="msg-thumb-sender">
-                  <b>{{ i.groupname ? i.groupname : i.receivename }}</b>
+        <div v-for="(i, index) in chatInfos" :key="index">
+          <router-link
+            :to="{
+              name: 'MsgItemView',
+              params: { id: i.group ? i.chatGroupId : i.chatUserId },
+            }"
+          >
+            <a>
+              <div class="msglist-item">
+                <div class="sendimg">
+                  <el-image
+                    style="width: 32px; height: 32px; border-radius: 6px"
+                    :src="i.group ? i.chatGroupHeadImg : i.chatUserHeadImg"
+                  ></el-image>
                 </div>
-                <div class="msg-thumb-subdetial">
-                  <b>{{
-                    i.groupname
-                      ? i.msgsumary[i.msgsumary.length - 1].username + ": "
-                      : ""
-                  }}</b>
-                  <span>{{ i.msgsumary[i.msgsumary.length - 1].msgDetail }}</span>
+                <div class="msg-thumb">
+                  <div class="msg-thumb-sender">
+                    <b>{{ i.group ? i.chatGroupName : i.chatUserName }}</b>
+                  </div>
+                  <div class="msg-thumb-subdetial">
+                    <b>{{
+                      i.group
+                        ? i.chatGroupMsgs[i.chatGroupMsgs.length - 1]
+                            .senderNickName + ": "
+                        : ""
+                    }}</b>
+                    <span>{{
+                      i.group
+                        ? i.chatGroupMsgs[i.chatGroupMsgs.length - 1].msgDetail
+                        : i.chatUserMsgs[i.chatUserMsgs.length - 1].msgDetail
+                    }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </router-link>
           <div class="line"></div>
         </div>
@@ -43,23 +55,18 @@
 
 <script>
 export default {
-  props: ["msglists"],
+  props: ["chatInfos"],
   data() {
-    return {
-      count: 20,
-      isgroup: null,
-    };
+    return {};
   },
   methods: {},
-  created() {
-    console.log(this.msglists[this.msglists.length - 1]);
-  },
+  created() {},
 };
 </script>
 <style scoped>
 .lmsglist {
   padding-top: 0;
-  padding-bottom:6px ;
+  padding-bottom: 6px;
   padding-left: 14px;
   padding-right: 14px;
 }
@@ -115,7 +122,10 @@ export default {
   text-align: left;
   max-width: 216px;
 }
-.msglist-item:hover{
+.msglist-item:hover {
+  background-color: #f0f0f0 !important;
+}
+.msglist-item:active {
   background-color: #f0f0f0 !important;
 }
 .msg-thumb {
@@ -131,8 +141,8 @@ export default {
 .msg-thumb-sender {
   font-size: 16px;
   margin-bottom: 5px;
-  color:#333;
-  font-weight:bold;
+  color: #333;
+  font-weight: bold;
   overflow: hidden;
   min-width: 80px;
   max-width: 152px;

@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header class="msgwindowtitle">
-      <div class="chat-title">{{ username }}</div>
+      <div class="chat-title">{{ msgtitle }}</div>
     </el-header>
     <el-main>
       <div
@@ -15,31 +15,41 @@
             v-for="(msg, index) in msgsumary"
             :key="index"
           >
-            <div class="lchat-msg" :style="{ display: msg.issend ? none : '' }">
-              <img class="lavatar" :src="msg.avatar" />
+            <div
+              class="lchat-msg"
+              :style="{
+                display: msg.senderId == myUserInfo.userId ? none : '',
+              }"
+            >
+              <img class="lavatar" src="" />
               <div class="lmsg">
                 <div class="lmsg-time">
                   <span
                     style="color: #666; font-size: small; margin-right: 10px"
-                    >{{ msg.username }}</span
-                  >{{ msg.timestmp }}
+                    >{{ msg.senderNickName }}</span
+                  >{{ msg.msgTime }}
                 </div>
                 <div class="lmsg-content">{{ msg.msgDetail }}</div>
               </div>
             </div>
 
-            <div class="rchat-msg" :style="{ display: msg.issend ? '' : none }">
+            <div
+              class="rchat-msg"
+              :style="{
+                display: msg.senderId == myUserInfo.userId ? '' : none,
+              }"
+            >
               <div class="rmsg">
                 <div class="rmsg-time">
                   {{ msg.msgTime }}
                   <span
                     style="color: #666; font-size: small; margin-left: 10px"
-                    >{{ msg.username }}</span
+                    >{{ msg.senderNickName }}</span
                   >
                 </div>
                 <div class="rmsg-content">{{ msg.msgDetail }}</div>
               </div>
-              <img class="ravatar" :src="msg.avatar" />
+              <img class="ravatar" src="" />
             </div>
           </li>
         </ul>
@@ -61,9 +71,10 @@
 
 <script>
 export default {
-  props: ["msglists"],
+  props: ["chatInfos", "myUserInfo"],
   data() {
     return {
+      msgtitle: "",
       viewheight: "",
       username: null,
       none: "none",
@@ -106,24 +117,36 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    // console.log("创建时");
     console.log(this.$route.params.id);
-    // console.log(this.msglists);
-    // console.log(this.msglists);
-    this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
-    this.username = this.msglists[this.$route.params.id]["isgroup"]
-      ? this.msglists[this.$route.params.id]["groupname"]
-      : this.msglists[this.$route.params.id]["receivename"];
+    if (this.chatInfos.length > 0) {
+      this.chatInfos.forEach((chatInfo) => {
+        if (this.$route.params.id == chatInfo.chatUserId) {
+          this.msgsumary = chatInfo["chatUserMsgs"];
+          this.msgtitle = chatInfo["chatUserName"];
+        } else if (this.$route.params.id == chatInfo.chatGroupId) {
+          this.msgsumary = chatInfo["chatGroupMsgs"];
+          this.msgtitle = chatInfo["chatGroupName"];
+        }
+      });
+    }
+
     console.log(this.msgsumary);
   },
   watch: {
     $route() {
       console.log("路由变化时");
       console.log(this.$route.params.id);
-      this.msgsumary = this.msglists[this.$route.params.id]["msgsumary"];
-      this.username = this.msglists[this.$route.params.id]["isgroup"]
-        ? this.msglists[this.$route.params.id]["groupname"]
-        : this.msglists[this.$route.params.id]["receivename"];
+      if (this.chatInfos.length > 0) {
+        this.chatInfos.forEach((chatInfo) => {
+          if (this.$route.params.id == chatInfo.chatUserId) {
+            this.msgsumary = chatInfo["chatUserMsgs"];
+            this.msgtitle = chatInfo["chatUserName"];
+          } else if (this.$route.params.id == chatInfo.chatGroupId) {
+            this.msgsumary = chatInfo["chatGroupMsgs"];
+            this.msgtitle = chatInfo["chatGroupName"];
+          }
+        });
+      }
     },
     msgsumary() {
       console.log("msgsumary change");

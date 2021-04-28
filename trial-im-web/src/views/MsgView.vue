@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; width: 100%">
     <el-container class="msglisttool"
-      ><MsgListAside :msglists="msglists"></MsgListAside
+      ><MsgListAside :chatInfos="chatInfos"></MsgListAside
     ></el-container>
     <!-- <el-container>
       <el-header class="msgwindowtitle">
@@ -12,7 +12,7 @@
       <router-view></router-view>
     </el-container> -->
     <el-container>
-      <router-view :msglists="msglists"></router-view>
+      <router-view :chatInfos="chatInfos" :myUserInfo="myUserInfo"></router-view>
     </el-container>
   </div>
 </template>
@@ -33,6 +33,8 @@ export default {
     return {
       viewheight: "",
       msglists: [],
+      chatInfos: [],
+      myUserInfo: {},
     };
   },
   methods: {
@@ -45,6 +47,8 @@ export default {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
     this.msglists = JSON.parse(localStorage.getItem("lss"));
+    this.chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
+    this.myUserInfo = JSON.parse(localStorage.getItem("myUserInfo"));
     // console.log(this.msglists);
   },
 };
@@ -75,7 +79,7 @@ export default {
   border-bottom: 0.1px solid #eee;
   max-width: 240px;
 }
-.msglisttool::-webkit-scrollbar{
+.msglisttool::-webkit-scrollbar {
   display: none;
 }
 .el-main {

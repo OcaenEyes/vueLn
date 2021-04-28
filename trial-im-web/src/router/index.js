@@ -12,6 +12,16 @@ import FriendItemWindow from '../components/friend/FriendItemWindow.vue'
 Vue.use(VueRouter)
 
 // const s= 1;
+var chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
+var id;
+if (chatInfos.length > 0) {
+  if (chatInfos[chatInfos.length - 1].group) {
+    id = chatInfos[chatInfos.length - 1].chatGroupId;
+  } else {
+    id = chatInfos[chatInfos.length - 1].chatUserId;
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -23,7 +33,7 @@ const routes = [
         path: '/msgView',
         name: 'MsgView',
         component: MsgView,
-        redirect: '/msgView/msgItem/0',
+        redirect: '/msgView/msgItem/' + id,
         children: [
           {
             path: '/msgView/msgItem/:id',
@@ -37,10 +47,10 @@ const routes = [
         path: '/friend',
         name: 'friend',
         component: FriendWindow,
-        children:[
+        children: [
           {
             path: '/friend/firendItem/:id',
-            name : 'FriendItemView',
+            name: 'FriendItemView',
             component: FriendItemWindow
           }
         ]
