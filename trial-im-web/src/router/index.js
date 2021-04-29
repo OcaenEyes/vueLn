@@ -25,9 +25,28 @@ if (chatInfos != null) {
 const routes = [
   {
     path: '/',
+    redirect: '/loginregister',
+  },
+  // {
+  //   path: '/demo',
+  //   name: 'Demo',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "demo" */ '../views/Demo.vue')
+  // },
+  {
+    path: '/loginregister',
+    name: 'LoginRegister',
+    component: LoginRegister,
+    meta: { requiresAuth: false }
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
-    redirect: '/msgView',
+    redirect:'/msgView',
+    meta: { requiresAuth: true },
     children: [
       {
         path: '/msgView',
@@ -46,8 +65,8 @@ const routes = [
       },
       {
         path: '/friend',
-        name: 'friend',
         component: FriendWindow,
+        meta: { requiresAuth: true },
         children: [
           {
             path: '/friend/firendItem/:id',
@@ -69,20 +88,8 @@ const routes = [
         meta: { requiresAuth: true }
       }
     ],
-  },
-  // {
-  //   path: '/demo',
-  //   name: 'Demo',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "demo" */ '../views/Demo.vue')
-  // },
-  {
-    path: '/loginregister',
-    name: 'LoginRegister',
-    component: LoginRegister
   }
+
 ]
 
 const router = new VueRouter({
@@ -106,8 +113,6 @@ router.beforeEach((to, from, next) => {
     } else {
       next({ name: 'LoginRegister' })
     }
-  } else {
-    next()
   }
 
 })

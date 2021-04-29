@@ -17,6 +17,12 @@ export default {
   created() {
     // localStorage.removeItem("chatInfos");
     // localStorage.removeItem("myCookie");
+    // localStorage.removeItem("myUserInfo");
+    // localStorage.removeItem("friends");
+
+  },
+  destroyed() {
+    
   },
 };
 </script>

@@ -58,9 +58,6 @@ export default {
         password: [{ validator: validatePass, trigger: "blur" }],
         phone: [{ validator: checkPhone }],
       },
-      chatInfos: [],
-      friends: [],
-      myUserInfo: {},
     };
   },
   methods: {
@@ -90,12 +87,18 @@ export default {
         })
         .then((res) => {
           if (res.data.resCode == "0000") {
+            console.log(res.data.userDetail);
+            console.log(JSON.stringify(res.data.userDetail));
             localStorage.setItem(
               "myUserInfo",
               JSON.stringify(res.data.userDetail)
             );
-            this.myUserInfo = res.data.userDetail;
             localStorage.setItem("myCookie", "152955");
+            console.log(localStorage.getItem("myCookie"));
+            console.log(localStorage.getItem("myUserInfo"));
+            this.getFriends();
+            this.getMsgs();
+            this.$router.push({ name: "MsgView" });
           } else {
             _this.$notify({
               title: "通知",
@@ -104,21 +107,16 @@ export default {
             });
           }
         });
-
-      if (this.myUserInfo != null) {
-        this.getFriends();
-        this.getMsgs();
-      }
-      if (this.chatInfos != null) {
-        this.$router.push({ name: "Home" });
-      }
     },
     getMsgs() {
       const _this = this;
+      console.log(JSON.parse(localStorage.getItem("myUserInfo")));
+      var myuserinfo;
+      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
       this.axios
         .get("http://127.0.01:8081/getChat", {
           params: {
-            userId: JSON.parse(localStorage.getItem("myUserInfo"))["userId"],
+            userId: myuserinfo.userId,
           },
         })
         .then(function (res) {
@@ -128,7 +126,6 @@ export default {
               "chatInfos",
               JSON.stringify(res.data.chatInfos)
             );
-            this.chatInfos = res.data.chatInfos;
           } else {
             _this.$notify({
               title: "通知",
@@ -141,17 +138,18 @@ export default {
 
     getFriends() {
       const _this = this;
+      var myuserinfo;
+      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
       this.axios
         .get("http://127.0.01:8081/getFriends", {
           params: {
-            userId: JSON.parse(localStorage.getItem("myUserInfo"))["userId"],
+            userId: myuserinfo.userId,
           },
         })
         .then(function (res) {
           console.log(res.data);
           if (res.data.resCode == "0000") {
             localStorage.setItem("friends", JSON.stringify(res.data.friends));
-            this.friends = res.data.friends;
           } else {
             _this.$notify({
               title: "通知",
