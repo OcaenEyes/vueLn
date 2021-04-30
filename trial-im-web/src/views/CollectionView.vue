@@ -22,7 +22,7 @@
 // import SendTool from "../components/msg/foot/SendTools";
 import MsgListAside from "../components/msg/aside/MsgListAside";
 export default {
-  name: "MsgView",
+  name: "CollectionView",
   components: {
     // MsgWindowTitle,
     // MsgWindow,

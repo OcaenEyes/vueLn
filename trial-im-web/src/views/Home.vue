@@ -29,14 +29,65 @@ export default {
     getHeight() {
       this.viewheight = window.innerHeight - 120 + "px";
       console.log(this.viewheight);
-      
     },
-    
+    getMsgs() {
+      const _this = this;
+      console.log(JSON.parse(localStorage.getItem("myUserInfo")));
+      var myuserinfo;
+      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
+      this.axios
+        .get("http://127.0.01:8081/getChat", {
+          params: {
+            userId: myuserinfo.userId,
+          },
+        })
+        .then(function (res) {
+          console.log(res.data);
+          if (res.data.resCode == "0000") {
+            localStorage.setItem(
+              "chatInfos",
+              JSON.stringify(res.data.chatInfos)
+            );
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: res.resMsg,
+              type: "error",
+            });
+          }
+        });
+    },
+
+    getFriends() {
+      const _this = this;
+      var myuserinfo;
+      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
+      this.axios
+        .get("http://127.0.01:8081/getFriends", {
+          params: {
+            userId: myuserinfo.userId,
+          },
+        })
+        .then(function (res) {
+          console.log(res.data);
+          if (res.data.resCode == "0000") {
+            localStorage.setItem("friends", JSON.stringify(res.data.friends));
+          } else {
+            _this.$notify({
+              title: "通知",
+              message: res.resMsg,
+              type: "error",
+            });
+          }
+        })
+        .catch((error) => console.log(error));
+    },
   },
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-
+    // this.getMsgs();
+    // this.getFriends();
   },
 };
 </script>

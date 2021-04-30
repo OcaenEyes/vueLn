@@ -58,6 +58,7 @@ export default {
         password: [{ validator: validatePass, trigger: "blur" }],
         phone: [{ validator: checkPhone }],
       },
+      myUserInfo: {},
     };
   },
   methods: {
@@ -94,11 +95,9 @@ export default {
               JSON.stringify(res.data.userDetail)
             );
             localStorage.setItem("myCookie", "152955");
+            this.myUserInfo = res.data.userDetail;
             console.log(localStorage.getItem("myCookie"));
             console.log(localStorage.getItem("myUserInfo"));
-            this.getFriends();
-            this.getMsgs();
-            this.$router.push({ name: "MsgView" });
           } else {
             _this.$notify({
               title: "通知",
@@ -110,13 +109,10 @@ export default {
     },
     getMsgs() {
       const _this = this;
-      console.log(JSON.parse(localStorage.getItem("myUserInfo")));
-      var myuserinfo;
-      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
       this.axios
         .get("http://127.0.01:8081/getChat", {
           params: {
-            userId: myuserinfo.userId,
+            userId: this.myUserInfo.userId,
           },
         })
         .then(function (res) {
@@ -129,7 +125,7 @@ export default {
           } else {
             _this.$notify({
               title: "通知",
-              message: res.recMsg,
+              message: res.resMsg,
               type: "error",
             });
           }
@@ -138,12 +134,10 @@ export default {
 
     getFriends() {
       const _this = this;
-      var myuserinfo;
-      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
       this.axios
         .get("http://127.0.01:8081/getFriends", {
           params: {
-            userId: myuserinfo.userId,
+            userId: this.myUserInfo.userId,
           },
         })
         .then(function (res) {
@@ -153,7 +147,7 @@ export default {
           } else {
             _this.$notify({
               title: "通知",
-              message: "请求异常",
+              message: res.resMsg,
               type: "error",
             });
           }
@@ -163,6 +157,16 @@ export default {
   },
   created() {
     console.log(localStorage.getItem("myCookie"));
+  },
+  watch: {
+    myUserInfo: {
+      handler() {
+        this.getMsgs();
+        this.getFriends();
+        this.$router.push({ name: "Home" });
+      },
+      deep: true,
+    },
   },
 };
 </script>

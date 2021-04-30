@@ -21,6 +21,11 @@ if (chatInfos != null) {
       id = chatInfos[chatInfos.length - 1].chatUserId;
     }
   }
+  else {
+    console.log("chatInfos", chatInfos);
+  }
+} else {
+  console.log("chatInfos", chatInfos);
 }
 const routes = [
   {
@@ -45,7 +50,7 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    redirect:'/msgView',
+    redirect: '/msgView',
     meta: { requiresAuth: true },
     children: [
       {
