@@ -12,7 +12,10 @@
       <router-view></router-view>
     </el-container> -->
     <el-container>
-      <router-view :chatInfos="chatInfos" :myUserInfo="myUserInfo"></router-view>
+      <router-view
+        :chatInfos="chatInfos"
+        :myUserInfo="myUserInfo"
+      ></router-view>
     </el-container>
   </div>
 </template>
@@ -45,7 +48,10 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.chatInfos = JSON.parse(sessionStorage.getItem("chatInfos"));
+    var chatInfos;
+    chatInfos = JSON.parse(sessionStorage.getItem("chatInfos"));
+    this.chatInfos = chatInfos.reverse();
+
     this.myUserInfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
   },
 };

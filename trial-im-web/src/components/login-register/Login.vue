@@ -20,7 +20,12 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submit('ruleForm')">登录</el-button>
+        <el-button
+          type="primary"
+          v-loading.fullscreen.lock="fullscreenLoading"
+          @click="submit('ruleForm')"
+          >登录</el-button
+        >
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -60,6 +65,7 @@ export default {
       },
       myUserInfo: {},
       chatInfosRes: [],
+      fullscreenLoading: false,
     };
   },
   methods: {
@@ -67,6 +73,7 @@ export default {
       let that = this;
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          that.fullscreenLoading = true;
           that.login();
         } else {
           console.log("error submit!!");
@@ -79,9 +86,8 @@ export default {
     },
     login() {
       let _this = this;
-
       this.axios
-        .post("http://127.0.0.1:8081/login", {
+        .post("http://127.0.0.1:8081/login", null, {
           params: {
             phone: this.ruleForm.phone,
             password: this.ruleForm.password,
@@ -171,6 +177,7 @@ export default {
     chatInfosRes: {
       handler() {
         var id = "";
+
         if (this.chatInfosRes != null) {
           if (this.chatInfosRes.length > 0) {
             if (this.chatInfosRes[this.chatInfosRes.length - 1].group) {
@@ -187,6 +194,7 @@ export default {
           console.log("chatInfos", this.chatInfosRes);
           this.$router.push({ path: "/msgView/msgItem/" });
         }
+        this.fullscreenLoading = false;
       },
     },
   },

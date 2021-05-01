@@ -73,14 +73,14 @@ export default {
         pass: "",
         checkPass: "",
         phone: "",
-        myUserInfo: {},
-        chatInfosRes: [],
       },
       rules: {
         pass: [{ validator: validatePass, trigger: "blur" }],
         checkPass: [{ validator: validatePass2, trigger: "blur" }],
         phone: [{ validator: checkPhone }],
       },
+      myUserInfo: {},
+      chatInfosRes: [],
     };
   },
   methods: {
@@ -100,7 +100,7 @@ export default {
     regist() {
       let _this = this;
       this.axios
-        .post("http://127.0.0.1:8081/register", {
+        .post("http://127.0.0.1:8081/register", null, {
           params: {
             phone: this.ruleForm.phone,
             password: this.ruleForm.pass,
