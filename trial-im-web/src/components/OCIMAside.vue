@@ -2,10 +2,9 @@
   <div>
     <div class="asidetools">
       <div>
-        <el-image
-          style="width: 40px; height: 40px; border-radius: 20px"
-          src="https://up.enterdesk.com/edpic_source/42/7d/72/427d72b831d61616098dbca1488bcb3c.jpg"
-        ></el-image>
+        <el-avatar :src="myUserInfo.headImg != null ? myUserInfo.headImg : ''">
+          {{ myUserInfo.nickName }}
+        </el-avatar>
       </div>
       <div>
         <router-link :to="{ path: '/msgView/msgItem/' + id }">
@@ -36,7 +35,11 @@ export default {
   data() {
     return {
       id: "",
+      myUserInfo: {},
     };
+  },
+  created() {
+    this.myUserInfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
   },
   watch: {
     $route() {

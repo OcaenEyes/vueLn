@@ -14,14 +14,20 @@
           <router-link :to="{ name: 'FriendItemView', params: { id: index } }">
             <div class="friendlist-item">
               <div class="sendimg">
-                <el-image
+                <!-- <el-image
                   style="width: 32px; height: 32px; border-radius: 6px"
                   :src="i.headImg"
-                ></el-image>
+                ></el-image> -->
+                <el-avatar
+                  size="small"
+                  :src="i.headImg!=null ?i.headImg:''"
+                >
+                  {{i.nickName}}
+                </el-avatar>
               </div>
               <div class="friend-thumb">
                 <div class="friend-thumb-sender">
-                  <b>{{i.nickname}}</b>
+                  <b>{{i.nickName}}</b>
                 </div>
               </div>
             </div>
@@ -132,6 +138,6 @@ export default {
   width: 88%;
   height: 1px;
   margin-left: 6%;
-  /* border-top: solid #eee 1px; */
+  border-top: solid #eee 1px;
 }
 </style>

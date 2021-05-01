@@ -21,7 +21,9 @@
                 display: msg.senderId == myUserInfo.userId ? none : '',
               }"
             >
-              <img class="lavatar" src="" />
+              <el-avatar size="medium" src="">{{
+                msg.senderNickName
+              }}</el-avatar>
               <div class="lmsg">
                 <div class="lmsg-time">
                   <span
@@ -49,7 +51,9 @@
                 </div>
                 <div class="rmsg-content">{{ msg.msgDetail }}</div>
               </div>
-              <img class="ravatar" src="" />
+              <el-avatar size="medium" src="">{{
+                msg.senderNickName
+              }}</el-avatar>
             </div>
           </li>
         </ul>
@@ -290,15 +294,5 @@ export default {
   text-align: center;
   line-height: 36px;
   padding: 0 10px 0 10px;
-}
-.lavatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-}
-.ravatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
 }
 </style>

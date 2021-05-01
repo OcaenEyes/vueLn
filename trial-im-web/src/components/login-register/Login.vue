@@ -70,10 +70,10 @@ export default {
   },
   methods: {
     submit(formName) {
+      this.fullscreenLoading = true;
       let that = this;
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          that.fullscreenLoading = true;
           that.login();
         } else {
           console.log("error submit!!");

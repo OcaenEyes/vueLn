@@ -17,34 +17,38 @@
               params: { id: i.group ? i.chatGroupId : i.chatUserId },
             }"
           >
-            <a>
-              <div class="msglist-item">
-                <div class="sendimg">
-                  <el-image
+            <div class="msglist-item">
+              <div class="sendimg">
+                <el-avatar
+                  size="medium"
+                  :src="i.group ? i.chatGroupHeadImg : i.chatUserHeadImg"
+                >
+                  {{ i.group ? i.chatGroupName : i.chatUserName }}
+                </el-avatar>
+                <!-- <el-image
                     style="width: 32px; height: 32px; border-radius: 6px"
                     :src="i.group ? i.chatGroupHeadImg : i.chatUserHeadImg"
-                  ></el-image>
+                  ></el-image> -->
+              </div>
+              <div class="msg-thumb">
+                <div class="msg-thumb-sender">
+                  <b>{{ i.group ? i.chatGroupName : i.chatUserName }}</b>
                 </div>
-                <div class="msg-thumb">
-                  <div class="msg-thumb-sender">
-                    <b>{{ i.group ? i.chatGroupName : i.chatUserName }}</b>
-                  </div>
-                  <div class="msg-thumb-subdetial">
-                    <b>{{
-                      i.group
-                        ? i.chatGroupMsgs[i.chatGroupMsgs.length - 1]
-                            .senderNickName + ": "
-                        : ""
-                    }}</b>
-                    <span>{{
-                      i.group
-                        ? i.chatGroupMsgs[i.chatGroupMsgs.length - 1].msgDetail
-                        : i.chatUserMsgs[i.chatUserMsgs.length - 1].msgDetail
-                    }}</span>
-                  </div>
+                <div class="msg-thumb-subdetial">
+                  <b>{{
+                    i.group
+                      ? i.chatGroupMsgs[i.chatGroupMsgs.length - 1]
+                          .senderNickName + ": "
+                      : ""
+                  }}</b>
+                  <span>{{
+                    i.group
+                      ? i.chatGroupMsgs[i.chatGroupMsgs.length - 1].msgDetail
+                      : i.chatUserMsgs[i.chatUserMsgs.length - 1].msgDetail
+                  }}</span>
                 </div>
               </div>
-            </a>
+            </div>
           </router-link>
           <div class="line"></div>
         </div>
@@ -111,6 +115,10 @@ export default {
 
 .msglist {
   overflow-y: auto;
+  overflow-x: hidden;
+}
+.msglist::-webkit-scrollbar {
+  display: none;
 }
 .msglist-item {
   height: 56px;
@@ -121,6 +129,9 @@ export default {
   background-color: #fff;
   text-align: left;
   max-width: 216px;
+}
+.msglist-item ::-webkit-scrollbar {
+  display: none;
 }
 .msglist-item:hover {
   background-color: #f0f0f0 !important;
