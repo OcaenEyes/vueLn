@@ -81,7 +81,7 @@ export default {
       let _this = this;
 
       this.axios
-        .post("http://127.0.0.1:8081/login", null, {
+        .post("http://127.0.0.1:8081/login", {
           params: {
             phone: this.ruleForm.phone,
             password: this.ruleForm.password,
