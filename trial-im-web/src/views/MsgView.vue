@@ -45,8 +45,8 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
-    this.myUserInfo = JSON.parse(localStorage.getItem("myUserInfo"));
+    this.chatInfos = JSON.parse(sessionStorage.getItem("chatInfos"));
+    this.myUserInfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
   },
 };
 </script>

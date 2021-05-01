@@ -59,6 +59,7 @@ export default {
         phone: [{ validator: checkPhone }],
       },
       myUserInfo: {},
+      chatInfosRes: [],
     };
   },
   methods: {
@@ -90,14 +91,14 @@ export default {
           if (res.data.resCode == "0000") {
             console.log(res.data.userDetail);
             console.log(JSON.stringify(res.data.userDetail));
-            localStorage.setItem(
+            sessionStorage.setItem(
               "myUserInfo",
               JSON.stringify(res.data.userDetail)
             );
-            localStorage.setItem("myCookie", "152955");
+            sessionStorage.setItem("myCookie", "152955");
             this.myUserInfo = res.data.userDetail;
-            console.log(localStorage.getItem("myCookie"));
-            console.log(localStorage.getItem("myUserInfo"));
+            console.log(sessionStorage.getItem("myCookie"));
+            console.log(sessionStorage.getItem("myUserInfo"));
           } else {
             _this.$notify({
               title: "通知",
@@ -118,10 +119,11 @@ export default {
         .then(function (res) {
           console.log(res.data);
           if (res.data.resCode == "0000") {
-            localStorage.setItem(
+            sessionStorage.setItem(
               "chatInfos",
               JSON.stringify(res.data.chatInfos)
             );
+            _this.chatInfosRes = res.data.chatInfos;
           } else {
             _this.$notify({
               title: "通知",
@@ -143,7 +145,7 @@ export default {
         .then(function (res) {
           console.log(res.data);
           if (res.data.resCode == "0000") {
-            localStorage.setItem("friends", JSON.stringify(res.data.friends));
+            sessionStorage.setItem("friends", JSON.stringify(res.data.friends));
           } else {
             _this.$notify({
               title: "通知",
@@ -156,16 +158,36 @@ export default {
     },
   },
   created() {
-    console.log(localStorage.getItem("myCookie"));
+    console.log(sessionStorage.getItem("myCookie"));
   },
   watch: {
     myUserInfo: {
       handler() {
         this.getMsgs();
         this.getFriends();
-        this.$router.push({ name: "Home" });
       },
       deep: true,
+    },
+    chatInfosRes: {
+      handler() {
+        var id = "";
+        if (this.chatInfosRes != null) {
+          if (this.chatInfosRes.length > 0) {
+            if (this.chatInfosRes[this.chatInfosRes.length - 1].group) {
+              id = this.chatInfosRes[this.chatInfosRes.length - 1].chatGroupId;
+            } else {
+              id = this.chatInfosRes[this.chatInfosRes.length - 1].chatUserId;
+            }
+            this.$router.push({ path: "/msgView/msgItem/" + id });
+          } else {
+            console.log("chatInfos", this.chatInfosRes);
+            this.$router.push({ path: "/msgView/msgItem/" + id });
+          }
+        } else {
+          console.log("chatInfos", this.chatInfosRes);
+          this.$router.push({ path: "/msgView/msgItem/" });
+        }
+      },
     },
   },
 };

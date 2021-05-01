@@ -8,7 +8,7 @@
         ></el-image>
       </div>
       <div>
-        <router-link to="/msgView">
+        <router-link to="/home">
           <i style="font-size: 24px" class="el-icon-chat-dot-round"></i>
         </router-link>
       </div>
@@ -34,7 +34,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+
+    };
   },
 };
 </script>

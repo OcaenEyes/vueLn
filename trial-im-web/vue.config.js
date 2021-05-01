@@ -15,5 +15,11 @@ module.exports = {
   },
   configureWebpack: {
     devtool: 'source-map'
+  },
+  pages: {
+    index: {
+      entry: 'src/main.js',
+      title: 'OCEAN IM'
+    }
   }
 }

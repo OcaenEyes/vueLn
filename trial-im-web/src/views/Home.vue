@@ -32,9 +32,9 @@ export default {
     },
     getMsgs() {
       const _this = this;
-      console.log(JSON.parse(localStorage.getItem("myUserInfo")));
+      console.log(JSON.parse(sessionStorage.getItem("myUserInfo")));
       var myuserinfo;
-      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
+      myuserinfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
       this.axios
         .get("http://127.0.01:8081/getChat", {
           params: {
@@ -44,7 +44,7 @@ export default {
         .then(function (res) {
           console.log(res.data);
           if (res.data.resCode == "0000") {
-            localStorage.setItem(
+            sessionStorage.setItem(
               "chatInfos",
               JSON.stringify(res.data.chatInfos)
             );
@@ -61,7 +61,7 @@ export default {
     getFriends() {
       const _this = this;
       var myuserinfo;
-      myuserinfo = JSON.parse(localStorage.getItem("myUserInfo"));
+      myuserinfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
       this.axios
         .get("http://127.0.01:8081/getFriends", {
           params: {
@@ -71,7 +71,7 @@ export default {
         .then(function (res) {
           console.log(res.data);
           if (res.data.resCode == "0000") {
-            localStorage.setItem("friends", JSON.stringify(res.data.friends));
+            sessionStorage.setItem("friends", JSON.stringify(res.data.friends));
           } else {
             _this.$notify({
               title: "通知",
@@ -86,15 +86,13 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    // this.getMsgs();
-    // this.getFriends();
   },
 };
 </script>
 
 <style scoped>
 .home {
-  margin-top: calc(1%);
+  margin-top: calc(3%);
   display: flex;
   flex-direction: row;
   justify-content: center;

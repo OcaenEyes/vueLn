@@ -11,7 +11,7 @@
 <script>
 import FriendListAside from "../components/friend/aside/FriendListAside";
 export default {
-  name: "friend",
+  name: "FriendView",
   components: {
     // friendWindowTitle,
     // friendWindow,
@@ -33,12 +33,12 @@ export default {
   created() {
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
-    this.friends = JSON.parse(localStorage.getItem("friends"));
+    this.friends = JSON.parse(sessionStorage.getItem("friends"));
     console.log(this.friends);
   },
   // watch:{
   //   $route(){
-  //     this.friends = JSON.parse(localStorage.getItem("friends"));
+  //     this.friends = JSON.parse(sessionStorage.getItem("friends"));
   //     console.log(this.friends);
   //   }
   // }

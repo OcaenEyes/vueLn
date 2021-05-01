@@ -11,8 +11,8 @@ import FriendItemWindow from '../components/friend/FriendItemWindow.vue'
 
 Vue.use(VueRouter)
 
-var id;
-var chatInfos = JSON.parse(localStorage.getItem("chatInfos"));
+var id = "";
+var chatInfos = JSON.parse(sessionStorage.getItem("chatInfos"));
 if (chatInfos != null) {
   if (chatInfos.length > 0) {
     if (chatInfos[chatInfos.length - 1].group) {
@@ -70,6 +70,7 @@ const routes = [
       },
       {
         path: '/friend',
+        name: 'FriendView',
         component: FriendWindow,
         meta: { requiresAuth: true },
         children: [
@@ -83,12 +84,14 @@ const routes = [
       },
       {
         path: '/collect',
+        name: 'CollectionView',
         component: CollectWindow,
         meta: { requiresAuth: true }
 
       },
       {
         path: '/file',
+        name: 'FileView',
         component: FileWindow,
         meta: { requiresAuth: true }
       }
@@ -103,19 +106,23 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   var myCookie;
-  myCookie = localStorage.getItem("myCookie");
+  myCookie = sessionStorage.getItem("myCookie");
   console.log(myCookie);
   console.log(to.meta.requiresAuth);
   if (to.name == 'LoginRegister') {
     if (myCookie != null) {
+      console.log(to.path);
       next({ name: 'Home' })
     } else {
+      console.log(to.path);
       next();
     }
   } else if (to.meta.requiresAuth == true) {
     if (myCookie != null) {
+      console.log(to.path);
       next()
     } else {
+      console.log(to.path);
       next({ name: 'LoginRegister' })
     }
   }
