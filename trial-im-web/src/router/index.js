@@ -22,10 +22,10 @@ if (chatInfos != null) {
     }
   }
   else {
-    console.log("chatInfos", chatInfos);
+    // console.log("chatInfos", chatInfos);
   }
 } else {
-  console.log("chatInfos", chatInfos);
+  // console.log("chatInfos", chatInfos);
 }
 const routes = [
   {
@@ -107,22 +107,22 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   var myCookie;
   myCookie = sessionStorage.getItem("myCookie");
-  console.log(myCookie);
-  console.log(to.meta.requiresAuth);
+  // console.log(myCookie);
+  // console.log(to.meta.requiresAuth);
   if (to.name == 'LoginRegister') {
     if (myCookie != null) {
-      console.log(to.path);
+      // console.log(to.path);
       next({ name: 'Home' })
     } else {
-      console.log(to.path);
+      // console.log(to.path);
       next();
     }
   } else if (to.meta.requiresAuth == true) {
     if (myCookie != null) {
-      console.log(to.path);
+      // console.log(to.path);
       next()
     } else {
-      console.log(to.path);
+      // console.log(to.path);
       next({ name: 'LoginRegister' })
     }
   }

@@ -95,16 +95,16 @@ export default {
         })
         .then((res) => {
           if (res.data.resCode == "0000") {
-            console.log(res.data.userDetail);
-            console.log(JSON.stringify(res.data.userDetail));
+            // console.log(res.data.userDetail);
+            // console.log(JSON.stringify(res.data.userDetail));
             sessionStorage.setItem(
               "myUserInfo",
               JSON.stringify(res.data.userDetail)
             );
             sessionStorage.setItem("myCookie", "152955");
             this.myUserInfo = res.data.userDetail;
-            console.log(sessionStorage.getItem("myCookie"));
-            console.log(sessionStorage.getItem("myUserInfo"));
+            // console.log(sessionStorage.getItem("myCookie"));
+            // console.log(sessionStorage.getItem("myUserInfo"));
           } else {
             _this.$notify({
               title: "通知",
@@ -123,7 +123,7 @@ export default {
           },
         })
         .then(function (res) {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.resCode == "0000") {
             sessionStorage.setItem(
               "chatInfos",
@@ -149,7 +149,7 @@ export default {
           },
         })
         .then(function (res) {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.resCode == "0000") {
             sessionStorage.setItem("friends", JSON.stringify(res.data.friends));
           } else {
@@ -164,7 +164,7 @@ export default {
     },
   },
   created() {
-    console.log(sessionStorage.getItem("myCookie"));
+    // console.log(sessionStorage.getItem("myCookie"));
   },
   watch: {
     myUserInfo: {
@@ -187,11 +187,11 @@ export default {
             }
             this.$router.push({ path: "/msgView/msgItem/" + id });
           } else {
-            console.log("chatInfos", this.chatInfosRes);
+            // console.log("chatInfos", this.chatInfosRes);
             this.$router.push({ path: "/msgView/msgItem/" + id });
           }
         } else {
-          console.log("chatInfos", this.chatInfosRes);
+          // console.log("chatInfos", this.chatInfosRes);
           this.$router.push({ path: "/msgView/msgItem/" });
         }
         this.fullscreenLoading = false;

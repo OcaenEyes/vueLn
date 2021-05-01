@@ -12,7 +12,7 @@
     "core-js": "^3.6.5",
     "cube-ui": "^1.12.44",
     "echarts": "^4.9.0",
-    "element-ui": "^2.14.1",
+    "element-ui": "^2.15.1",
     "qs": "^6.9.4",
     "socket.io": "^3.0.3",
     "socket.io-client": "^3.0.3",
