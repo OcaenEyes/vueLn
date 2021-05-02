@@ -37,15 +37,59 @@ function websock_close(e) {
 }
 // 数据接收
 function websock_onmessage(e) {
-    console.log("收到服务器消息" + e);
-    global_callback(JSON.parse(e.data));
+    console.log("收到服务器消息" + e.data);
+    var chatinfos;
+    var newchatinfos = [];
+    var msgstr;
+    var msg = {};
+    msgstr = e.data;
+    msgstr = msgstr.replace(/, /g, '","');
+    msgstr = msgstr.replace(/=/g, '":"');
+    msgstr = msgstr.replace(/{/g, '{"');
+    msgstr = msgstr.replace(/}/g, '"}')
+    msg = JSON.parse(msgstr);
+    chatinfos = JSON.parse(sessionStorage.getItem("chatInfos"));
+    chatinfos.forEach(chatinfo => {
+        if (chatinfo.chatUserId == msg.senderId) {
+            chatinfo.chatUserMsgs.push(msg);
+            newchatinfos.push(chatinfo);
+        } else if (chatinfo.chatGroupId == msg.groupCid && chatinfo.group == true) {
+            chatinfo.chatGroupMsgs.push(msg);
+            newchatinfos.push(chatinfo);
+        } else if (msg.group == true) {
+            var chatGroupMsgs = [];
+            chatGroupMsgs.push(msg);
+            var newGroupMsg = {};
+            newGroupMsg = {
+                chatGroupMsgs: chatGroupMsgs,
+                chatGroupName: msg.groupName,
+                chatGroupHeadImg: "",
+                group: true,
+                chatGroupId: msg.groupCid,
+            }
+            newchatinfos.push(newGroupMsg);
+        } else if (msg.group == false) {
+            var chatUserMsgs = [];
+            chatUserMsgs.push(msg);
+            var newUserMsg = {};
+            newUserMsg = {
+                chatUserMsgs: chatUserMsgs,
+                chatUserName: msg.senderNickName,
+                chatUserHeadImg: "",
+                group: false,
+                chatUserId: msg.senderId,
+            }
+            newchatinfos.push(newUserMsg);
+        }
+    });
+    sessionStorage.setItem("chatInfos", JSON.stringify(newchatinfos));
+    console.log(JSON.parse(sessionStorage.getItem("chatInfos")));
 }
 
 // 数据发送
 function websock_send(e) {
     ws.send(JSON.stringify(e));
-    // ws.send(e);
-    console.log(e);
+    // console.log(e);
     global_callback(e);
 
 }
@@ -63,6 +107,15 @@ function sendSocket(data, callback) {
         }, 1000);
     } else if (ws.readyState === ws.CLOSED) {
         initWebsocket();
+        var connectMsg = {};
+        connectMsg = {
+            action: "0",
+            message: {
+                senderId: JSON.parse(sessionStorage.getItem("myUserInfo")).userId,
+            },
+            extend: "",
+        };
+        sendSocket(connectMsg);
         setTimeout(() => {
             sendSocket(data, callback)
         }, 1000);

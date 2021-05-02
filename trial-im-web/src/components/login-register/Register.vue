@@ -130,7 +130,7 @@ export default {
     getMsgs() {
       const _this = this;
       this.axios
-        .get("http://127.0.01:8081/getChat", {
+        .get("http://127.0.0.1:8081/getChat", {
           params: {
             userId: this.myUserInfo.userId,
           },
@@ -156,7 +156,7 @@ export default {
     getFriends() {
       const _this = this;
       this.axios
-        .get("http://127.0.01:8081/getFriends", {
+        .get("http://127.0.0.1:8081/getFriends", {
           params: {
             userId: this.myUserInfo.userId,
           },

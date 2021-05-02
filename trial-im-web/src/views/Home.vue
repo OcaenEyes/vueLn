@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       viewheight: "",
+      timeout: 3000,
     };
   },
   methods: {
@@ -30,57 +31,18 @@ export default {
       this.viewheight = window.innerHeight - 120 + "px";
       console.log(this.viewheight);
     },
-    getMsgs() {
-      const _this = this;
-      console.log(JSON.parse(sessionStorage.getItem("myUserInfo")));
-      var myuserinfo;
-      myuserinfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
-      this.axios
-        .get("http://127.0.01:8081/getChat", {
-          params: {
-            userId: myuserinfo.userId,
-          },
-        })
-        .then(function (res) {
-          console.log(res.data);
-          if (res.data.resCode == "0000") {
-            sessionStorage.setItem(
-              "chatInfos",
-              JSON.stringify(res.data.chatInfos)
-            );
-          } else {
-            _this.$notify({
-              title: "通知",
-              message: res.resMsg,
-              type: "error",
-            });
-          }
-        });
-    },
-
-    getFriends() {
-      const _this = this;
-      var myuserinfo;
-      myuserinfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
-      this.axios
-        .get("http://127.0.01:8081/getFriends", {
-          params: {
-            userId: myuserinfo.userId,
-          },
-        })
-        .then(function (res) {
-          console.log(res.data);
-          if (res.data.resCode == "0000") {
-            sessionStorage.setItem("friends", JSON.stringify(res.data.friends));
-          } else {
-            _this.$notify({
-              title: "通知",
-              message: res.resMsg,
-              type: "error",
-            });
-          }
-        })
-        .catch((error) => console.log(error));
+    getHeatTest() {
+      var connectMsg = {};
+      connectMsg = {
+        action: "0",
+        message: {
+          senderId: this.myUserInfo.userId,
+        },
+        extend: "",
+      };
+      setTimeout(() => {
+        this.$ocSockApi.sendSocket(connectMsg, function () {});
+      }, this.timeout);
     },
   },
   created() {
@@ -96,9 +58,11 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  min-width: 980px;
 }
 .main-window {
   max-width: 66%;
+
   /* min-height: 600px; */
   /* max-height: 600px; */
   border-right: 0.1px solid #eee;

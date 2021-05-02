@@ -105,6 +105,15 @@ export default {
             this.myUserInfo = res.data.userDetail;
             // console.log(sessionStorage.getItem("myCookie"));
             // console.log(sessionStorage.getItem("myUserInfo"));
+            var connectMsg = {};
+            connectMsg = {
+              action: "0",
+              message: {
+                senderId: this.myUserInfo.userId,
+              },
+              extend: "",
+            };
+            _this.$ocSockApi.sendSocket(connectMsg, function () {});
           } else {
             _this.$notify({
               title: "通知",
@@ -117,7 +126,7 @@ export default {
     getMsgs() {
       const _this = this;
       this.axios
-        .get("http://127.0.01:8081/getChat", {
+        .get("http://127.0.0.1:8081/getChat", {
           params: {
             userId: this.myUserInfo.userId,
           },
@@ -143,7 +152,7 @@ export default {
     getFriends() {
       const _this = this;
       this.axios
-        .get("http://127.0.01:8081/getFriends", {
+        .get("http://127.0.0.1:8081/getFriends", {
           params: {
             userId: this.myUserInfo.userId,
           },

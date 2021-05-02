@@ -18,7 +18,7 @@
             <div
               class="lchat-msg"
               :style="{
-                display: msg.senderId == myUserInfo.userId ? none : '',
+                display: msg.senderId == myUserInfo.userId ? 'none' : '',
               }"
             >
               <el-avatar size="medium" src="">{{
@@ -27,7 +27,7 @@
               <div class="lmsg">
                 <div class="lmsg-time">
                   <span
-                    style="color: #666; font-size: small; margin-right: 10px"
+                    style="color: #666; font-size: 8px; margin-right: 10px"
                     >{{ msg.senderNickName }}</span
                   >{{ msg.msgTime }}
                 </div>
@@ -38,14 +38,14 @@
             <div
               class="rchat-msg"
               :style="{
-                display: msg.senderId == myUserInfo.userId ? '' : none,
+                display: msg.senderId == myUserInfo.userId ? '' : 'none',
               }"
             >
               <div class="rmsg">
                 <div class="rmsg-time">
                   {{ msg.msgTime }}
                   <span
-                    style="color: #666; font-size: small; margin-left: 10px"
+                    style="color: #666; font-size: 8px; margin-left: 10px"
                     >{{ msg.senderNickName }}</span
                   >
                 </div>
@@ -80,9 +80,6 @@ export default {
     return {
       msgtitle: "",
       viewheight: "",
-      username: null,
-      none: "none",
-      ws: null,
       sendmsg: "",
       msgviewheight: "",
       msgsumary: null,
@@ -100,22 +97,53 @@ export default {
     sendMsg() {
       let that = this;
       var msgData = null;
-      if (this.sendmsg != "") {
-        msgData = {
-          isgroup: false,
-          issend: true,
-          msgType: "single",
-          receiverId: "1450136519",
-          senderId: "1450136519",
-          msgDetail: this.sendmsg,
-          msgTime: "20201202",
-        };
-        console.log(msgData);
-        this.$ocSockApi.sendSocket(msgData, function (msgData) {
-          that.msglists[that.$route.params.id]["msgsumary"].push(msgData);
-        });
-      }
-      this.sendmsg = "";
+      this.chatInfos.forEach((chatInfo) => {
+        if (that.$route.params.id == chatInfo.chatUserId) {
+          if (that.sendmsg != "") {
+            msgData = {
+              action: "1",
+              message: {
+                senderId: that.myUserInfo.userId,
+                senderNickName: that.myUserInfo.nickName,
+                receiverId: chatInfo.chatUserId,
+                receiverNickName: chatInfo.chatUserName,
+                group: false,
+                msgDetail: that.sendmsg,
+                groupCid: "",
+                msgTime: new Date(),
+              },
+              extend: "",
+            };
+            console.log(msgData);
+            that.$ocSockApi.sendSocket(msgData, function (msgData) {
+              that.msgsumary.push(msgData.message);
+            });
+          }
+          that.sendmsg = "";
+        } else if (that.$route.params.id == chatInfo.chatGroupId) {
+          if (that.sendmsg != "") {
+            msgData = {
+              action: "1",
+              message: {
+                senderId: that.myUserInfo.userId,
+                senderNickName: that.myUserInfo.nickName,
+                receiverId: "",
+                receiverNickName: "",
+                group: true,
+                groupCid: chatInfo.chatGroupId,
+                msgDetail: that.sendmsg,
+                msgTime: new Date(),
+              },
+              extend: "",
+            };
+            console.log(msgData);
+            that.$ocSockApi.sendSocket(msgData, function (msgData) {
+              that.msgsumary.push(msgData.message);
+            });
+          }
+          that.sendmsg = "";
+        }
+      });
     },
   },
   created() {
@@ -262,6 +290,7 @@ export default {
   border-radius: 6px;
   text-align: center;
   line-height: 36px;
+  font-size: 14px;
   padding: 0 10px 0 10px;
 }
 
@@ -293,6 +322,7 @@ export default {
   border-radius: 6px;
   text-align: center;
   line-height: 36px;
+  font-size: 14px;
   padding: 0 10px 0 10px;
 }
 </style>
