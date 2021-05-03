@@ -88,7 +88,7 @@ export default {
   methods: {
     getHeight() {
       this.viewheight = window.innerHeight - 120 + "px";
-      this.msgviewheight = window.innerHeight - 320 + "px";
+      this.msgviewheight = window.innerHeight - 280 + "px";
       console.log("聊天窗");
       console.log(this.viewheight);
       console.log("消息框");
@@ -214,6 +214,7 @@ export default {
   color: #333;
   text-align: center;
   overflow-y: auto;
+  padding: 10px;
   border-left: 0.1px solid #eee;
 }
 .el-main::-webkit-scrollbar {
@@ -254,7 +255,12 @@ export default {
   /* padding: 6px 0 6px 0; */
 }
 .msg-window::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+  height: 4px;
+}
+.msg-window::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgb(224, 224, 224);
 }
 .el-row {
   margin-bottom: 20px;

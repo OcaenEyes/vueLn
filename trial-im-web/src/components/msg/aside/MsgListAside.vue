@@ -120,6 +120,15 @@ export default {
 .msglist::-webkit-scrollbar {
   display: none;
 }
+
+.msglist::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.msglist::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgb(224, 224, 224);
+}
 .msglist-item {
   height: 56px;
   display: flex;
@@ -133,6 +142,7 @@ export default {
 .msglist-item ::-webkit-scrollbar {
   display: none;
 }
+
 .msglist-item:hover {
   background-color: #f0f0f0 !important;
 }

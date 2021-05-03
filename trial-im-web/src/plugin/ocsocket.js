@@ -57,6 +57,7 @@ function websock_onmessage(e) {
             chatinfo.chatGroupMsgs.push(msg);
             newchatinfos.push(chatinfo);
         } else if (msg.group == true) {
+            newchatinfos.push(chatinfo);
             var chatGroupMsgs = [];
             chatGroupMsgs.push(msg);
             var newGroupMsg = {};
@@ -69,6 +70,7 @@ function websock_onmessage(e) {
             }
             newchatinfos.push(newGroupMsg);
         } else if (msg.group == false) {
+            newchatinfos.push(chatinfo);
             var chatUserMsgs = [];
             chatUserMsgs.push(msg);
             var newUserMsg = {};
