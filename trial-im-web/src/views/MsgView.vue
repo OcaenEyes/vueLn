@@ -54,6 +54,13 @@ export default {
 
     this.myUserInfo = JSON.parse(sessionStorage.getItem("myUserInfo"));
   },
+  mounted() {
+    window.addEventListener("setItem", () => {
+      var chatInfos;
+      chatInfos = JSON.parse(sessionStorage.getItem("chatInfos"));
+      this.chatInfos = chatInfos.reverse();
+    });
+  },
 };
 </script>
 

@@ -50,41 +50,47 @@ function websock_onmessage(e) {
     msg = JSON.parse(msgstr);
     chatinfos = JSON.parse(sessionStorage.getItem("chatInfos"));
     chatinfos.forEach(chatinfo => {
-        if (chatinfo.chatUserId == msg.senderId) {
-            chatinfo.chatUserMsgs.push(msg);
-            newchatinfos.push(chatinfo);
-        } else if (chatinfo.chatGroupId == msg.groupCid && chatinfo.group == true) {
-            chatinfo.chatGroupMsgs.push(msg);
-            newchatinfos.push(chatinfo);
-        } else if (msg.group == true) {
-            newchatinfos.push(chatinfo);
-            var chatGroupMsgs = [];
-            chatGroupMsgs.push(msg);
-            var newGroupMsg = {};
-            newGroupMsg = {
-                chatGroupMsgs: chatGroupMsgs,
-                chatGroupName: msg.groupName,
-                chatGroupHeadImg: "",
-                group: true,
-                chatGroupId: msg.groupCid,
+        if (msg.group == true) {
+            if (chatinfo.chatGroupId == msg.groupCid) {
+                chatinfo.chatGroupMsgs.push(msg);
+                newchatinfos.push(chatinfo);
+            } else {
+                newchatinfos.push(chatinfo);
+                var chatGroupMsgs = [];
+                chatGroupMsgs.push(msg);
+                var newGroupMsg = {};
+                newGroupMsg = {
+                    chatGroupMsgs: chatGroupMsgs,
+                    chatGroupName: msg.groupName,
+                    chatGroupHeadImg: "",
+                    group: true,
+                    chatGroupId: msg.groupCid,
+                }
+                newchatinfos.push(newGroupMsg);
             }
-            newchatinfos.push(newGroupMsg);
-        } else if (msg.group == false) {
-            newchatinfos.push(chatinfo);
-            var chatUserMsgs = [];
-            chatUserMsgs.push(msg);
-            var newUserMsg = {};
-            newUserMsg = {
-                chatUserMsgs: chatUserMsgs,
-                chatUserName: msg.senderNickName,
-                chatUserHeadImg: "",
-                group: false,
-                chatUserId: msg.senderId,
+
+        } else {
+            if (chatinfo.chatUserId == msg.senderId) {
+                chatinfo.chatUserMsgs.push(msg);
+                newchatinfos.push(chatinfo);
+            } else {
+                newchatinfos.push(chatinfo);
+                var chatUserMsgs = [];
+                chatUserMsgs.push(msg);
+                var newUserMsg = {};
+                newUserMsg = {
+                    chatUserMsgs: chatUserMsgs,
+                    chatUserName: msg.senderNickName,
+                    chatUserHeadImg: "",
+                    group: false,
+                    chatUserId: msg.senderId,
+                }
+                newchatinfos.push(newUserMsg);
+
             }
-            newchatinfos.push(newUserMsg);
         }
     });
-    sessionStorage.setItem("chatInfos", JSON.stringify(newchatinfos));
+    this.resetSetItem("chatInfos", JSON.stringify(newchatinfos));
     console.log(JSON.parse(sessionStorage.getItem("chatInfos")));
 }
 
