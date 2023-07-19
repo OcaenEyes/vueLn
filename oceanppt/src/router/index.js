@@ -1,3 +1,11 @@
+/*
+ * @Author: OCEAN.GZY
+ * @Date: 2023-07-15 15:10:40
+ * @LastEditors: OCEAN.GZY
+ * @LastEditTime: 2023-07-19 16:07:49
+ * @FilePath: /oceanppt/src/router/index.js
+ * @Description: 注释信息
+ */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 

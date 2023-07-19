@@ -2,19 +2,28 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 23:55:32
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-15 12:27:44
+ * @LastEditTime: 2023-07-15 15:38:00
  * @FilePath: /oceanppt/src/components/PptSummaryCard.vue
  * @Description: 注释信息
 -->
 
 <template>
     <div>
-        <h6>新页面-Summary</h6>
+        <h5>{{ summary.title }}</h5>
+        <h6>{{ summary.text }}</h6>
     </div>
 </template>
 
-<script setup>
+<script setup >
+import { toRef, defineProps } from 'vue'
+const props = defineProps({
+    summary: {
+        type: Object,
+        required: true
+    }
+});
+var summary = toRef(props.summary);
+console.log("summary", summary.value);
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

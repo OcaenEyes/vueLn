@@ -2,14 +2,43 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:30
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-15 14:51:45
+ * @LastEditTime: 2023-07-19 17:51:51
  * @FilePath: /oceanppt/src/views/RightView.vue
  * @Description: 注释信息
 -->
 <template>
     <div class="detail">
-        <div class="content" v-html="result"> </div>
+        <!-- <div class="content" v-html="result"> </div> -->
+        <div class="content">
+            <article id="webslides">
+                <section id="section-2" class="slide">
+                    <div class="wrap size-50 aligncenter">
+                        <h2><strong>Why WebSlides?</strong></h2>
+                        <p class="text-intro">Good karma &amp; Productivity.</p>
+                        <div class="bg-white shadow">
+                            <ul class="flexblock reasons">
+                                <li>
+                                    <h2>An opportunity to engage.</h2>
+                                    <p>WebSlides is about good karma. This is about telling the story, and sharing it in a
+                                        beautiful way. HTML and CSS as narrative elements.</p>
+                                </li>
+                                <li>
+                                    <h2>Work better, faster.</h2>
+                                    <p>Designers, marketers, and journalists can now focus on the content. Simply <a
+                                            href="/demos" title="WebSlides Demos">choose a demo</a> and customize it in
+                                        minutes.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- .end .bg-white shadow -->
+                    </div>
+                    <!-- .end .wrap -->
+                </section>
+            </article>
+        </div>
+
         <!-- <div class="content-source"> {{ result }} </div> -->
+
     </div>
 </template>
 
@@ -56,31 +85,46 @@ export default {
 
 <!-- 使用心得 script setup -->
 <script setup>
-import { ref, defineProps, watch } from 'vue'
+import { ref, defineProps, watch, onMounted } from 'vue'
+import webslides from "webslides/src/js/full"
+
+onMounted(() => {
+    window.ws = webslides
+})
+
 const props = defineProps({
     res: {
         type: String
     },
+    pdata: {
+        type: Object
+    }
 });
 
-console.log("收到父组件的参数", props.res);
-console.log(props.res);
+// console.log("收到父组件的参数", props.res, props.pdata);
 var result = ref("");
+// var pptdata = ref({});
 const md = require('markdown-it')({
     html: true,
     linkify: true,
     typographer: true
 });
 result = ref(md.render(props.res));
-console.log("旧的", result);
+// console.log("旧的", result.value);
 watch(props, (newProps) => {
-    if(newProps.res!=""){
+    if (newProps.res != "") {
         result = ref(md.render(newProps.res));
-    }else{
+    } else {
         result = ref(md.render('## ❤️OCEAN-PPT❤️ \n SHOW出你的IDEA~'));
     }
-    
-    console.log("新的", result);
+
+    // if (newProps.pdata != undefined) {
+    //     pptdata = newProps.pdata;
+    // } else {
+    //     pptdata = {};
+    // }
+
+    console.log("新的", result.value);
 });
 </script>
 
@@ -93,16 +137,23 @@ watch(props, (newProps) => {
     height: 100%;
 
     .content {
-        height:96%;
+        height: 96%;
         width: 98%;
-        // background-color:#020304;
-        
+        overflow-y: scroll;
+
+        #webslides {
+            height: 100% !important;
+
+            .slide {
+                padding: 4rem;
+                height: 100% !important;
+            }
+        }
     }
 
     .content-source {
         // height: 100%;
         width: 90%;
-        background-color:#020304;
     }
 }
 </style>
