@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:21
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-19 17:31:11
+ * @LastEditTime: 2023-07-19 20:06:59
  * @FilePath: /oceanppt/src/views/LeftView.vue
  * @Description: 注释信息
 -->
@@ -12,10 +12,10 @@
             <div class="nav">
                 <div class="title">缩略图</div>
                 <div class="close-icon" @click="closeSum">
-                    <button>X</button>
+                    X
                 </div>
             </div>
-            <div v-for="(i, index) in ppts" v-bind:key="index">
+            <div class="summarys" v-for="(i, index) in ppts" v-bind:key="index">
                 <li :class="{ 'selected': currentIndex == index }">
                     <PptSummaryCard class="card" @click="clickCard(i, index)" :summary="i"></PptSummaryCard>
                 </li>
@@ -35,7 +35,7 @@ import { ref, defineEmits } from 'vue'
 import store from '../store/index.js'
 
 var currentIndex = ref(0);
-var showSum = ref(false);
+var showSum = ref(true);
 var showEditor = ref(true);
 const mousePos = (e) => {
     // console.log(e.clientX, e.clientY);
@@ -90,11 +90,12 @@ textarea::placeholder {
         position: absolute;
         z-index: 1000;
         height: 100%;
-        width: 100%;
-        left: 0;
-        overflow-y: scroll;
+        width: 60%;
+        left: -59%;
         overflow-x: hidden;
-        background-color: #6f8294;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px 2px peachpuff;
+        background-color: #f5f5f5;
 
 
         .nav {
@@ -107,59 +108,61 @@ textarea::placeholder {
             height: 46px;
             border-bottom: 1px dashed #000000aa;
             font-weight: bold;
-            color: #07111a;
+            color: #333;
 
             .close-icon {
+                border: none;
+                border-radius: 50%;
+                width: 24px;
+                height: 26px;
+                text-align: center;
+                background-color: white;
+                line-height: 28px;
+                font-weight: bolder;
+                cursor: pointer;
+            }
+        }
+
+        .summarys {
+            overflow-y: auto;
+
+            li {
+                list-style: none;
+                text-decoration: none;
+                // background-color:red;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                border-radius: 10px;
+
                 :hover {
                     cursor: pointer;
+                    box-shadow: 2px 2px 10px 2px peachpuff;
                 }
 
-                button {
-                    // background-color:#627b94;
-                    border: none;
-                    border-radius: 50%;
-                    // color:white;
-
+                .card {
+                    background-color: #333;
+                    border-radius: 10px;
+                    color: white;
+                    height: 180px;
+                    font-size:small;
+                    font-weight:normal;
                 }
             }
-        }
 
-        li {
-            list-style: none;
-            text-decoration: none;
-            // background-color:red;
-            margin-left: 20px;
-            margin-right: 20px;
-            border-radius: 10px;
-
-            :hover {
-                cursor: pointer;
+            li.selected {
                 box-shadow: 2px 2px 10px 2px peachpuff;
+                // background-color: black;
             }
+
         }
-
-        li.selected {
-            box-shadow: 2px 2px 10px 2px peachpuff;
-            // background-color: black;
-        }
-
-        .card {
-            background-color: #161f28;
-            border-radius: 10px;
-            // margin-left: 20px;
-            // margin-right: 20px;
-            height: 200px;
-        }
-
-
 
         .new-page {
-            // margin:20px;
+            background-color: #333;
+            color: white;
             width: 85%;
             margin-top: 20px;
             margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: bold;
             height: 40px;
             border-radius: 20px;
             border: none;

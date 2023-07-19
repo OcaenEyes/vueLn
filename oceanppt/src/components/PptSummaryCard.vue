@@ -2,15 +2,15 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 23:55:32
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-15 15:38:00
+ * @LastEditTime: 2023-07-19 20:07:37
  * @FilePath: /oceanppt/src/components/PptSummaryCard.vue
  * @Description: 注释信息
 -->
 
 <template>
     <div>
-        <h5>{{ summary.title }}</h5>
-        <h6>{{ summary.text }}</h6>
+        <text>{{ summary.title }}</text>
+        <text>{{ summary.text }}</text>
     </div>
 </template>
 

@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:30
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-19 17:51:51
+ * @LastEditTime: 2023-07-19 20:08:24
  * @FilePath: /oceanppt/src/views/RightView.vue
  * @Description: 注释信息
 -->
@@ -139,14 +139,16 @@ watch(props, (newProps) => {
     .content {
         height: 96%;
         width: 98%;
-        overflow-y: scroll;
+        overflow-y: auto;
 
         #webslides {
             height: 100% !important;
 
+
             .slide {
                 padding: 4rem;
                 height: 100% !important;
+                min-height: 100%;
             }
         }
     }
