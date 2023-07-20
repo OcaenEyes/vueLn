@@ -2,14 +2,14 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:30
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-19 20:08:24
+ * @LastEditTime: 2023-07-20 11:49:52
  * @FilePath: /oceanppt/src/views/RightView.vue
  * @Description: 注释信息
 -->
 <template>
     <div class="detail">
-        <!-- <div class="content" v-html="result"> </div> -->
-        <div class="content">
+        <div class="content" v-html="result"> </div>
+        <!-- <div class="content">
             <article id="webslides">
                 <section id="section-2" class="slide">
                     <div class="wrap size-50 aligncenter">
@@ -29,13 +29,13 @@
                                         minutes.</p>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <!-- .end .bg-white shadow -->
-                    </div>
+                    <!-- </div> -->
                     <!-- .end .wrap -->
-                </section>
+                <!-- </section>
             </article>
-        </div>
+        </div> -->
 
         <!-- <div class="content-source"> {{ result }} </div> -->
 

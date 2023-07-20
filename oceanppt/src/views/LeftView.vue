@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:21
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-19 20:06:59
+ * @LastEditTime: 2023-07-20 12:01:01
  * @FilePath: /oceanppt/src/views/LeftView.vue
  * @Description: 注释信息
 -->
@@ -10,7 +10,7 @@
     <div class="side" @mousemove="mousePos">
         <div class="summary-view" v-show="showSum">
             <div class="nav">
-                <div class="title">缩略图</div>
+                <div class="title">页面信息</div>
                 <div class="close-icon" @click="closeSum">
                     X
                 </div>
@@ -22,7 +22,7 @@
             </div>
             <button class="new-page" @click="newPage">New Page</button>
         </div>
-        <div class="editor-view" v-show="showEditor">
+        <div class="editor-view">
             <div class="editor">
                 <textarea class="text-in" v-on:input="insChange" placeholder="输入一些想法～"></textarea>
             </div>
@@ -36,18 +36,16 @@ import store from '../store/index.js'
 
 var currentIndex = ref(0);
 var showSum = ref(true);
-var showEditor = ref(true);
 const mousePos = (e) => {
-    // console.log(e.clientX, e.clientY);
-    if (e.clientX < 20) {
-        showSum.value = true;
-        showEditor.value = false;
+    console.log(e.clientX, e.clientY);
+    if (e.clientX < 50 && e.clientY > 200) {
+        console.log("修改了吗")
+        showSum.value = true
     }
-    // console.log("现在的showSum", showSum.value);
+    console.log("现在的showSum", showSum.value);
 };
 const closeSum = () => {
     showSum.value = false;
-    showEditor.value = true;
 }
 
 const emits = defineEmits(['inputsBack', 'chagePttPage']);
@@ -81,20 +79,21 @@ textarea::placeholder {
 }
 
 .side {
-    position: relative;
     // background-color: rgb(68, 26, 203);
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
 
     .summary-view {
-        position: absolute;
-        z-index: 1000;
+
         height: 100%;
-        width: 60%;
-        left: -59%;
+        width: 200px;
         overflow-x: hidden;
         border-radius: 20px;
-        box-shadow: 2px 2px 10px 2px peachpuff;
+        box-shadow: 1px 1px 20px 1px rgba(81, 204, 238, 0.65);
         background-color: #f5f5f5;
 
 
@@ -121,6 +120,11 @@ textarea::placeholder {
                 font-weight: bolder;
                 cursor: pointer;
             }
+
+            .close-icon:hover {
+                background-color: rgb(81, 204, 238);
+                color: white;
+            }
         }
 
         .summarys {
@@ -137,21 +141,21 @@ textarea::placeholder {
 
                 :hover {
                     cursor: pointer;
-                    box-shadow: 2px 2px 10px 2px peachpuff;
+                    box-shadow: 1px 1px 10px 1px rgb(81, 203, 238);
                 }
 
                 .card {
                     background-color: #333;
                     border-radius: 10px;
                     color: white;
-                    height: 180px;
-                    font-size:small;
-                    font-weight:normal;
+                    height: 100px;
+                    font-size: small;
+                    font-weight: normal;
                 }
             }
 
             li.selected {
-                box-shadow: 2px 2px 10px 2px peachpuff;
+                box-shadow: 1px 1px 10px 1px rgb(81, 204, 238);
                 // background-color: black;
             }
 
@@ -160,21 +164,28 @@ textarea::placeholder {
         .new-page {
             background-color: #333;
             color: white;
-            width: 85%;
+            width: 60%;
+            font-size: 12px;
             margin-top: 20px;
             margin-bottom: 20px;
-            height: 40px;
+            height: 30px;
             border-radius: 20px;
             border: none;
+
+
+        }
+
+        .new-page:hover {
+            background-color: rgb(81, 204, 238);
         }
     }
 
     .editor-view {
-        position: absolute;
-        z-index: 1;
-        left: 0;
         height: 100%;
-        width: 100%;
+        flex: 1;
+        margin-left: 20px;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
 
         // background-color: rgba(0, 255, 255, 0.5);
         .editor {
