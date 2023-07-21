@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:16:31
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-20 11:56:03
+ * @LastEditTime: 2023-07-21 19:40:19
  * @FilePath: /oceanppt/src/views/HomeView.vue
  * @Description: 注释信息
 -->
@@ -15,7 +15,7 @@
         <div class="main">
             <LeftView class="left" @inputs-back="inputsBack" @chagePttPage="chagePttPage"></LeftView>
             <div style="color:rgb(81, 203, 238);">
-               <h6>==>></h6> 
+                <h6>==>></h6>
             </div>
             <RightView class="right" :res="res" :pdata="pdata"></RightView>
         </div>
@@ -83,12 +83,14 @@ const chagePttPage = (data) => {
         align-items: center;
         height: 90%;
         width: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
 
         .left {
-            width: 35%;
+            width: 40%;
             // flex: 1;
-            max-width: 500px;
-            min-width: 300px;
+            max-width: 800px;
+            min-width: 500px;
             border-radius: 20px;
             height: 90%;
             margin-left: 20px;
@@ -104,6 +106,12 @@ const chagePttPage = (data) => {
             border-radius: 20px;
             border-color: transparent;
             box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+
+
+        }
+
+        .right:hover {
+            box-shadow: 1px 1px 20px 1px rgba(81, 204, 238, 0.65);
         }
 
     }

@@ -2,18 +2,19 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:30
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-20 11:49:52
+ * @LastEditTime: 2023-07-20 22:01:38
  * @FilePath: /oceanppt/src/views/RightView.vue
  * @Description: 注释信息
 -->
 <template>
     <div class="detail">
-        <div class="content" v-html="result"> </div>
-        <!-- <div class="content">
+        <!-- <div class="content" v-html="result"> </div> -->
+        <div class="content">
             <article id="webslides">
                 <section id="section-2" class="slide">
                     <div class="wrap size-50 aligncenter">
-                        <h2><strong>Why WebSlides?</strong></h2>
+                        <div v-html="result"></div>
+                        <!-- <h2><strong>Why WebSlides?</strong></h2>
                         <p class="text-intro">Good karma &amp; Productivity.</p>
                         <div class="bg-white shadow">
                             <ul class="flexblock reasons">
@@ -31,11 +32,11 @@
                             </ul>
                         </div> -->
                         <!-- .end .bg-white shadow -->
-                    <!-- </div> -->
+                    </div>
                     <!-- .end .wrap -->
-                <!-- </section>
+                </section>
             </article>
-        </div> -->
+        </div>
 
         <!-- <div class="content-source"> {{ result }} </div> -->
 
@@ -87,7 +88,8 @@ export default {
 <script setup>
 import { ref, defineProps, watch, onMounted } from 'vue'
 import webslides from "webslides/src/js/full"
-
+// import { parser } from "posthtml-parser"
+// import { render } from "posthtml-render"
 onMounted(() => {
     window.ws = webslides
 })
@@ -125,7 +127,13 @@ watch(props, (newProps) => {
     // }
 
     console.log("新的", result.value);
+
+    // console.log("新的转换后", render(result.value))
+
 });
+
+
+
 </script>
 
 <style lang="less" scoped>
@@ -139,7 +147,7 @@ watch(props, (newProps) => {
     .content {
         height: 96%;
         width: 98%;
-        overflow-y: auto;
+        overflow-y: hidden;
 
         #webslides {
             height: 100% !important;
@@ -149,6 +157,7 @@ watch(props, (newProps) => {
                 padding: 4rem;
                 height: 100% !important;
                 min-height: 100%;
+                
             }
         }
     }

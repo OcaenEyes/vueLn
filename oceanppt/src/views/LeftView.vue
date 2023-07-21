@@ -2,7 +2,7 @@
  * @Author: OCEAN.GZY
  * @Date: 2023-07-14 16:05:21
  * @LastEditors: OCEAN.GZY
- * @LastEditTime: 2023-07-20 12:01:01
+ * @LastEditTime: 2023-07-21 15:44:13
  * @FilePath: /oceanppt/src/views/LeftView.vue
  * @Description: 注释信息
 -->
@@ -24,7 +24,10 @@
         </div>
         <div class="editor-view">
             <div class="editor">
-                <textarea class="text-in" v-on:input="insChange" placeholder="输入一些想法～"></textarea>
+
+                <textarea class="text-in" v-on:input="insChange" placeholder="输入一些想法～">
+                   
+                </textarea>
             </div>
         </div>
     </div>
@@ -38,7 +41,7 @@ var currentIndex = ref(0);
 var showSum = ref(true);
 const mousePos = (e) => {
     console.log(e.clientX, e.clientY);
-    if (e.clientX < 50 && e.clientY > 200) {
+    if (e.clientX < 90 && e.clientY > 200) {
         console.log("修改了吗")
         showSum.value = true
     }
@@ -191,6 +194,7 @@ textarea::placeholder {
         .editor {
             height: 100%;
             width: 100%;
+            border-radius: 20px;
 
             .text-in {
                 outline: none;
@@ -240,5 +244,11 @@ textarea::placeholder {
 
 
     }
+
+    .editor-view :hover {
+
+        box-shadow: 1px 1px 20px 1px rgba(81, 204, 238, 0.65);
+    }
+
 }
 </style>
